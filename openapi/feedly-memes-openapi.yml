@@ -1,0 +1,97 @@
+openapi: 3.1.0
+info:
+  title: Memes API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/memes
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+security:
+- sec0: []
+paths:
+  /vulnerabilities/en?:
+    get:
+      summary: Trending Vulnerabilities
+      description: A guide to extract trending vulnerabilities from the Threat Landscape Dashboard.
+      operationId: trending-cves
+      parameters:
+      - name: count
+        in: query
+        description: The number of articles/entries to return. Maximum is 25.
+        schema:
+          type: integer
+          format: int32
+          default: 25
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /contents/{memeId}:
+    get:
+      summary: Trend analysis card
+      description: ''
+      operationId: trend-analysis-card
+      parameters:
+      - name: memeId
+        in: path
+        description: id of the topic (must be properly url encoded)
+        schema:
+          type: string
+          default: topic/vulnerabilities/meme/03c57394-3333-11ef-8856-bafbaebb0ef6
+        required: true
+      - name: count
+        in: query
+        description: number of articles returned in the API call
+        schema:
+          type: string
+          default: '20'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

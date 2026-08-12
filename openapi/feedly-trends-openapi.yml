@@ -1,0 +1,186 @@
+openapi: 3.1.0
+info:
+  title: Trends API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/trends/
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+security:
+- sec0: []
+paths:
+  /ttp-dashboard:
+    post:
+      summary: List TTPs from TTP Agent
+      description: ''
+      operationId: list-ttps
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - RAW_BODY
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: 'Body of the request: the JSON query you obtained in step 2'
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /ttp-dashboard/entries?ttpId={ttpId}:
+    post:
+      summary: Collect Procedures and articles from the TTP Agent
+      description: ''
+      operationId: collect-procedures
+      parameters:
+      - name: ttpId
+        in: path
+        description: ttpId taken from step 1 in this guide
+        schema:
+          type: string
+        required: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - RAW_BODY
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: The JSON Body you acquire in step 2 from this guide.
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /threats:
+    get:
+      summary: Trending Articles
+      description: A guide to extract trending trending Cybersecurity articles from the Threat Landscape
+        Agent.
+      operationId: trending-articles
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /new-malwares:
+    get:
+      summary: Trending New Malware
+      description: A guide to extract trending new malware from the Threat Landscape Dashboard.
+      operationId: trending-new-malware
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /threat-actors:
+    get:
+      summary: Trending Attackers
+      description: A guide to extract trending attackers from the Threat Landscape Dashboard.
+      operationId: trending-attackers
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

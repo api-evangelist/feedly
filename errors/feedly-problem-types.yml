@@ -1,0 +1,120 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://developers.feedly.com/reference/status-codes (documented error reference) enriched with a
+  derivation across the 18 OpenAPI documents in openapi/ (49 operations, 105 declared responses).
+format: proprietary
+rfc9457: false
+description: >-
+  Feedly's API-level error catalogue. The API does NOT use RFC 9457 problem+json — no operation in any
+  published spec declares an application/problem+json response. Two distinct proprietary envelopes
+  coexist, and a consumer has to handle both.
+
+envelopes:
+- name: errorId envelope
+  fields: [errorMessage, errorId]
+  example: '{"errorMessage":"Invalid JSON", "errorId":"xyz.2018021111.12345"}'
+  where: Documented as the general shape on the Status Codes reference page.
+  note: errorId is the support correlation handle.
+- name: errorCode envelope
+  fields: [errorCode, requestId, errorMessage]
+  example: '{"errorCode":401,"requestId":"853eb1877eebc529-SEA","errorMessage":"must provide authorization token"}'
+  where: Returned in practice on 401/403 and observed live on unauthenticated calls to cloud.feedly.com/v3/profile.
+  note: >-
+    requestId carries an edge PoP suffix (-SEA, -EWR). Duplicates the status in the body as errorCode.
+inconsistency: >-
+  The same API returns two different correlation field names (errorId vs requestId) and two different
+  envelope shapes depending on the operation. Neither the docs nor the specs say which operations use
+  which. Parse defensively: read errorMessage, then errorId ?? requestId.
+
+problems:
+- status: 400
+  title: Bad Request
+  meaning: >-
+    Invalid JSON, a wrong Content-Type header, or JSON values of the wrong type.
+  documented_messages:
+  - Invalid JSON
+  - Body should be a JSON Hash
+  remediation: >-
+    Verify the body parses as JSON, that Content-Type is application/json, and that the top level is
+    an object rather than an array or scalar.
+  declared_on_operations: 43
+  note: >-
+    Declared on 43 of 49 operations — the most broadly specified error in the API, including on GET
+    operations that take no body.
+- status: 401
+  title: Unauthorized
+  meaning: Missing, invalid, or expired Authorization header.
+  documented_messages:
+  - must provide authorization token
+  remediation: >-
+    Send `Authorization: Bearer <token>`. Tokens are issued at https://feedly.com/i/team/api by an
+    account admin and are shown once. Regenerate if lost.
+  declared_on_operations: 9
+  observed_live: >-
+    GET https://cloud.feedly.com/v3/profile without a token returned 401 with the errorCode envelope
+    on 2026-08-12.
+- status: 403
+  title: Forbidden
+  meaning: >-
+    Authenticated but not entitled to the requested enterprise resource.
+  documented_messages:
+  - 'unauthorized access: enterprise collection'
+  remediation: >-
+    Confirm the token belongs to the enterprise that owns the streamId/collection, and that the
+    account's plan includes the endpoint. API access is an Advanced-tier feature — a Standard-plan
+    token will be rejected on API-gated surfaces.
+  declared_on_operations: 5
+- status: 404
+  title: Not Found
+  meaning: The referenced entity, agent or timeline does not exist.
+  declared_on_operations: 3
+  affected_operations: [get-custom-agent, getCveTimeline, getEntityDetails]
+  remediation: >-
+    Entity ids are opaque and namespaced (nlp/f/entity/ioc:<uuid>). Resolve them through
+    autocomplete-entities rather than constructing them, and URI-encode before use.
+- status: 405
+  title: Method Not Allowed
+  meaning: Wrong HTTP method for the endpoint.
+  declared_on_operations: 1
+  affected_operations: [autocomplete-entities]
+- status: 429
+  title: Too Many Requests
+  meaning: >-
+    The token has exceeded its rate limit (100,000 API requests per month).
+  headers:
+  - X-RateLimit-Count
+  - X-RateLimit-Limit
+  - X-RateLimit-Reset
+  remediation: >-
+    Read X-RateLimit-Reset (SECONDS until the counter resets, not a timestamp) and back off. There is
+    no Retry-After header, so the client must compute its own schedule.
+  declared_on_operations: 3
+  note: >-
+    Only 3 of 49 operations declare a 429 in their spec, but the limit is account-wide and applies to
+    every operation. The specs understate this — treat 429 as possible everywhere.
+  detail: rate-limits/feedly-rate-limits.yml
+- status: 500
+  title: Internal Server Error
+  declared_on_operations: 1
+  affected_operations: [getEntityLists]
+
+edge_errors:
+  note: >-
+    Feedly fronts its hosts with an edge rate limiter that answers with the plain-text body
+    "Too Many Requests (HAP429)." — and on some paths it returns that body with a 200 status rather
+    than 429. Observed on /.well-known/security.txt on feedly.com, api.feedly.com and
+    cloud.feedly.com. A client that checks only the status code will treat that as success and parse
+    garbage. Check Content-Type and body shape, not just the status.
+  observed: '2026-08-12'
+
+coverage:
+  operations_total: 49
+  responses_declared: 105
+  operations_with_a_4xx: 43
+  operations_with_only_200_and_400: 40
+  gaps:
+  - No operation declares application/problem+json.
+  - Error response schemas are declared inline per operation rather than in a shared components.schemas entry, so the two envelopes are duplicated across dozens of specs instead of referenced.
+  - 429 is declared on only 3 operations despite being an account-wide limit.
+  - No documented machine-readable error CODE registry — errorMessage is free text, so clients must string-match.

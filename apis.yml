@@ -1,28 +1,242 @@
 aid: feedly
 name: Feedly
-description: Feedly is a company surfaced via the API Evangelist marketing integration graph — named as
-  an integration by 2 members of the programmable-marketing cohort — and added to the network as a stub
-  for full-pipeline profiling.
+description: Feedly is a content aggregation and threat intelligence platform that reads millions of open
+  sources and turns them into structured, machine-readable intelligence. Its consumer product is a feed
+  reader built on RSS/Atom; its commercial product, Feedly Threat Intelligence, applies a family of AI
+  models ("Leo") to build a Real-Time Threat Graph covering threat actors, malware families, CVEs, indicators
+  of compromise, MITRE ATT&CK techniques, and cyberattacks. The Feedly API is a REST API over api.feedly.com/v3
+  that exposes those objects to security teams for SOAR/SIEM automation — collecting articles from AI
+  Feeds, Folders and Boards, searching and asking questions of the corpus with LLMs, pulling CVE/malware/threat-actor
+  insight cards and their relationships, exporting IoCs with context, and registering webhooks for saved-article
+  and annotation events. Feedly also operates a hosted, OAuth-protected Model Context Protocol server
+  over its Threat Graph, and publishes an open-source library of CTI Agent Skills and prompts for Claude.
+image: https://feedly.com/favicon.ico
 url: https://raw.githubusercontent.com/api-evangelist/feedly/refs/heads/main/apis.yml
 x-type: company
 x-source: harvest:marketing-integration-graph
-x-tier: stub
-x-tier-reason: harvest
-specificationVersion: '0.20'
+specificationVersion: '0.21'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
-- Company
-apis: []
+- threat-intelligence
+- cybersecurity
+- cyber-threat-intelligence
+- content-aggregation
+- rss
+- news
+- vulnerability-management
+- indicators-of-compromise
+- malware
+- threat-actors
+- mitre-attack
+- security-automation
+- artificial-intelligence
+- mcp
+- agent-native
+- webhooks
+apis:
+- name: Feedly API
+  description: REST API over api.feedly.com/v3 for the Feedly Threat Intelligence platform. Collect articles
+    from AI Feeds, Folders and Boards by streamId; search and query the corpus with the Ask AI (RAG) endpoints;
+    retrieve CVE, malware, threat-actor and company insight cards plus their relationship graphs; pull
+    trending vulnerabilities, malware and attackers; export IoCs with context; manage team boards, annotations,
+    enterprise users, collections and intel profiles; and register webhooks. Bearer-token authenticated,
+    JSON over HTTPS, cursor pagination via continuation tokens.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - threat-intelligence
+  - cybersecurity
+  - vulnerability-management
+  - indicators-of-compromise
+  - malware
+  - threat-actors
+  - news
+  - artificial-intelligence
+  properties:
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+  - type: OpenAPI
+    url: openapi/feedly-streams-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-search-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-entries-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-entities-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-ml-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-trends-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-enterprise-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-enterprise-users-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-enterprise-collections-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-intel-profiles-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-iocs-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-ti-endpoints-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-agents-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-alerts-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-annotations-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-tags-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-memes-openapi.yml
+  - type: OpenAPI
+    url: openapi/feedly-vulnerability-agent-openapi.yml
+- name: Feedly Threat Graph MCP Server
+  description: Hosted, remote Model Context Protocol server exposing the Feedly Real-Time Threat Graph
+    to AI agents. Feedly documents 16 tools covering threat actors, malware, vulnerabilities, TTPs, IoCs
+    and cyberattacks. Protected by OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE; anonymous
+    tools/list returns 401 invalid_token. Bundled with the Advanced plan.
+  humanURL: https://docs.feedly.com/article/820-what-is-mcp-feedly
+  baseURL: https://mcp.feedly.com/mcp
+  tags:
+  - mcp
+  - agent-native
+  - threat-intelligence
+  - cybersecurity
+  properties:
+  - type: MCPServer
+    url: mcp/feedly-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/feedly-tool-crosswalk.yml
+  - type: Documentation
+    url: https://docs.feedly.com/article/820-what-is-mcp-feedly
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: DomainSecurity
+  url: security/feedly-domain-security.yml
+- type: Authentication
+  url: authentication/feedly-authentication.yml
 - type: Website
   url: https://feedly.com/
+- type: DeveloperPortal
+  url: https://developers.feedly.com/
+- type: Documentation
+  url: https://docs.feedly.com/
+- type: APIReference
+  url: https://developers.feedly.com/reference/introduction
+- type: GettingStarted
+  url: https://developers.feedly.com/reference/building-your-first-ti-integration
+- type: Support
+  url: https://docs.feedly.com/
+- type: Blog
+  url: https://feedly.com/new-features
+- type: GitHubOrganization
+  url: https://github.com/feedly
+- type: Pricing
+  url: https://feedly.com/threat-intelligence/pricing
+- type: SignUp
+  url: https://feedly.com/i/team/api
+- type: TermsOfService
+  url: https://feedly.com/legal/terms
+- type: PrivacyPolicy
+  url: https://feedly.com/legal/privacy
+- type: TrustCenter
+  url: https://trust.feedly.com/
+- type: StatusPage
+  url: https://status.feedly.com/
+- type: WellKnown
+  url: well-known/feedly-well-known.yml
+- type: APICatalog
+  url: well-known/feedly-api-catalog.json
+- type: Packages
+  url: packages/feedly-packages.yml
+- type: SDKs
+  url: packages/feedly-packages.yml
+- type: LLMsTxt
+  url: llms/feedly-llms.txt
+- type: Conformance
+  url: conformance/feedly-conformance.yml
+- type: Compliance
+  url: https://trust.feedly.com/
+- type: ErrorCatalog
+  url: errors/feedly-problem-types.yml
+- type: Lifecycle
+  url: lifecycle/feedly-lifecycle.yml
+- type: Deprecation
+  url: lifecycle/feedly-lifecycle.yml
+- type: Security
+  url: https://feedly.com/legal/security
+- type: Conventions
+  url: conventions/feedly-conventions.yml
+- type: ChangeLog
+  url: changelog/feedly-changelog.yml
+- type: ChangeLog
+  url: https://developers.feedly.com/changelog/
+- type: DataModel
+  url: data-model/feedly-data-model.yml
+- type: Webhooks
+  url: asyncapi/feedly-webhooks.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Plans
+  url: plans/feedly-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/feedly-rate-limits.yml
+- type: TrustCenter
+  url: security/feedly-trust-center.yml
+- type: Overlay
+  url: overlays/feedly-streams-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-search-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-entries-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-entities-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-ml-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-trends-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-enterprise-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-enterprise-users-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-enterprise-collections-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-intel-profiles-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-iocs-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-ti-endpoints-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-agents-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-alerts-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-annotations-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-tags-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-memes-overlay.yaml
+- type: Overlay
+  url: overlays/feedly-vulnerability-agent-overlay.yaml
 x-vouched-by:
 - Ghost
 - Improvado
 x-vouch-count: 2
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 60
+  pass: local-v1

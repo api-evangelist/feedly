@@ -1,0 +1,194 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  Derived from the 18 OpenAPI documents in openapi/ and probed documents in well-known/, plus
+  https://trust.feedly.com/ (HTTP 200, 2026-08-12) and the Feedly developer documentation.
+description: >-
+  Which cross-cutting and industry standards the Feedly API actually conforms to. Feedly's strongest
+  conformance is in two places that are unusual and worth naming: RFC 9727 API Catalog discovery, and
+  the CTI data standards (STIX 2.1, MISP, MITRE ATT&CK) it exports to.
+
+standards:
+- id: openapi-3
+  conforms: true
+  evidence: >-
+    18 first-party OpenAPI documents published at https://developers.feedly.com/openapi/<id>;
+    versions 3.0.0, 3.0.3 and 3.1.0. 49 operations, all with operationIds and summaries.
+- id: rfc9727-api-catalog
+  conforms: true
+  evidence: >-
+    https://developers.feedly.com/.well-known/api-catalog returns 200 with
+    Content-Type application/linkset+json and a valid linkset naming service-desc
+    (application/vnd.oai.openapi+json) and service-doc entries. This is rare — most of the catalog
+    does not publish one.
+  note: >-
+    3 of the 21 service-desc hrefs return 404, so the catalog is stale in places, and one href is
+    duplicated. Conformant in form; imperfect in maintenance.
+- id: rfc8414-oauth-authorization-server-metadata
+  conforms: true
+  evidence: >-
+    https://mcp.feedly.com/.well-known/oauth-authorization-server returns 200 with issuer,
+    authorization_endpoint, token_endpoint, registration_endpoint, revocation_endpoint,
+    grant_types_supported and code_challenge_methods_supported.
+  scope: MCP server only, not the REST API.
+- id: rfc7591-dynamic-client-registration
+  conforms: true
+  evidence: registration_endpoint https://mcp.feedly.com/register advertised in the RFC 8414 metadata.
+- id: oauth2
+  conforms: partial
+  evidence: >-
+    OAuth 2.1 (authorization_code + refresh_token, PKCE S256) protects the Threat Graph MCP server.
+    The REST API does NOT use OAuth — it uses static bearer tokens minted in the team admin UI.
+- id: rfc7636-pkce
+  conforms: true
+  evidence: code_challenge_methods_supported [plain, S256] in the MCP authorization-server metadata.
+- id: rfc9728-oauth-protected-resource-metadata
+  conforms: false
+  evidence: >-
+    /.well-known/oauth-protected-resource returns 404 on mcp.feedly.com. The server does return a
+    correct WWW-Authenticate Bearer challenge, but a client cannot discover the authorization server
+    from the resource per RFC 9728.
+- id: mcp
+  conforms: true
+  evidence: >-
+    Hosted remote MCP server at https://mcp.feedly.com/mcp; anonymous JSON-RPC tools/list returns 401
+    with a well-formed OAuth challenge. 16 tools documented by the provider.
+- id: rfc6750-bearer-token
+  conforms: true
+  evidence: >-
+    Authorization: Bearer <token> on the REST API; WWW-Authenticate: Bearer realm="OAuth" on the MCP
+    server's 401.
+- id: rfc9457-problem-details
+  conforms: false
+  evidence: >-
+    No operation in any of the 18 specs declares application/problem+json. Two proprietary error
+    envelopes are used instead ({errorMessage, errorId} and {errorCode, requestId, errorMessage}).
+- id: rfc8594-sunset-header
+  conforms: false
+  evidence: >-
+    No Sunset or Deprecation headers; no deprecation policy published; zero operations marked
+    deprecated in the specs despite two in-place field removals.
+- id: rfc9116-security-txt
+  conforms: false
+  evidence: >-
+    /.well-known/security.txt returns 404 on developers.feedly.com and mcp.feedly.com. On feedly.com,
+    api.feedly.com and cloud.feedly.com it returns a soft-200 whose body is the edge rate-limiter
+    string "Too Many Requests (HAP429)." — not a document.
+- id: asyncapi
+  conforms: false
+  evidence: >-
+    Three webhook event types are documented in prose (NewEntrySaved, NewAnnotation,
+    NewWebAlertEntry) with a full CRUD trigger API, but no AsyncAPI document is published.
+- id: webhooks
+  conforms: true
+  evidence: >-
+    Documented event catalog + management operations (get/create/delete triggers) on
+    /v3/enterprise/triggers. Captured in asyncapi/feedly-webhooks.yml.
+- id: llms-txt
+  conforms: true
+  evidence: >-
+    https://developers.feedly.com/llms.txt returns 200 with a complete, well-formed index of guides,
+    API reference pages and changelog entries, each with an .md twin.
+- id: cursor-pagination
+  conforms: true
+  evidence: >-
+    Continuation-token pagination documented at
+    https://developers.feedly.com/docs/understanding-continuation and implemented across streams,
+    search and the agent dashboards.
+- id: idempotency
+  conforms: false
+  evidence: >-
+    No Idempotency-Key header or parameter in any of the 18 specs; no request-deduplication window
+    documented. Write retries are not server-deduplicated.
+- id: stix-2.1
+  conforms: true
+  evidence: >-
+    IoC and entity endpoints expose STIX 2.1 export. The Advanced plan feature is named "Threat Graph
+    STIX API" on https://feedly.com/threat-intelligence/pricing.
+- id: misp
+  conforms: true
+  evidence: >-
+    MISP export format on entity endpoints; Feedly maintains a public fork of the MISP galaxy
+    clusters at https://github.com/feedly/misp-galaxy; MISP is a named no-code integration on the
+    Advanced plan.
+- id: mitre-attack
+  conforms: true
+  evidence: >-
+    The TTP Agent (POST /v3/trends/ttp-dashboard, collect-procedures) models MITRE ATT&CK tactics,
+    techniques and procedures; the published Claude skills reference ATT&CK and ATLAS mapping.
+- id: cve
+  conforms: true
+  evidence: >-
+    CVE Insights Card (GET /v3/entities/{CVEID}), bulk CVE metadata, CVE timeline; CVSS score and
+    vector, EPSS score, and CISA KEV membership exposed as filter fields on the Vulnerability Agent.
+- id: cvss
+  conforms: true
+  evidence: >-
+    cvssScore, cvssEstimate and cvssVector filter fields on getVulnerabilityAgent, using standard CVSS
+    vector notation (AV:N, PR:N, UI:N).
+- id: cisa-kev
+  conforms: true
+  evidence: inCisaKev boolean filter field on getVulnerabilityAgent.
+- id: cpe
+  conforms: partial
+  evidence: >-
+    A search_cpe tool is named in Feedly's published Claude skill, but no public REST operation
+    exposes CPE lookup. MCP-only.
+- id: opencti
+  conforms: true
+  evidence: >-
+    "Open CTI ... no code integrations" listed as an Advanced plan feature; Feedly maintains a public
+    fork of the OpenCTI connectors repo at https://github.com/feedly/connectors.
+- id: rss-atom
+  conforms: true
+  evidence: Feedly's core product is a feed aggregator built on RSS/Atom source ingestion.
+- id: soc2
+  conforms: true
+  evidence: >-
+    https://trust.feedly.com/ lists "Feedly 2026 SOC 2 Type 1 Report" and "Feedly 2026 SOC 2 Type 2
+    Report" as documents. See security/feedly-trust-center.yml.
+- id: iso-27001
+  conforms: false
+  evidence: Not listed in the Feedly trust portal document set.
+- id: gdpr
+  conforms: unknown
+  evidence: >-
+    A privacy policy is published at https://feedly.com/legal/privacy, but no GDPR/DPA artifact is
+    named in the public trust portal document list.
+- id: fedramp
+  conforms: false
+  evidence: Not listed.
+- id: hipaa
+  conforms: false
+  evidence: Not listed.
+- id: pci-dss
+  conforms: false
+  evidence: Not applicable; Feedly is not a payment provider.
+- id: graphql
+  conforms: false
+  evidence: No GraphQL endpoint published.
+- id: grpc
+  conforms: false
+  evidence: No .proto definitions published in the GitHub org, on buf.build, or in the docs.
+- id: a2a
+  conforms: false
+  evidence: >-
+    /.well-known/agent-card.json and /.well-known/agent.json return 404 on feedly.com,
+    api.feedly.com, cloud.feedly.com, developers.feedly.com and mcp.feedly.com.
+
+summary:
+  conformant: 19
+  partial: 3
+  non_conformant: 12
+  unknown: 1
+  strengths:
+  - RFC 9727 API Catalog — the discovery mechanism that made this profile's spec harvest possible.
+  - RFC 8414 + RFC 7591 + PKCE on the MCP server.
+  - Deep CTI data-standard alignment (STIX 2.1, MISP, MITRE ATT&CK, CVE/CVSS/CISA KEV).
+  - A complete, well-formed llms.txt with .md twins for every page.
+  weaknesses:
+  - No RFC 9457 problem details; two competing proprietary error envelopes.
+  - No idempotency contract on a write-bearing API.
+  - No deprecation policy or Sunset headers, with two in-place breaking removals already shipped.
+  - No AsyncAPI despite a real three-event webhook surface, and no webhook signature verification.
+  - No security.txt and no RFC 9728 protected-resource metadata.

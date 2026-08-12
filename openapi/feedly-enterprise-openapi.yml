@@ -1,0 +1,334 @@
+openapi: 3.1.0
+info:
+  title: Enterprise API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/enterprise
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+security:
+- sec0: []
+paths:
+  /ioc?/streamid=:
+    get:
+      summary: Collect IoCs with rich context
+      description: This guide contains a step-by-step guide for exporting all IoCs referenced in articles
+        contained within a Feedly AI Feed, Folder, or Board using the Feedly API. The article will show
+        how to access the Feedly Enterprise API token, and the stream ID as well as show examples of the
+        API output using the Postman API platform.
+      operationId: collect-iocs
+      parameters:
+      - name: streamId
+        in: query
+        description: The id of the stream you want to access. Make sure that you are URI encoding the
+          streamId
+        required: true
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: The number of articles/entries to return. Pick a number between 1 and 100 (optional,
+          default is 20)
+        schema:
+          type: string
+      - name: newerThan
+        in: query
+        description: Long timestamp in ms representing the time of your previous call (in Unix/Epoch).
+          Cannot be older than 31 days ago. (optional)
+        schema:
+          type: string
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /triggers:
+    get:
+      summary: Get the List of Webhooks
+      description: ''
+      operationId: get-the-list-of-webhooks
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+    post:
+      summary: Create or Update a Webhook
+      description: ''
+      operationId: create-or-update-a-webhook
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - RAW_BODY
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: JSON input as covered in the guide
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /triggers/:{triggerid}:
+    delete:
+      summary: Delete a Webhook
+      description: ''
+      operationId: delete-a-webhook
+      parameters:
+      - name: triggerid
+        in: path
+        description: id of the webhook you want to delete
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /tags:
+    get:
+      summary: Get list of team board streamIds
+      description: Return a list of team boards
+      operationId: get-list-of-team-boards
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n  {\n    \"bufferSettings\": {\n      \"disabled\": true,\n      \"profileSelection\"\
+                    : \"allProfiles\",\n      \"sendNow\": false,\n      \"includeHighlight\": false\n\
+                    \    },\n    \"created\": 1737736144960,\n    \"createdBy\": \"71bcd854-acb0-4b55-9e82-c49bd12ea6c3\"\
+                    ,\n    \"emailSettings\": {\n      \"daysOfWeek\": [\n        \"Monday\",\n      \
+                    \  \"Thursday\",\n        \"Tuesday\",\n        \"Wednesday\",\n        \"Sunday\"\
+                    ,\n        \"Friday\",\n        \"Saturday\"\n      ],\n      \"disabled\": true,\n\
+                    \      \"hourOfDay\": 10,\n      \"includeFollowers\": true,\n      \"includeHighlights\"\
+                    : true,\n      \"includeImages\": true,\n      \"includeNotes\": true,\n      \"ranked\"\
+                    : \"newest\",\n      \"subjectTemplate\": \"NameAndDate\",\n      \"timeZone\": \"\
+                    America/Detroit\",\n      \"useLeoSummary\": true\n    },\n    \"id\": \"enterprise/akko/tag/002820c3-918f-4052-b5c9-595091c2e419\"\
+                    ,\n    \"label\": \"API Test Board\",\n    \"lastEntryAdded\": 1737736477703,\n  \
+                    \  \"microsoftTeamsSettings\": {\n      \"disabled\": true\n    },\n    \"tagArchived\"\
+                    : false,\n    \"totalEntries\": 4,\n    \"users\": [\n      {\n        \"userId\"\
+                    : \"9ec2f23d-0fbb-49a5-bcc8-bcbceb05e563\",\n        \"name\": \"Gaby\",\n       \
+                    \ \"email\": \"gaby+mi+content@feedly.com\",\n        \"isAdmin\": false,\n      \
+                    \  \"joinDate\": 1747842012518\n      },\n      {\n        \"userId\": \"71bcd854-acb0-4b55-9e82-c49bd12ea6c3\"\
+                    ,\n        \"givenName\": \"Aaron\",\n        \"name\": \"Aaron O'Maley\",\n     \
+                    \   \"email\": \"aaronwfv+mipersonal@gmail.com\",\n        \"isAdmin\": false,\n \
+                    \       \"joinDate\": 1737736145236\n      }\n    ]\n  }\n]"
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    bufferSettings:
+                      type: object
+                      properties:
+                        disabled:
+                          type: boolean
+                          example: true
+                          default: true
+                        profileSelection:
+                          type: string
+                          example: allProfiles
+                        sendNow:
+                          type: boolean
+                          example: false
+                          default: true
+                        includeHighlight:
+                          type: boolean
+                          example: false
+                          default: true
+                    created:
+                      type: integer
+                      example: 1737736144960
+                      default: 0
+                    createdBy:
+                      type: string
+                      example: 71bcd854-acb0-4b55-9e82-c49bd12ea6c3
+                    emailSettings:
+                      type: object
+                      properties:
+                        daysOfWeek:
+                          type: array
+                          items:
+                            type: string
+                            example: Monday
+                        disabled:
+                          type: boolean
+                          example: true
+                          default: true
+                        hourOfDay:
+                          type: integer
+                          example: 10
+                          default: 0
+                        includeFollowers:
+                          type: boolean
+                          example: true
+                          default: true
+                        includeHighlights:
+                          type: boolean
+                          example: true
+                          default: true
+                        includeImages:
+                          type: boolean
+                          example: true
+                          default: true
+                        includeNotes:
+                          type: boolean
+                          example: true
+                          default: true
+                        ranked:
+                          type: string
+                          example: newest
+                        subjectTemplate:
+                          type: string
+                          example: NameAndDate
+                        timeZone:
+                          type: string
+                          example: America/Detroit
+                        useLeoSummary:
+                          type: boolean
+                          example: true
+                          default: true
+                    id:
+                      type: string
+                      example: enterprise/akko/tag/002820c3-918f-4052-b5c9-595091c2e419
+                    label:
+                      type: string
+                      example: API Test Board
+                    lastEntryAdded:
+                      type: integer
+                      example: 1737736477703
+                      default: 0
+                    microsoftTeamsSettings:
+                      type: object
+                      properties:
+                        disabled:
+                          type: boolean
+                          example: true
+                          default: true
+                    tagArchived:
+                      type: boolean
+                      example: false
+                      default: true
+                    totalEntries:
+                      type: integer
+                      example: 4
+                      default: 0
+                    users:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          userId:
+                            type: string
+                            example: 9ec2f23d-0fbb-49a5-bcc8-bcbceb05e563
+                          name:
+                            type: string
+                            example: Gaby
+                          email:
+                            type: string
+                            example: gaby+mi+content@feedly.com
+                          isAdmin:
+                            type: boolean
+                            example: false
+                            default: true
+                          joinDate:
+                            type: integer
+                            example: 1747842012518
+                            default: 0
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

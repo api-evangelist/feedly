@@ -1,0 +1,94 @@
+# Feedly API Documentation
+
+> Feedly’s API is an easy-to-integrate REST API that allows you to automate workflows to quickly share intelligence with leadership and operations teams.
+
+## Guides
+- [Removing Duplicates from Streams API (Experimental)](https://developers.feedly.com/docs/removing-duplicates-from-streams-api.md)
+- [Understanding Continuation (Pagination)](https://developers.feedly.com/docs/understanding-continuation.md)
+- [Using the Search API](https://developers.feedly.com/docs/using-the-search-api.md)
+- [Add articles to Team Boards](https://developers.feedly.com/docs/how-to-add-articles-to-team-boards.md)
+- [Annotations](https://developers.feedly.com/docs/annotations.md)
+- [IoC Lookup Guide](https://developers.feedly.com/docs/ioc-lookup.md): This guide explains how to use the Feedly API to resolve Indicators of Compromise (IoCs) into stable Feedly Entity IDs and retrieve their full relationships and metadata.
+- [Emerging Trends API Guide](https://developers.feedly.com/docs/feedly-ai-trend-discovery-api-guide.md): This guide explains how to use the Feedly Emerging Trends API to retrieve trends based on specific industries, filters, and sorting criteria.
+
+## API Reference
+- [Introduction](https://developers.feedly.com/reference/introduction.md)
+- [Authorization](https://developers.feedly.com/reference/authorization.md): Use the ‘Self Service Feedly for Threat Intelligence Access Token' to create and manage your Feedly API’s in 3 easy steps.
+- [Building your first TI integration](https://developers.feedly.com/reference/building-your-first-ti-integration.md): This tutorial will show you how to make your first API call to the Feedly API and retrieve a list of articles from an AI Feed, a folder, or a Board.
+- [Request Limits](https://developers.feedly.com/reference/request-limits.md)
+- [Firewall Information](https://developers.feedly.com/reference/firewall-information.md)
+- [Status Codes](https://developers.feedly.com/reference/status-codes.md): This page is intended to provide brief description of error codes that you may encounter while interacting with the Feedly API.
+- [Feedly API Terms of Service](https://developers.feedly.com/reference/feedly-api-terms-of-service.md)
+- [Article JSON](https://developers.feedly.com/reference/articlejson.md): This guide will help you become familiar with the enriched JSON structure Feedly creates to represent articles in the Feedly REST API.
+- [CVE Insight Card JSON](https://developers.feedly.com/reference/cve-json.md): The purpose of this guide is to help you become familiar with the enriched JSON structure Feedly creates to represent the CVE Insights Card in the Feedly REST API.
+- [Threat Actor Insight Card JSON](https://developers.feedly.com/reference/threat-actor-insight-card-json.md): The purpose of this guide is to help you become familiar with the enriched JSON structure Feedly creates to represent the Threat Actor Insights Card in the Feedly REST API.
+- [Malware Insight Card JSON](https://developers.feedly.com/reference/malware-insight-card-json.md)
+- [Vulnerability Agent JSON Structure](https://developers.feedly.com/reference/vulnerability-agent-json-structure.md)
+- [TTP Agent JSON Structure](https://developers.feedly.com/reference/ttp-agent-json-structure.md): The purpose of this guide is to help you become familiar with the JSON structure Feedly creates to represent the TTP Agent in the Feedly REST API.
+- [Cyberattacks Agent JSON Structure](https://developers.feedly.com/reference/cyber-attacks-agent-json-structure.md): This page describes the JSON structure returned by the Cyberattacks Agent API endpoints.
+- [Collect articles from streamId](https://developers.feedly.com/reference/collect-articles.md)
+- [Get article metadata](https://developers.feedly.com/reference/get-article-metadata.md)
+- [Get multiple article metadata](https://developers.feedly.com/reference/get-multiple-article-metadata.md)
+- [Search](https://developers.feedly.com/reference/search.md)
+- [List Enterprise Users](https://developers.feedly.com/reference/listenterpriseusers.md): Retrieves a list of all users in the enterprise account with their activity metrics and profile information.  **Export Options:** - Add `?format=csv` to the URL to export the user list as a CSV file instead of JSON
+- [Get all team folders](https://developers.feedly.com/reference/getteamfolders.md): Retrieve a list of all team folders with their associated feeds. Supports CSV export via the `format=csv` query parameter.
+- [Get list of team board streamIds](https://developers.feedly.com/reference/get-list-of-team-boards.md): Return a list of team boards
+- [Add articles to board](https://developers.feedly.com/reference/add-articles-to-board.md): Add articleIds to team board
+- [Delete article from Board](https://developers.feedly.com/reference/delete-article-from-board.md): Remove an article from a team board by its entry ID.
+- [Annotate articles](https://developers.feedly.com/reference/annotate-articles.md): Add annotations to articleIds
+- [Get list of AI Feeds](https://developers.feedly.com/reference/get-list-of-ai-feeds.md): Return AI Feeds from enterprise team
+- [Get Intel Profile data](https://developers.feedly.com/reference/getintelprofilelists.md): Returns all intel profiles associated with the authenticated enterprise account. When `details=true` is passed, each list includes its full entity membership. Entity lists group named entities (companies, technologies, threat actors, custom text terms) that can be used to scope and filter intelligence feeds.  Entity members may be resolved Feedly entities (returned with an `id`) or unresolved custom text strings (returned with a `text` field only).
+- [Ask AI](https://developers.feedly.com/reference/search-ask-ai.md)
+- [Ask AI with structured outputs](https://developers.feedly.com/reference/ai-actions-experimental.md): The Feedly Ask AI API allows developers to leverage the power of Large Language Models (LLMs) to ask questions and gather insights from a set of articles.
+- [Trend analysis card](https://developers.feedly.com/reference/trend-analysis-card.md)
+- [Autocomplete Entities](https://developers.feedly.com/reference/autocomplete-entities.md)
+- [Entity Lookup](https://developers.feedly.com/reference/entity-lookup.md)
+- [Trending Articles](https://developers.feedly.com/reference/trending-articles.md): A guide to extract trending trending Cybersecurity articles from the Threat Landscape Agent.
+- [Get Cyberattacks Agent](https://developers.feedly.com/reference/get-cyber-attacks-agent.md): The Cyberattacks Agent API provides access to structured cyber attack data, allowing you to query, filter, and analyze security incidents across different time periods, regions, and attack types.
+- [Get Cyberattacks Statistics](https://developers.feedly.com/reference/get-cyber-attacks-statistics.md): Retrieve aggregated statistics and trends for cyber attacks based on your query filters. This endpoint provides statistical breakdowns by attack type, victim country, victim industry, and other dimensions.
+- [Get Individual Cyberattack Details](https://developers.feedly.com/reference/get-individual-cyber-attack-details.md): Retrieve comprehensive details about a specific cyberattack, including timeline events, related entities, source articles, and mention trends over time.
+- [Trending Vulnerabilities](https://developers.feedly.com/reference/trending-cves.md): A guide to extract trending vulnerabilities from the Threat Landscape Dashboard.
+- [Get CVE Metadata with or without Articles](https://developers.feedly.com/reference/cve-insights-card.md): Research critical vulnerabilities with the CVE Insights Card
+- [Get CVE Metadata on Multiple CVEs](https://developers.feedly.com/reference/get-multiple-cves.md)
+- [Get CVE Timeline](https://developers.feedly.com/reference/getcvetimeline.md): Returns a chronological list of significant events for a given CVE entity, including CVSS score changes, exploitation reports, vendor advisories, threat intelligence reports, and relationship discoveries.
+- [Vulnerability Agent](https://developers.feedly.com/reference/vulnerability-agent.md): Query the Vulnerability Agent.  **How to get your query JSON**: Open any saved or ad-hoc Vulnerability Agent search in the Feedly UI and click the **API** button at the top of the page. Feedly generates the complete JSON payload for you — paste it directly into the request body. You do not need to construct the body manually.  **Custom time windows**: Use `"type": "Custom"` with full ISO 8601 datetimes for `start` and `end` to poll on any cadence (e.g. every 4 hours) without overlapping bucket boundaries. This is useful for automated workflows (SOAR, SIEM) so each poll returns only new records with no overlap.  **Request body fields**: - `layers` (array) — ordered filter layers; filters within a layer are   OR'd, layers are AND'd together  - `layers[].filters[].field` — filter dimension: `period`, `trending`,   `created`, `exploited`, `poc`, `weaponized`, `inCisaKev`, `cvssScore`,   `cvssEstimate`, `cvssVector`  - `layers[].filters[].value` — value depends on field:   period → `{"type": "Last7Days"|"Last30Days"|"Last3Months"|"Last6Months"|"Custom", "label": "...", "start": "ISO datetime", "end": "ISO datetime"}`;   cvssScore → `{"gte": 9}`;   cvssEstimate → `"HIGH"|"MEDIUM"|"LOW"`;   cvssVector → string component e.g. `"AV:N"`, `"PR:N"`, `"UI:N"`;   boolean fields → `true`  - `count` (integer, optional) — max results per page - `continuation` — pagination token from the previous response - `sort` — `{"field": "cveId"|"cvssScore"|"epssScore"|"publishedDate", "order": "asc"|"desc"}`
+- [List TTPs from TTP Agent](https://developers.feedly.com/reference/list-ttps.md)
+- [Collect Procedures and articles from the TTP Agent](https://developers.feedly.com/reference/collect-procedures.md)
+- [Trending Attackers](https://developers.feedly.com/reference/trending-attackers.md): A guide to extract trending attackers from the Threat Landscape Dashboard.
+- [Get Threat Actor Metadata](https://developers.feedly.com/reference/get-threat-actor-metadata.md): Retrieves metadata and details about a specific threat actor.
+- [Get Threat Actor Relationships](https://developers.feedly.com/reference/get-threat-actor-relationships.md): Retrieves relationship information (such as IoCs or TTPs) for a specific threat actor.
+- [Collect IoCs with rich context](https://developers.feedly.com/reference/collect-iocs.md): This guide contains a step-by-step guide for exporting all IoCs referenced in articles contained within a Feedly AI Feed, Folder, or Board using the Feedly API. The article will show how to access the Feedly Enterprise API token, and the stream ID as well as show examples of the API output using the Postman API platform.
+- [Get IoC Metadata with or without articles](https://developers.feedly.com/reference/getiocmetadata.md): Retrieves detailed information about a specific IoC, including statistics, relationships, and export options
+- [Trending New Malware](https://developers.feedly.com/reference/trending-new-malware.md): A guide to extract trending new malware from the Threat Landscape Dashboard.
+- [Get Malware Metadata](https://developers.feedly.com/reference/get-malware-metadata.md): A GET request to the following endpoint can retrieve some of the meta-data contained in the Malware Insights Card, including the `description`,  `label`, `aliases`, `malware type`and more.
+- [Get Malware Relationships](https://developers.feedly.com/reference/get-malware-relationships.md)
+- [Get Malware Article Graph](https://developers.feedly.com/reference/get-malware-article-graph.md)
+- [Get Malware Detection Rules](https://developers.feedly.com/reference/get-malware-detection-rules.md)
+- [Get list of agents](https://developers.feedly.com/reference/get-agents.md): > 🚧 Alpha: Custom Agents is a new capability and still under active development. Endpoints, fields, and behavior may change without notice.  Returns every Threat Intelligence Agent — Custom Agents as well as the built-in TTP, Cyberattacks, Brand Monitoring, Vulnerability, and Credential Leaks agents.  To find your team's Custom Agents, filter the response for items where `type` is `customAgent`, then pass each one's `id` to `GET /custom-agents/{id}` to fetch that agent's rows.
+- [Get a Custom Agent's rows](https://developers.feedly.com/reference/get-custom-agent.md): > 🚧 Alpha: Custom Agents is a new capability and still under active development. Endpoints, fields, and behavior may change without notice.  Returns the rows (one per tracked entity) and cell data for a single Custom Agent, paginated with `count`/`continuation`.  Find the `id` to use here from a `customAgent`-type item returned by `GET /dashboards`, and use that same item's `schema.columns` to interpret each row's `cells`.
+- [Emerging Trends](https://developers.feedly.com/reference/emerging-trends.md): Retrieve trends based on specific industries, filters, and sorting criteria.
+- [Company Insights Cards](https://developers.feedly.com/reference/company-insights-cards.md): This guide outlines the available endpoints for retrieving company insights and analytics data
+- [Metadata](https://developers.feedly.com/reference/company-metadata.md): Retrieves metadata and details about a specific company
+- [Key Metrics](https://developers.feedly.com/reference/key-metrics.md): Retrieve key metrics points for a company
+- [Article Counts](https://developers.feedly.com/reference/article-counts.md): Get article count graphs across different categories
+- [Resource Counts](https://developers.feedly.com/reference/resource-counts.md): Get resource count data for a company
+- [Top Stories](https://developers.feedly.com/reference/top-stories.md): Get trending news stories related to a company
+- [NewEntrySaved Events](https://developers.feedly.com/reference/newentrysaved-events.md)
+- [NewAnnotation Events](https://developers.feedly.com/reference/newannotation-events.md)
+- [NewWebAlertEntry Events](https://developers.feedly.com/reference/newwebalertentry-events.md)
+- [Get the List of Webhooks](https://developers.feedly.com/reference/get-the-list-of-webhooks.md)
+- [Create or Update a Webhook](https://developers.feedly.com/reference/create-or-update-a-webhook.md)
+- [Delete a Webhook](https://developers.feedly.com/reference/delete-a-webhook.md)
+- [Sample Scripts](https://developers.feedly.com/reference/sample-scripts.md)
+
+## Changelog
+- [IoC Lookup Guide - New Two-Step Workflow for Resolving Raw IoCs](https://developers.feedly.com/changelog/ioc-lookup-guide-new-two-step-workflow-for-resolving-raw-iocs.md)
+- [New Endpoint: Get IoC Details](https://developers.feedly.com/changelog/new-endpoint-get-ioc-details.md)
+- [Vulnerability Dashboard API - cvssVector added, attackVector Deprecated](https://developers.feedly.com/changelog/vulnerability-dashboard-api-attackvector-field-deprecated.md)
+- [Cyber Attacks Dashboard API](https://developers.feedly.com/changelog/new-cyber-attacks-dashboard-api.md)
+- [Threat actor relationships moved to new endpoint](https://developers.feedly.com/changelog/threat-actor-relationships-endpoint-updates.md)
+- [Understanding Continuation Guide Published](https://developers.feedly.com/changelog/understanding-continuation-guide-published.md)
+- [Removing Duplicates Guide (Experimental)](https://developers.feedly.com/changelog/removing-duplicates-guide-experimental.md)
+- [AI Actions (beta) added](https://developers.feedly.com/changelog/ai-actions-beta-added.md)
+- [Article JSON Updates](https://developers.feedly.com/changelog/article-json-updates.md)
+- [Welcome to Feedly API](https://developers.feedly.com/changelog/welcome-to-feedly-api.md)

@@ -1,0 +1,242 @@
+openapi: 3.1.0
+info:
+  title: Search API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/search/
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+security:
+- sec0: []
+paths:
+  /contents?:
+    post:
+      summary: Search
+      description: ''
+      operationId: search
+      parameters:
+      - name: count
+        in: query
+        description: Integer number of articles to return. default is 10. (optional)
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      - name: newerThan
+        in: query
+        description: Long timestamp in ms (optional)
+        schema:
+          type: integer
+          format: int32
+      - name: olderThan
+        in: query
+        description: Long timestamp in ms (optional)
+        schema:
+          type: integer
+          format: int32
+      - name: unreadOnly
+        in: query
+        description: 'Boolean if true, only unread articles will be returned; default is false. Reminder:
+          entries older than 31 days are automatically marked as read (optional)'
+        schema:
+          type: boolean
+      - name: continuation
+        in: query
+        description: String a continuation id is used to page through the content. Pass the continuation
+          from a search result to get the next set of results for this search (optional)
+        schema:
+          type: string
+      - name: includeAiActions
+        in: query
+        schema:
+          type: boolean
+          default: true
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - RAW_BODY
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: JSON formatted body with layers, salience, and source/streams
+                  default: '{"layers":[{"severities":["HIGH"],"type":"security"},{"parts":[{"id":"nlp/f/entity/gz:org:microsoft"}],"type":"matches","salience":"about"},{"type":"language","languages":["en"]}],"source":{"items":[{"type":"publicationBucket","id":"byf:cybersecurity-bundle","tier":"tier1"},{"type":"publicationBucket","id":"cybersecurity:vulnerabilities","tier":"tier2"}]}}'
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"errorCode\": 400,\n  \"requestId\": \"835133063819c36c-SEA\",\n  \"errorMessage\"\
+                    : \"Invalid JSON\"\n}"
+              schema:
+                type: object
+                properties:
+                  errorCode:
+                    type: integer
+                    example: 400
+                    default: 0
+                  requestId:
+                    type: string
+                    example: 835133063819c36c-SEA
+                  errorMessage:
+                    type: string
+                    example: Invalid JSON
+      deprecated: false
+  /entities?:
+    get:
+      summary: Autocomplete Entities
+      description: ''
+      operationId: autocomplete-entities
+      parameters:
+      - name: query
+        in: query
+        description: The keyword you want to match to an entity or AI Model
+        required: true
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: 'The number of suggestions. Recommendation: 10'
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"errorCode\": 400,\n  \"requestId\": \"835133063819c36c-SEA\",\n  \"errorMessage\"\
+                    : \"Invalid JSON\"\n}"
+              schema:
+                type: object
+                properties:
+                  errorCode:
+                    type: integer
+                    example: 400
+                    default: 0
+                  requestId:
+                    type: string
+                    example: 835133063819c36c-SEA
+                  errorMessage:
+                    type: string
+                    example: Invalid JSON
+        '405':
+          description: '405'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: "\"errorCode\": 405,\n  \"requestId\": \"8351587fdc5a6808-SEA\",\n  \"errorMessage\"\
+                    : \"POST not allowed\""
+      deprecated: false
+  /rag:
+    post:
+      summary: Ask AI
+      description: ''
+      operationId: search-ask-ai
+      parameters:
+      - name: newerThan
+        in: query
+        description: Filter articles crawled after the given timestamp (epoch timestamp in milliseconds)
+        schema:
+          type: string
+      - name: olderThan
+        in: query
+        description: Filter articles crawled before the given timestamp (epoch timestamp in milliseconds)
+        schema:
+          type: string
+      - name: stream
+        in: query
+        description: Should the response be streamed
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - query
+              properties:
+                query:
+                  type: string
+                  description: The search query
+                  format: json
+                source:
+                  type: string
+                  description: Prioritize articles from the selected sources.
+                  format: json
+                entityIds:
+                  type: string
+                  description: A list empty or of one element containing eg. cve id, malware id, cyber
+                    attack id, meme id
+                  format: json
+                agentQueries:
+                  type: string
+                  description: A list of agent queries
+                  format: json
+                layers:
+                  type: string
+                  description: Prioritize articles from the selected layers and ai models.
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,109 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://developers.feedly.com/reference/newentrysaved-events,
+  https://developers.feedly.com/reference/newannotation-events,
+  https://developers.feedly.com/reference/newwebalertentry-events,
+  https://developers.feedly.com/reference/get-the-list-of-webhooks,
+  https://developers.feedly.com/reference/create-or-update-a-webhook,
+  https://developers.feedly.com/reference/delete-a-webhook — fetched 2026-08-12
+spec_type: none
+asyncapi_published: false
+description: >-
+  Feedly documents a real webhook (they call them "triggers") event surface with three event types and
+  a full CRUD management API, but publishes NO AsyncAPI document. This artifact captures the webhook
+  catalog as documented. It is deliberately NOT an AsyncAPI file — writing one would assert Feedly
+  publishes an event contract it does not.
+
+management_api:
+  base: https://api.feedly.com/v3/enterprise/triggers
+  spec: openapi/feedly-enterprise-openapi.yml
+  operations:
+  - operationId: get-the-list-of-webhooks
+    method: GET
+    path: /v3/enterprise/triggers
+    summary: Get the List of Webhooks
+  - operationId: create-or-update-a-webhook
+    method: POST
+    path: /v3/enterprise/triggers
+    summary: Create or Update a Webhook
+    note: >-
+      Upsert semantics. The OpenAPI models the request body as an untyped RAW_BODY string, so the
+      published spec does not describe the trigger's own fields — the field contract lives only in
+      prose on the reference page.
+  - operationId: delete-a-webhook
+    method: DELETE
+    path: /v3/enterprise/triggers/{triggerId}
+    summary: Delete a Webhook
+
+transport:
+  protocol: HTTPS POST
+  content_type: application/json; charset=UTF-8
+  headers_sent_by_feedly:
+  - name: X-Request-Id
+    note: Per-delivery correlation id, e.g. 166e626a23b:3b:8c61af75
+  - name: Authorization
+    note: >-
+      Whatever static value the consumer configured on the trigger. This is the ONLY authentication
+      control on inbound deliveries.
+  signature_verification:
+    supported: false
+    note: >-
+      Feedly publishes no HMAC/signature scheme (no X-Signature, no shared-secret digest) for webhook
+      deliveries. Consumers can only verify the static Authorization header they configured. This is
+      a real gap against the norm for security-tooling webhooks.
+  retry_policy:
+    documented: false
+  delivery_guarantee:
+    documented: false
+    note: No published at-least-once/exactly-once guarantee and no delivery-id for idempotent consumption.
+
+events:
+- name: NewEntrySaved
+  docs: https://developers.feedly.com/reference/newentrysaved-events
+  trigger: >-
+    An enterprise member adds an enterprise tag to an entry — i.e. saves an article to a Team Board.
+  payload_fields:
+  - {name: type, type: String, description: Constant "NewEntrySaved"}
+  - {name: triggerId, type: String, description: Id of the trigger that fired}
+  - {name: entryId, type: String, description: Unique id of the saved entry}
+  - {name: resourceId, type: String, description: Enterprise tag (board) streamId the entry was saved to}
+  - {name: resourceName, type: String, description: Enterprise tag label}
+  - {name: savedBy, type: String, description: Name of the enterprise member who saved the entry}
+  - {name: title, type: String, description: Entry title}
+  - {name: entryUrl, type: URL, description: Entry URL on the publisher website}
+  - {name: feedlyUrl, type: URL, description: Entry URL on the Feedly website}
+  - {name: feedId, type: String, description: Source feed id}
+  - {name: feedTitle, type: String, description: Source feed title}
+  - {name: publishedDate, type: Date, description: Published date}
+  - {name: publishedTimestamp, type: Long, description: Published date as epoch milliseconds}
+  - {name: author, type: String, description: Entry author}
+  - {name: visualUrl, type: URL, description: Lead visual}
+  - {name: keywords, type: Array, description: Extracted keywords}
+  - {name: contentHtml, type: String, description: Entry content as HTML}
+  - {name: content, type: String, description: Entry content as text}
+- name: NewAnnotation
+  docs: https://developers.feedly.com/reference/newannotation-events
+  trigger: An enterprise member annotates an article.
+  related_operation: annotate-articles (POST /v3/annotations)
+- name: NewWebAlertEntry
+  docs: https://developers.feedly.com/reference/newwebalertentry-events
+  trigger: A new entry matches a configured web alert.
+
+network:
+  egress_documented: true
+  docs: https://developers.feedly.com/reference/firewall-information
+  note: Feedly publishes firewall/egress information for consumers that need to allowlist inbound deliveries.
+
+streaming:
+  websockets: false
+  sse: false
+  kafka: false
+  note: No streaming transport is published; webhooks and polling are the only event delivery mechanisms.
+
+gaps:
+- No AsyncAPI (or CloudEvents) document for any of the three events.
+- No payload signature/HMAC verification scheme.
+- No published retry, backoff or delivery-guarantee policy.
+- NewAnnotation and NewWebAlertEntry payload fields are documented in prose only, not as schemas.
+- The create/update trigger request body is untyped (RAW_BODY) in the OpenAPI.

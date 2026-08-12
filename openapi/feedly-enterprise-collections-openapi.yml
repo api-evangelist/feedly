@@ -1,0 +1,247 @@
+openapi: 3.0.0
+info:
+  title: Enterprise Collections
+  description: Feedly Enterprise API for managing team folders and collections
+  version: 1.0.0
+  contact:
+    name: Feedly Support
+    url: https://feedly.com/support
+servers:
+- url: https://api.feedly.com/v3
+  description: Feedly API v3
+security:
+- BearerAuth: []
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Enterprise API key for authentication
+  schemas:
+    Feed:
+      type: object
+      description: Feed information within a folder
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the feed
+          example: feed/http://blog.checkpoint.com/feed/
+        feedId:
+          type: string
+          description: Alternative feed identifier
+          example: feed/http://blog.checkpoint.com/feed/
+        title:
+          type: string
+          description: Feed title
+          example: Check Point Blog
+        description:
+          type: string
+          description: Feed description
+          example: Blog
+        website:
+          type: string
+          format: uri
+          description: Website URL for the feed
+          example: https://blog.checkpoint.com/
+        language:
+          type: string
+          description: Primary language of the feed content
+          example: en
+        topics:
+          type: array
+          description: Topics or categories associated with the feed
+          items:
+            type: string
+          example:
+          - security
+          - vendor
+          - tech
+        subscribers:
+          type: integer
+          description: Number of subscribers to this feed
+          example: 9964
+        velocity:
+          type: number
+          format: double
+          description: Publishing velocity (articles per day)
+        estimatedEngagement:
+          type: integer
+          description: Estimated engagement level
+        created:
+          type: integer
+          format: int64
+          description: Feed creation timestamp (milliseconds since epoch)
+          example: 1424817030751
+        updated:
+          type: integer
+          format: int64
+          description: Feed last update timestamp (milliseconds since epoch)
+          example: 1761742717599
+        addedBy:
+          type: string
+          format: uuid
+          description: User ID of who added this feed to the folder
+          example: 7b966855-c953-4ec8-b271-cf554996c1ab
+        addedDate:
+          type: integer
+          format: int64
+          description: Timestamp when the feed was added to the folder (milliseconds since epoch)
+          example: 1758707494466
+        visualUrl:
+          type: string
+          format: uri
+          description: URL to the feed's visual/banner image
+        iconUrl:
+          type: string
+          format: uri
+          description: URL to the feed's icon
+        coverUrl:
+          type: string
+          format: uri
+          description: URL to the feed's cover image
+        isFeedlyFeed:
+          type: boolean
+          description: Whether this is a Feedly-managed feed
+        partial:
+          type: boolean
+          description: Whether this is a partial feed record
+          example: true
+      required:
+      - id
+      - feedId
+      - title
+      - website
+      - created
+      - updated
+    Folder:
+      type: object
+      description: Team folder containing feeds
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the folder
+          example: enterprise/christeam/category/fa84365d-6433-400e-bbbf-9d3c010889c4
+        label:
+          type: string
+          description: Display name for the folder
+          example: '*CTI Vendor Reports'
+        description:
+          type: string
+          description: Folder description
+        createdBy:
+          type: string
+          format: uuid
+          description: User ID of the folder creator
+          example: 7b966855-c953-4ec8-b271-cf554996c1ab
+        created:
+          type: integer
+          format: int64
+          description: Folder creation timestamp (milliseconds since epoch)
+          example: 1758036126516
+        updated:
+          type: integer
+          format: int64
+          description: Folder last update timestamp (milliseconds since epoch)
+        private:
+          type: boolean
+          description: Whether this folder is private
+        collectionArchived:
+          type: boolean
+          description: Whether this folder is archived
+        disabled:
+          type: boolean
+          description: Whether this folder is disabled
+        includeFollowers:
+          type: boolean
+          description: Whether to include followers in this folder
+        feeds:
+          type: array
+          description: List of feeds in this folder
+          items:
+            $ref: '#/components/schemas/Feed'
+      required:
+      - id
+      - label
+      - createdBy
+      - created
+      - feeds
+paths:
+  /enterprise/collections:
+    get:
+      operationId: getTeamFolders
+      summary: Get all team folders
+      description: Retrieve a list of all team folders with their associated feeds. Supports CSV export
+        via the `format=csv` query parameter.
+      tags:
+      - Folders
+      parameters:
+      - name: includeArchived
+        in: query
+        description: Include archived folders in the response (default is false)
+        schema:
+          type: boolean
+        example: false
+      - name: format
+        in: query
+        description: Export format for the response
+        schema:
+          type: string
+          enum:
+          - csv
+          - json
+        example: json
+      responses:
+        '200':
+          description: Successful retrieval of team folders
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Folder'
+              example:
+              - id: enterprise/christeam/category/fa84365d-6433-400e-bbbf-9d3c010889c4
+                label: '*CTI Vendor Reports'
+                description: ''
+                createdBy: 7b966855-c953-4ec8-b271-cf554996c1ab
+                created: 1758036126516
+                updated: 1761742717599
+                private: false
+                collectionArchived: false
+                disabled: false
+                includeFollowers: false
+                feeds:
+                - id: feed/http://blog.checkpoint.com/feed/
+                  feedId: feed/http://blog.checkpoint.com/feed/
+                  title: Check Point Blog
+                  description: Blog
+                  website: https://blog.checkpoint.com/
+                  language: en
+                  topics:
+                  - security
+                  - vendor
+                  - tech
+                  subscribers: 9964
+                  velocity: 3.8
+                  estimatedEngagement: 1
+                  created: 1424817030751
+                  updated: 1761742717599
+                  addedBy: 7b966855-c953-4ec8-b271-cf554996c1ab
+                  addedDate: 1758707494466
+                  isFeedlyFeed: false
+                  partial: true
+            text/csv:
+              schema:
+                type: string
+              example: 'id,label,description,createdBy,created,updated,private,collectionArchived,disabled,includeFollowers
+
+                "enterprise/christeam/category/fa84365d-6433-400e-bbbf-9d3c010889c4","*CTI Vendor Reports","","7b966855-c953-4ec8-b271-cf554996c1ab",1758036126516,1761742717599,false,false,false,false
+
+                '
+        '401':
+          description: Unauthorized - Invalid or missing API key
+        '403':
+          description: Forbidden - Insufficient permissions to access team folders
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

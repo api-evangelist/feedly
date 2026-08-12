@@ -1,0 +1,109 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://developers.feedly.com/reference/introduction, https://developers.feedly.com/changelog/,
+  https://status.feedly.com/ (HTTP 200), https://feedly.com/legal/terms (HTTP 200),
+  https://developers.feedly.com/changelog/vulnerability-dashboard-api-attackvector-field-deprecated,
+  https://developers.feedly.com/changelog/threat-actor-relationships-endpoint-updates — 2026-08-12
+description: >-
+  Feedly's versioning, deprecation and operational-transparency posture. It runs a public status page
+  and a dated changelog, but publishes no deprecation policy, no sunset guarantees and no SLA — and it
+  has shipped at least two field/response-shape removals in place on v3.
+
+versioning:
+  scheme: uri-path
+  current: v3
+  docs: https://developers.feedly.com/reference/introduction
+  header_versioning: false
+  date_versioning: false
+  note: >-
+    /v3 is the only version segment in every published OpenAPI servers[] block. There is no version
+    header, no date-pinned version, and no published statement about how a future major version would
+    be introduced or how long v3 would remain supported.
+
+deprecation:
+  policy_url: null
+  policy_published: false
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  note: >-
+    NO deprecation policy exists. Feedly publishes no notice period, no support window, and does not
+    emit RFC 8594 Sunset or Deprecation headers. Changes are announced in the changelog only, with no
+    dated removal schedule. A consumer's only warning mechanism is reading the changelog.
+  deprecated_operations_in_spec: []
+  spec_note: >-
+    Zero of the 49 published operations carry `deprecated: true`. Every spec that sets the flag sets
+    it to false. The specs therefore give no machine-readable deprecation signal at all.
+  observed_breaking_changes:
+  - change: >-
+      `attackVector` field REMOVED from POST /v3/trends/vulnerability-dashboard and replaced with
+      `cvssVector` (standard CVSS notation).
+    operation: getVulnerabilityAgent
+    kind: field removal
+    announced: https://developers.feedly.com/changelog/vulnerability-dashboard-api-attackvector-field-deprecated
+    notice_period: none published
+    note: >-
+      The changelog title says "Deprecated" but the body says "Removed" — the field was taken out, not
+      deprecated. Old values were NETWORK, LOCAL, ADJACENT_NETWORK, PHYSICAL.
+  - change: >-
+      `relationships` field REMOVED from the GET /v3/entities/{threatActorId} response; relationship
+      data moved to GET /v3/ml/relationships/actor/{threatActorId}.
+    operation: get-threat-actor-metadata
+    kind: response-shape removal
+    announced: https://developers.feedly.com/changelog/threat-actor-relationships-endpoint-updates
+    notice_period: none published
+    note: >-
+      The original endpoint is "still supported" but silently returns less. A client reading
+      `relationships` now gets nothing rather than an error — a silent failure mode.
+
+experimental_surfaces:
+  note: >-
+    Feedly labels some surfaces experimental/alpha in the docs, which is useful signal, but there is
+    no stated graduation or removal process for them.
+  items:
+  - name: Custom Agents (GET /v3/dashboards, GET /v3/custom-agents/{id})
+    status: alpha
+    warning: >-
+      "Alpha: Custom Agents is a new capability and still under active development. Endpoints, fields,
+      and behavior may change without notice."
+  - name: Streams API deduplication
+    status: experimental
+    docs: https://developers.feedly.com/docs/removing-duplicates-from-streams-api
+  - name: AI Actions
+    status: beta
+    docs: https://developers.feedly.com/reference/ai-actions-experimental
+
+status_page:
+  url: https://status.feedly.com/
+  http_status: 200
+  verified: '2026-08-12'
+  note: Public status page for the Feedly platform.
+
+sla:
+  url: null
+  published: false
+  uptime_target: null
+  note: >-
+    No public SLA or uptime commitment. Terms of Service exist (https://feedly.com/legal/terms) and an
+    API-specific Terms page is published at
+    https://developers.feedly.com/reference/feedly-api-terms-of-service, but neither is an
+    availability commitment.
+
+support:
+  channels:
+  - https://docs.feedly.com/
+  - sales@feedly.com (API access provisioning)
+  note: No public developer forum, Discord, or community channel is published for the API.
+
+changelog:
+  url: https://developers.feedly.com/changelog/
+  published: true
+  detail: changelog/feedly-changelog.yml
+
+gaps:
+- No deprecation policy and no notice period.
+- No Sunset / Deprecation headers (RFC 8594).
+- No `deprecated: true` on any operation, despite fields having been removed in place.
+- No SLA or uptime commitment.
+- No published migration path or support window for a future major version.

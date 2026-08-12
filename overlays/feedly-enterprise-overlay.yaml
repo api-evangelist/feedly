@@ -1,0 +1,38 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Feedly Enterprise API
+  version: 1.0.0
+extends: openapi/feedly-enterprise-openapi.yml
+actions:
+- target: $.info
+  update:
+    x-apievangelist-provider: feedly
+    x-apievangelist-source: https://developers.feedly.com/.well-known/api-catalog
+    x-apievangelist-harvested: '2026-08-12'
+    x-apievangelist-conventions: conventions/feedly-conventions.yml
+    x-apievangelist-errors: errors/feedly-problem-types.yml
+    x-apievangelist-rate-limits: rate-limits/feedly-rate-limits.yml
+    x-apievangelist-authentication: authentication/feedly-authentication.yml
+- target: $
+  update:
+    x-apievangelist-notes:
+      idempotency: Not supported. No Idempotency-Key header or parameter is published on any Feedly operation;
+        retried writes are not server-deduplicated.
+      pagination: Cursor pagination via a continuation token. Stop when `continuation` is absent from
+        the response. newerThan cannot be older than 31 days.
+      rate_limits: 100,000 requests per month per token. X-RateLimit-Count / X-RateLimit-Limit / X-RateLimit-Reset
+        on every response; X-RateLimit-Reset is SECONDS remaining, not a timestamp. 429 on exhaustion,
+        no Retry-After.
+      error_envelope: 'Not RFC 9457. Two proprietary shapes: {errorMessage, errorId} and {errorCode, requestId,
+        errorMessage}.'
+      response_schemas: The published 200 response schemas are empty objects. Real object shapes are documented
+        only in prose at https://developers.feedly.com/reference/ — see data-model/feedly-data-model.yml.
+      access: API access requires the Threat Intelligence Advanced plan and an admin-generated token from
+        https://feedly.com/i/team/api.
+- target: $.info
+  update:
+    x-apievangelist-empty-response-schemas:
+    - collect-iocs
+    - get-the-list-of-webhooks
+    - create-or-update-a-webhook
+    - delete-a-webhook

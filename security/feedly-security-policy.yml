@@ -1,0 +1,76 @@
+generated: '2026-08-12'
+method: searched
+source: https://feedly.com/legal/security — fetched 2026-08-12, HTTP 200
+url: https://feedly.com/legal/security
+title: Feedly Information Security Practices
+description: >-
+  Feedly publishes a substantive information security policy as a legal document — data centers,
+  access control, encryption, continuity, incident response, data disposal and governance. It is a
+  contractual commitment ("during the term of this agreement... will not lower its information
+  security standards"), which is stronger than a marketing security page.
+
+vulnerability_disclosure:
+  program: false
+  security_txt: false
+  bug_bounty: false
+  security_contact: null
+  note: >-
+    RECORDED ABSENCE, not an unchecked box. There is no coordinated vulnerability disclosure program,
+    no security@ contact, no PGP key and no bug bounty. Probed 2026-08-12: hackerone.com/feedly 404,
+    bugcrowd.com/feedly 404, /.well-known/security.txt is a soft-200 rate-limiter body on the
+    feedly.com/api.feedly.com/cloud.feedly.com hosts and a 404 on developers.feedly.com and
+    mcp.feedly.com. The paths /security, /responsible-disclosure, /security/responsible-disclosure
+    and /vulnerability-disclosure all return HTTP 200 with an identical 45,225-byte SPA catch-all
+    body — a false positive, not four pages. No VulnerabilityDisclosure pointer is emitted.
+  gap: >-
+    A cyber threat intelligence vendor with no published route for reporting a vulnerability in its
+    own platform is a notable omission for this category specifically.
+
+policy:
+  data_centers:
+    operator: Equinix
+    locations: [California (US), Virginia (US)]
+    operator_compliance: [SOC 1 Type II, SOC 2 Type II, PCI DSS, NIST 800-53, ISO 27001]
+    note: >-
+      These certifications are the DATA CENTER OPERATOR's (Equinix), not Feedly's. Feedly's own
+      attestations are the SOC 2 Type 1 and Type 2 reports in security/feedly-trust-center.yml. The
+      distinction matters and the page states it plainly.
+    segregation: Production service and data fully segregated from internal business systems, network and storage.
+    access_control: Multi-factor, IP-controlled access limited to personnel needed to deploy and maintain uptime.
+  data_access:
+    purpose_limitation: Customer data used only for the purpose collected or for service provision and support.
+    sso: [SAML, Google, Azure]
+    domain_restriction: Customers can limit access by domain via SSO.
+    advanced_privacy: Employees cannot log in to or view customer accounts when advanced privacy is enabled.
+  encryption:
+    in_transit: HTTPS
+    passwords: Transmitted encrypted; only the hash is stored.
+    at_rest: not specified
+  continuity:
+    redundancy: Fully redundant system with synchronous replication and database writes.
+    warm_site: Geographically separated data center in Virginia.
+  incident_response:
+    procedure: Maintained and followed; reviewed by CEO and CTO at least annually.
+    escalation: First responders, escalation to executive leadership, customer notification.
+    breach_notification_window: 36 hours
+    note: Customers notified within 36 hours if their data has been compromised.
+  data_disposal:
+    customer_controlled: Customers control deletion through the UI; data permanently deleted and overwritten in normal backup practice.
+    termination: Customer data deleted 30 days after agreement termination.
+    legal_hold: Available on request; storage costs borne by the customer.
+    export: 'Screen print and PDF output for legal hold; "an API allows larger data extract."'
+  governance:
+    security_policy: Formal information security policy approved by the CEO and head of software development.
+    incident_procedure: Formal, documented.
+    background_checks: Employees undergo background checks at hire.
+    sdlc: Published guidelines covering code hygiene, code review, security awareness and code integrity.
+    review_cadence: Policies, procedures and guidelines reviewed at least annually.
+    least_privilege: Only employees provisioning the production service or technical support can access end-user names.
+
+related:
+  trust_center: security/feedly-trust-center.yml
+  domain_security: security/feedly-domain-security.yml
+  conformance: conformance/feedly-conformance.yml
+  api_terms: https://developers.feedly.com/reference/feedly-api-terms-of-service
+  privacy_policy: https://feedly.com/legal/privacy
+  firewall_information: https://developers.feedly.com/reference/firewall-information

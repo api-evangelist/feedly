@@ -1,0 +1,139 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://developers.feedly.com/changelog/ — entry list and ordering from
+  https://developers.feedly.com/llms.txt; each entry body fetched from its .md twin on 2026-08-12.
+description: >-
+  Feedly runs a real, curated developer changelog on its ReadMe-hosted developer hub. Entries are
+  substantive — they name the exact endpoints and fields that changed, which is better than most of
+  the catalog. The recorded weakness is that PUBLICATION DATES are not exposed in any
+  machine-readable form.
+
+url: https://developers.feedly.com/changelog/
+scheme: dated-entries
+current_version: v3
+entry_count_captured: 10
+window: recent (full published list as of 2026-08-12)
+
+dates_note: >-
+  DATES NOT CAPTURED — recorded honestly rather than guessed. The changelog HTML carries per-entry
+  dates, but developers.feedly.com returns HTTP 429 (a Cloudflare "Hello there, human!" challenge) to
+  non-browser clients for every HTML path. The .md twins that ReadMe serves — which DO return 200 —
+  omit the date line entirely, and llms.txt lists titles without dates. So the machine-readable
+  surface of this changelog has no timestamps on it. Ordering below is the provider's own
+  newest-first ordering from llms.txt and is reliable; the absolute dates are not available to a
+  machine and are therefore null rather than invented.
+
+entries:
+- order: 1
+  title: IoC Lookup Guide - New Two-Step Workflow for Resolving Raw IoCs
+  date: null
+  url: https://developers.feedly.com/changelog/ioc-lookup-guide-new-two-step-workflow-for-resolving-raw-iocs
+  kind: guide
+  breaking: false
+  highlights:
+  - Documents resolving a raw IoC (domain, IP, URL, file hash) without pre-computing an entity ID.
+  - 'Step 1 resolve: GET /v3/search/entities converts a raw IoC into a Feedly entity ID.'
+  - 'Step 2 enrich: GET /v3/entities/{entityId} returns threat-actor attribution, malware associations and export links.'
+- order: 2
+  title: 'New Endpoint: Get IoC Details'
+  date: null
+  url: https://developers.feedly.com/changelog/new-endpoint-get-ioc-details
+  kind: addition
+  breaking: false
+  operations_added: [getEntityDetails]
+  highlights:
+  - NEW GET /v3/entities/{entityId}.
+  - Detail for threat actors, malware families, vulnerabilities and IoCs.
+  - Export in STIX 2.1, MISP, CSV and Markdown.
+  - Entity relationships and temporal mention statistics.
+- order: 3
+  title: Vulnerability Dashboard API - cvssVector added, attackVector Deprecated
+  date: null
+  url: https://developers.feedly.com/changelog/vulnerability-dashboard-api-attackvector-field-deprecated
+  kind: breaking
+  breaking: true
+  operations_affected: [getVulnerabilityAgent]
+  highlights:
+  - 'REMOVED: attackVector field (values NETWORK, LOCAL, ADJACENT_NETWORK, PHYSICAL) from /v3/trends/vulnerability-dashboard.'
+  - 'ADDED: cvssVector, using standard CVSS vector notation for more granular filtering.'
+  note: >-
+    Titled "Deprecated" but the body states the field was removed. No notice period or sunset date was
+    published.
+- order: 4
+  title: Cyber Attacks Dashboard API
+  date: null
+  url: https://developers.feedly.com/changelog/new-cyber-attacks-dashboard-api
+  kind: addition
+  breaking: false
+  operations_added: [get-cyber-attacks-agent, get-cyber-attacks-statistics, get-individual-cyber-attack-details]
+  highlights:
+  - POST /v3/ml/relationships/cyber-attacks/dashboard/table — filtered, paginated cyber attacks.
+  - POST /v3/ml/relationships/cyber-attacks/dashboard/stats — aggregated attack statistics.
+  - GET /v3/ml/relationships/cyber-attacks/{attackId} — detail for a single attack.
+- order: 5
+  title: Threat actor relationships moved to new endpoint
+  date: null
+  url: https://developers.feedly.com/changelog/threat-actor-relationships-endpoint-updates
+  kind: breaking
+  breaking: true
+  operations_affected: [get-threat-actor-metadata, get-threat-actor-relationships]
+  highlights:
+  - Relationship data moved from GET /v3/entities/{threatActorId} to GET /v3/ml/relationships/actor/{threatActorId}.
+  - The original endpoint is still supported but no longer returns the relationships field.
+  note: >-
+    Silent-shape change: existing clients get a response missing a field rather than an error.
+- order: 6
+  title: Understanding Continuation Guide Published
+  date: null
+  url: https://developers.feedly.com/changelog/understanding-continuation-guide-published
+  kind: documentation
+  breaking: false
+  highlights:
+  - New pagination guide at https://developers.feedly.com/docs/understanding-continuation.
+- order: 7
+  title: Removing Duplicates Guide (Experimental)
+  date: null
+  url: https://developers.feedly.com/changelog/removing-duplicates-guide-experimental
+  kind: addition
+  breaking: false
+  highlights:
+  - Experimental article deduplication for the Streams API, with a new guide.
+- order: 8
+  title: AI Actions (beta) added
+  date: null
+  url: https://developers.feedly.com/changelog/ai-actions-beta-added
+  kind: addition
+  breaking: false
+  operations_affected: [collect-articles, ai-actions-experimental]
+  highlights:
+  - AI Actions added to the Article JSON structure and to Collect Articles.
+- order: 9
+  title: Article JSON Updates
+  date: null
+  url: https://developers.feedly.com/changelog/article-json-updates
+  kind: addition
+  breaking: false
+  highlights:
+  - New Article JSON sections for Threat Intelligence and Market Intelligence entities.
+  - Feedly AI Market Data entities added to Article JSON.
+- order: 10
+  title: Welcome to Feedly API
+  date: null
+  url: https://developers.feedly.com/changelog/welcome-to-feedly-api
+  kind: announcement
+  breaking: false
+  highlights:
+  - Launch of the developer hub and documentation for the Feedly API.
+
+summary:
+  entries: 10
+  breaking_changes: 2
+  additions: 5
+  documentation: 2
+  announcements: 1
+  dates_available: false
+  quality: >-
+    Content quality is high — exact paths, exact field names, before/after values. The two breaking
+    changes are disclosed rather than hidden. The defect is process, not candour: no dates in the
+    machine-readable surface, and no deprecation window attached to either removal.

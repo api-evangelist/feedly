@@ -1,0 +1,106 @@
+generated: '2026-08-12'
+method: searched
+source: https://github.com/feedly/skills
+description: >-
+  Feedly is one of the few providers in the catalog that PUBLISHES its own Agent Skills. The
+  feedly/skills repository is a Claude Code plugin marketplace (`feedly-cti-skills`, MIT licensed)
+  distributing packaged CTI skills, plus a 44-prompt CTI prompt library. The provider-authored skill
+  is captured here verbatim; the remaining entries are API Evangelist skills generated from Feedly's
+  own OpenAPI, with every step grounded in a real operationId.
+
+provider_published:
+  repository: https://github.com/feedly/skills
+  marketplace: feedly-skills
+  plugin: feedly-cti-skills
+  license: MIT
+  owner: Feedly, Inc.
+  last_push: '2026-07-31'
+  install:
+    claude_code: |
+      /plugin marketplace add feedly/skills
+      /plugin install feedly-cti-skills@feedly-skills
+    claude_ai: Customize -> Plugins -> Add marketplace -> https://github.com/feedly/skills
+    bundles: https://github.com/feedly/skills/releases (standalone .skill files)
+  prompt_library:
+    path: prompts/feedly-complete-cti-prompt-library/
+    count: 44
+    note: >-
+      Plain prompts mirrored verbatim from four Feedly "TI Essentials" posts. Not packaged as skills.
+      Indexed at skills/_provider/cti-prompt-library-README.md; not copied in full.
+
+skills:
+- file: feedly-intelligence-requirements-builder.md
+  name: Intelligence Requirements Builder
+  method: searched
+  source: https://github.com/feedly/skills/blob/HEAD/skills/intelligence-requirements-builder/SKILL.md
+  author: Feedly, Inc.
+  verbatim: true
+  description: >-
+    Turns a vague stakeholder ask into a structured set of intelligence requirements (EEIs, collection
+    guidance, success criteria, deliverables, criticality rating), output as markdown, Word and CSV.
+  api: mcp/feedly-mcp.yml
+  tools:
+  - search_entities
+  - get_threat_actor_relationships
+  - get_malware_relationships
+  - search_ttps
+  - get_vulnerability_info
+  - search_vulnerabilities
+  - search_cpe
+  - get_trending_threat_actors
+  - get_trending_vulnerabilities
+  - get_trending_cyber_attacks
+  - get_trending_articles
+  - search_articles
+  - search_threat_intelligence
+  supporting_files:
+  - _provider/ir-definitions.md
+  - _provider/requirement-quality.md
+  - _provider/feedly-integration.md
+  - _provider/requirements-template.md
+  - _provider/marketplace.json
+  - _provider/plugin.json
+  note: >-
+    The feedly-integration.md reference is the single most valuable file in this repo for the
+    catalog — it is where Feedly names its MCP tools, which is what made mcp/feedly-tool-crosswalk.yml
+    possible while tools/list is OAuth-gated.
+
+- file: feedly-collect-articles-from-a-feed.md
+  name: Collect articles from an AI Feed, Folder or Board
+  method: generated
+  source: openapi/feedly-streams-openapi.yml, openapi/feedly-enterprise-openapi.yml
+  description: >-
+    Poll a Feedly stream for new articles on a schedule without gaps or duplicates, using continuation
+    pagination and newerThan watermarks.
+  api: openapi/feedly-streams-openapi.yml
+  operations: [collect-articles, get-list-of-team-boards, get-list-of-ai-feeds, getTeamFolders]
+
+- file: feedly-enrich-an-ioc.md
+  name: Resolve and enrich an indicator of compromise
+  method: generated
+  source: openapi/feedly-search-openapi.yml, openapi/feedly-iocs-openapi.yml
+  description: >-
+    Convert a raw IoC (domain, IP, URL or file hash) into a Feedly entity ID, then pull its full
+    intelligence context and relationships.
+  api: openapi/feedly-search-openapi.yml
+  operations: [autocomplete-entities, getEntityDetails, entity-lookup, collect-iocs]
+
+- file: feedly-triage-a-cve.md
+  name: Triage a CVE for exploitation risk
+  method: generated
+  source: openapi/feedly-entities-openapi.yml, openapi/feedly-vulnerability-agent-openapi.yml
+  description: >-
+    Assess whether a vulnerability warrants emergency patching, using the CVE Insights Card, its
+    timeline, and the Vulnerability Agent's exploitation filters.
+  api: openapi/feedly-entities-openapi.yml
+  operations: [cve-insights-card, get-multiple-cves, getCveTimeline, getVulnerabilityAgent, trending-cves]
+
+- file: feedly-register-a-webhook.md
+  name: Register and consume Feedly webhooks
+  method: generated
+  source: openapi/feedly-enterprise-openapi.yml
+  description: >-
+    Register a webhook trigger for NewEntrySaved / NewAnnotation / NewWebAlertEntry events and handle
+    the delivered payloads.
+  api: openapi/feedly-enterprise-openapi.yml
+  operations: [create-or-update-a-webhook, get-the-list-of-webhooks, delete-a-webhook, annotate-articles]

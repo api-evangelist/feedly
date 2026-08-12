@@ -1,0 +1,63 @@
+openapi: 3.1.0
+info:
+  title: Annotations API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/annotations
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+security:
+- sec0: []
+paths:
+  /:
+    post:
+      summary: Annotate articles
+      description: Add annotations to articleIds
+      operationId: annotate-articles
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: 'Example JSON Body: {   "entryId": "Xne8uW/IUiZhV1EuO2ZMzIrc2Ak6NlhGjboZ+Yk0rJ8=_1523699cbb3:2aa0463:e47a7aef",   "comment":
+                    "Good article",   "highlight": {     "version": 1,     "start": 0,     "end": 14,     "text":
+                    "this is the highlighted text"   } }'
+                  default: '{   "entryId": "Xne8uW/IUiZhV1EuO2ZMzIrc2Ak6NlhGjboZ+Yk0rJ8=_1523699cbb3:2aa0463:e47a7aef",   "comment":
+                    "Good article",   "highlight": {     "version": 1,     "start": 0,     "end": 14,     "text":
+                    "this is the highlighted text"   } }'
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

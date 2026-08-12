@@ -1,0 +1,196 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  Tool names read verbatim from Feedly's own skill reference,
+  https://github.com/feedly/skills — skills/intelligence-requirements-builder/references/feedly-integration.md
+  (captured at skills/_provider/feedly-integration.md). REST side from openapi/ (18 first-party OpenAPI
+  documents, 49 operations, harvested via the RFC 9727 API Catalog at
+  https://developers.feedly.com/.well-known/api-catalog). MCP endpoint probed at
+  https://mcp.feedly.com/mcp on 2026-08-12.
+description: >-
+  Binds Feedly's Threat Graph MCP tools to the REST operations that back them. The live tools/list is
+  OAuth-gated, so the tool names here were NOT read from the server — they were read from Feedly's own
+  published Claude skill, which routes requirements to named tools in a tool-routing table. That makes
+  the names first-party and citable, but it does NOT give inputSchemas: those still require
+  authenticated introspection. Confidence on every row reflects that gap honestly.
+
+surfaces:
+  openapi:
+    location: openapi/
+    documents: 18
+    operations: 49
+    gated: false
+    discovery: >-
+      Not linked from the human documentation. 17 specs came from /.well-known/api-catalog on the docs
+      host; the 18th (Vulnerability Agent) was recovered from the OpenAPI block embedded in
+      https://developers.feedly.com/reference/vulnerability-agent.md after its catalog entry 404'd.
+  mcp:
+    url: https://mcp.feedly.com/mcp
+    gated: true
+    gate: OAuth 2.1 bearer; anonymous tools/list returns 401 invalid_token
+    tools_documented: 16
+    tools_named_by_provider: 13
+    names_source: https://github.com/feedly/skills
+    input_schemas_available: false
+  graphql:
+    present: false
+    note: Feedly publishes no GraphQL endpoint; REST and MCP are the only two surfaces.
+
+crosswalk:
+- tool: search_entities
+  category: entity resolution
+  rest: [autocomplete-entities]
+  binding: rest
+  confidence: high
+  note: >-
+    GET /v3/search/entities. Feedly's own IoC Lookup changelog describes this exact endpoint as the
+    "resolve" step that converts a raw IoC (domain, IP, URL, hash) into a Feedly entity ID, which is
+    what the skill instructs the tool to do. Direct match.
+- tool: get_threat_actor_relationships
+  category: threat actors
+  rest: [get-threat-actor-relationships]
+  binding: rest
+  confidence: high
+  note: >-
+    GET /v3/ml/relationships/actor/{threatActorId}. Name, path and documented purpose (associated
+    malware, targeted orgs/sectors, TTPs, period-matched) all align.
+- tool: get_malware_relationships
+  category: malware
+  rest: [get-malware-relationships]
+  binding: rest
+  confidence: high
+  note: GET /v3/ml/relationships/malware/{malwareId}. Direct name and semantic match.
+- tool: get_vulnerability_info
+  category: vulnerabilities
+  rest: [cve-insights-card]
+  binding: rest
+  confidence: high
+  note: >-
+    GET /v3/entities/{CVEID} — the CVE Insights Card, the single-CVE metadata operation the skill
+    routes to for "a specific vulnerability or CVE".
+- tool: search_vulnerabilities
+  category: vulnerabilities
+  rest: [getVulnerabilityAgent, get-multiple-cves]
+  binding: rest
+  confidence: medium
+  note: >-
+    The skill uses this "for a set" of vulnerabilities. Two operations can serve that: POST
+    /v3/trends/vulnerability-dashboard (the Vulnerability Agent query, with layered filters on
+    cvssScore/exploited/inCisaKev/period) and POST /v3/entities/.mget (bulk CVE metadata). The
+    filtered-query semantics point at the Vulnerability Agent; recorded as a fan-out rather than
+    guessing one.
+- tool: get_trending_vulnerabilities
+  category: trending
+  rest: [trending-cves]
+  binding: rest
+  confidence: high
+  note: GET /v3/memes/vulnerabilities/en — "Trending Vulnerabilities" from the Threat Landscape dashboard.
+- tool: get_trending_threat_actors
+  category: trending
+  rest: [trending-attackers]
+  binding: rest
+  confidence: high
+  note: GET /v3/trends/threat-actors — "Trending Attackers".
+- tool: get_trending_articles
+  category: trending
+  rest: [trending-articles]
+  binding: rest
+  confidence: high
+  note: GET /v3/trends/threats — "Trending Articles" from the Threat Landscape Agent.
+- tool: get_trending_cyber_attacks
+  category: cyberattacks
+  rest: [get-cyber-attacks-agent]
+  binding: rest
+  confidence: medium
+  note: >-
+    POST /v3/ml/relationships/cyber-attacks/dashboard/table returns the Cyberattacks Agent rows with
+    filtering and pagination; the skill uses the tool "for recent incidents". get-cyber-attacks-
+    statistics is the aggregate sibling and may back the same tool's summary mode.
+- tool: search_ttps
+  category: TTPs
+  rest: [list-ttps]
+  binding: rest
+  confidence: high
+  note: >-
+    POST /v3/trends/ttp-dashboard — "List TTPs from TTP Agent". The skill's documented filters
+    (industry, country, malware type, period) match this operation's dashboard query body.
+- tool: search_articles
+  category: articles
+  rest: [search]
+  binding: rest
+  confidence: high
+  note: >-
+    POST /v3/search/contents — the Search endpoint. The skill describes entity-based layered queries
+    with sector topic IDs plus keyword layers, which is this operation's layered query model.
+- tool: search_threat_intelligence
+  category: synthesis
+  rest: [search-ask-ai]
+  binding: rest
+  confidence: medium
+  note: >-
+    POST /v3/search/rag — the Ask AI RAG endpoint. The skill flags this tool as a large-output
+    synthesis fallback (~77,000 characters observed in one call), which matches a RAG/LLM answer
+    rather than a structured lookup. Semantic match, not a name match.
+- tool: search_cpe
+  category: vulnerabilities
+  rest: []
+  binding: none
+  confidence: high
+  note: >-
+    No public REST operation exposes CPE (Common Platform Enumeration) product lookup. See mcp_only.
+
+mcp_only:
+- tool: search_cpe
+  reason: >-
+    Affected-product (CPE) search is offered to agents but has no counterpart anywhere in the 49
+    published REST operations. A REST consumer cannot pivot from a CVE to affected products the way
+    an MCP client can — this is a genuine surface divergence, not a documentation gap.
+
+unnamed_tools:
+  count: 3
+  reason: >-
+    Feedly documents 16 tools; 13 are named in its published skill. The remaining 3 are not named in
+    any public first-party source and tools/list is gated, so they are recorded as unknown. No names
+    are invented for them.
+
+rest_only:
+  note: >-
+    Operations with no counterpart in any named MCP tool. The MCP server is a read-only research
+    surface over the Threat Graph, so the entire write, administration and team-collaboration surface
+    is REST-only — an agent connected over MCP can research but cannot curate, annotate, or automate.
+  groups:
+  - capability: team boards and article curation (writes)
+    operations: [add-articles-to-board, delete-article-from-board, annotate-articles, get-list-of-team-boards]
+  - capability: webhook / trigger management (writes)
+    operations: [get-the-list-of-webhooks, create-or-update-a-webhook, delete-a-webhook]
+  - capability: enterprise administration
+    operations: [listEnterpriseUsers, getTeamFolders, getEntityLists, get-list-of-ai-feeds]
+  - capability: custom and built-in agents
+    operations: [get-agents, get-custom-agent]
+  - capability: article retrieval and AI actions
+    operations: [collect-articles, get-article-metadata, get-multiple-article-metadata, ai-actions-experimental]
+  - capability: entity and IoC detail
+    operations: [entity-lookup, getEntityDetails, collect-iocs, getCveTimeline, get-threat-actor-metadata, get-malware-metadata]
+  - capability: malware enrichment
+    operations: [get-malware-article-graph, get-malware-detection-rules, trending-new-malware]
+  - capability: cyberattack detail
+    operations: [get-cyber-attacks-statistics, get-individual-cyber-attack-details]
+  - capability: TTP procedures
+    operations: [collect-procedures]
+  - capability: company / market intelligence
+    operations: [company-metadata, key-metrics, article-counts, resource-counts, top-stories, emerging-trends, trend-analysis-card]
+
+coverage:
+  tools_documented: 16
+  tools_named: 13
+  tools_bound_to_rest: 12
+  tools_mcp_only: 1
+  tools_unknown: 3
+  rest_operations_total: 49
+  rest_operations_with_a_tool: 13
+  rest_operations_without_a_tool: 36
+  input_schemas_resolved: 0
+  input_schemas_note: >-
+    Every bound tool inherits its real input contract from the referenced operation's parameters and
+    requestBody in openapi/. That is the best available schema until an authenticated tools/list can
+    confirm the MCP server's own inputSchema.

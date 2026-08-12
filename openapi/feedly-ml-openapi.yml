@@ -1,0 +1,566 @@
+openapi: 3.1.0
+info:
+  title: ML Endpoint
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/ml
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+security:
+- sec0: []
+paths:
+  /relationships/malware/{malwareId}:
+    get:
+      summary: Get Malware Relationships
+      description: ''
+      operationId: get-malware-relationships
+      parameters:
+      - name: malwareId
+        in: path
+        description: ID of malware family
+        schema:
+          type: string
+          default: nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b
+        required: true
+      - name: intervalType
+        in: query
+        description: See table below for possible intervalType values
+        required: true
+        schema:
+          type: string
+          default: LAST_7_DAYS
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /memes/article-count-graphs:
+    get:
+      summary: Get Malware Article Graph
+      description: ''
+      operationId: get-malware-article-graph
+      parameters:
+      - name: resourceId
+        in: query
+        description: ID of malware family
+        required: true
+        schema:
+          type: string
+          default: nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b
+      - name: intervalType
+        in: query
+        description: See table below for possible intervalType values
+        required: true
+        schema:
+          type: string
+          default: LAST_7_DAYS
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+    post:
+      summary: Article Counts
+      description: Get article count graphs across different categories
+      operationId: article-counts
+      parameters:
+      - name: intervalType
+        in: query
+        description: Time interval (LAST_7_DAYS, LAST_30_DAYS, LAST_3_MONTHS, LAST_6_MONTHS, LAST_1_YEAR)
+        required: true
+        schema:
+          type: string
+          default: LAST_7_DAYS
+      - name: requestType
+        in: query
+        description: Must be set to insightCard
+        required: true
+        schema:
+          type: string
+          default: insightCard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - RAW_BODY
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: See table below
+                  default: '{"articleCountTypes":["NEWS"],"searchLayers":[{"parts":[{"id":"nlp/f/entity/gz:org:openai"}],"salience":"mention","type":"matches"}]}'
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /detection-rules/threat/{malwareId}:
+    get:
+      summary: Get Malware Detection Rules
+      description: ''
+      operationId: get-malware-detection-rules
+      parameters:
+      - name: malwareId
+        in: path
+        description: ID of malware family
+        schema:
+          type: string
+          default: nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /relationships/actor/{threatActorId}:
+    get:
+      summary: Get Threat Actor Relationships
+      description: Retrieves relationship information (such as IoCs or TTPs) for a specific threat actor.
+      operationId: get-threat-actor-relationships
+      parameters:
+      - name: threatActorId
+        in: path
+        description: The ID of the threat actor (URL encoded)
+        schema:
+          type: string
+        required: true
+      - name: intervalType
+        in: query
+        description: The time interval for the relationships (e.g., 'FOREVER')
+        required: true
+        schema:
+          type: string
+          default: FOREVER
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /trend-discovery/trends:
+    post:
+      summary: Emerging Trends
+      description: Retrieve trends based on specific industries, filters, and sorting criteria.
+      operationId: emerging-trends
+      parameters:
+      - name: count
+        in: query
+        description: Number of trends to return
+        required: true
+        schema:
+          type: integer
+          format: int32
+          default: 200
+      - name: newOnly
+        in: query
+        description: Whether to only return freshly added trends
+        schema:
+          type: boolean
+          default: false
+      - name: sort
+        in: query
+        description: 'Criteria to retrieve top count trends and sort response. Value should be one of:
+          ["-size", "size", "-growth", "growth"].  If starts with "-" output will be in decreasing order
+          (higher values first, generally preferred) Example: "-growth" returns trends with highest growth
+          first'
+        required: true
+        schema:
+          type: string
+          default: -growth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - RAW_BODY
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: JSON Body of the request
+                  default: '{   "filters": [     {"type": "growth", "values": ["Exploding", "Surging",
+                    "Growing"]},     {"type": "size", "values": ["Mainstream", "Known", "Niche"]},     {"type":
+                    "industry", "values": []}   ],   "period": "Last6Months",   "searchLayers": [     {       "parts":
+                    [         {"id": "nlp/f/entity/gz:no-code-development-platform"}       ]     }   ]
+                    }'
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /insight-cards/key-data-points:
+    get:
+      summary: Key Metrics
+      description: Retrieve key metrics points for a company
+      operationId: key-metrics
+      parameters:
+      - name: resourceId
+        in: query
+        description: resourceId (must be URL encoded)
+        required: true
+        schema:
+          type: string
+          default: nlp%2Ff%2Fentity%2Fgz%3Aorg%3Aopenai
+      - name: lastNDays
+        in: query
+        description: 'Last number of days (IE: 365)'
+        required: true
+        schema:
+          type: integer
+          format: int32
+          default: 365
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /ner-gazetteer/resource-count:
+    post:
+      summary: Resource Counts
+      description: Get resource count data for a company
+      operationId: resource-counts
+      parameters:
+      - name: intervalType
+        in: query
+        required: true
+        schema:
+          type: string
+          default: LAST_7_DAYS
+      - name: requestType
+        in: query
+        required: true
+        schema:
+          type: string
+          default: insightCard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - RAW_BODY
+              properties:
+                RAW_BODY:
+                  type: string
+                  default: '{"searchLayers":[{"parts":[{"id":"nlp/f/entity/gz:org:openai"}],"salience":"about","type":"matches"}]}'
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /memes/trending-news:
+    get:
+      summary: Top Stories
+      description: Get trending news stories related to a company
+      operationId: top-stories
+      parameters:
+      - name: resourceId
+        in: query
+        description: The resourceId of the company (must be URL encoded)
+        required: true
+        schema:
+          type: string
+          default: nlp%2Ff%2Fentity%2Fgz%3Aorg%3Aopenai
+      - name: lastNDays
+        in: query
+        description: 'Last number of days (IE: 30)'
+        required: true
+        schema:
+          type: integer
+          format: int32
+          default: 30
+      - name: size
+        in: query
+        description: 'Number of articles to return (IE: 20)'
+        required: true
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /relationships/cyber-attacks/dashboard/table:
+    post:
+      summary: Get Cyberattacks Agent
+      description: The Cyberattacks Agent API provides access to structured cyber attack data, allowing
+        you to query, filter, and analyze security incidents across different time periods, regions, and
+        attack types.
+      operationId: get-cyber-attacks-agent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - RAW_BODY
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: Paste the generated JSON from your query from the the [Cyberattacks Agent](https://feedly.com/i/dashboard/cyberAttack)
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /relationships/cyber-attacks/dashboard/stats:
+    post:
+      summary: Get Cyberattacks Statistics
+      description: Retrieve aggregated statistics and trends for cyber attacks based on your query filters.
+        This endpoint provides statistical breakdowns by attack type, victim country, victim industry,
+        and other dimensions.
+      operationId: get-cyber-attacks-statistics
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: Paste the generated JSON from your query from the the [Cyberattacks Agent](https://feedly.com/i/dashboard/cyberAttack)
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+  /relationships/cyber-attacks/{resourceId}:
+    get:
+      summary: Get Individual Cyberattack Details
+      description: Retrieve comprehensive details about a specific cyberattack, including timeline events,
+        related entities, source articles, and mention trends over time.
+      operationId: get-individual-cyber-attack-details
+      parameters:
+      - name: resourceId
+        in: path
+        description: Unique identifier for the cyber attack (URL-encoded)
+        schema:
+          type: string
+          default: nlp%2Ff%2FcyberAttack%2Faf0591a6-a2a4-4db9-9ddb-b3586182c04b
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

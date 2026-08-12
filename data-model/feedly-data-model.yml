@@ -1,0 +1,180 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  openapi/ (18 documents, 49 operations) plus the published object references
+  https://developers.feedly.com/reference/articlejson, /cve-json,
+  /threat-actor-insight-card-json, /malware-insight-card-json,
+  /vulnerability-agent-json-structure, /ttp-agent-json-structure,
+  /cyber-attacks-agent-json-structure
+description: >-
+  The Feedly entity-relationship graph. Feedly is unusual in the catalog: its OpenAPI documents carry
+  almost no components.schemas (most operations declare an empty `{"type":"object","properties":{}}`
+  200 body), so the real data model lives in the prose "JSON structure" reference pages rather than in
+  the machine-readable contract. This model is derived from both, and the gap is recorded as a defect.
+
+id_conventions:
+  stream_id:
+    shape: enterprise/<team>/category/<uuid> | enterprise/<team>/tag/<uuid>
+    note: category = AI Feed or Folder; tag = Team Board. Must be URI-encoded in query position.
+  entity_id:
+    shape: nlp/f/entity/<type>:<uuid>
+    example: 'nlp/f/entity/ioc:74fba9a5-04c1-5b42-8b7e-16dc482dc841'
+    note: Opaque and namespaced. Resolve via autocomplete-entities; never construct.
+  entry_id:
+    shape: base64-like string containing / and + characters, suffixed with a timestamped locator
+    example: 'Xne8uW/IUiZhV1EuO2ZMzIrc2Ak6NlhGjboZ+Yk0rJ8=_166e4ae74e0:3b7a:c7d25626'
+    note: URI-encode before use in a path or query.
+  feed_id:
+    shape: feed/<url>
+    example: feed/http://feeds.feedburner.com/Techcrunch
+  trigger_id:
+    shape: colon-delimited locator
+    example: '166e676a496:52:8c61af75'
+
+entities:
+- name: Entry
+  aka: Article
+  description: A single article ingested from a source feed and enriched by Feedly's AI models.
+  id_field: entryId
+  reference: https://developers.feedly.com/reference/articlejson
+  key_fields: [id, title, author, published, origin, entryUrl, feedlyUrl, visualUrl, keywords, content, contentHtml, entities, aiActions, numRelatedEntries]
+  operations: [collect-articles, get-article-metadata, get-multiple-article-metadata, search, ai-actions-experimental]
+- name: Stream
+  description: >-
+    Addressable collection of entries. Polymorphic — an AI Feed, a Folder, or a Team Board are all
+    streams and all read through the same operation.
+  id_field: streamId
+  operations: [collect-articles, get-list-of-ai-feeds, get-list-of-team-boards, getTeamFolders]
+- name: AIFeed
+  description: A saved AI-model-driven query producing a stream of matching articles.
+  operations: [get-list-of-ai-feeds]
+- name: Folder
+  aka: Collection
+  description: A team folder grouping source feeds.
+  operations: [getTeamFolders]
+- name: Board
+  aka: Team Board / enterprise tag
+  description: A curated collection an analyst saves articles into. Writable.
+  operations: [get-list-of-team-boards, add-articles-to-board, delete-article-from-board]
+- name: Feed
+  description: A source publication (RSS/Atom or web-crawled).
+  id_field: feedId
+- name: Annotation
+  description: A note or highlight a team member attaches to an article.
+  operations: [annotate-articles]
+- name: Entity
+  description: >-
+    The central abstraction of the Threat Graph. A resolved named thing — threat actor, malware
+    family, CVE, IoC, company, technology, technique. All specialised cards below are Entity subtypes
+    sharing the nlp/f/entity/ id space.
+  id_field: entityId
+  operations: [entity-lookup, autocomplete-entities, getEntityDetails]
+  subtypes: [ThreatActor, Malware, Vulnerability, IoC, Company, TTP]
+- name: ThreatActor
+  description: Named adversary with aliases, attributed campaigns, associated malware and targets.
+  reference: https://developers.feedly.com/reference/threat-actor-insight-card-json
+  operations: [get-threat-actor-metadata, get-threat-actor-relationships, trending-attackers]
+- name: Malware
+  description: Malware family with description, label, aliases, type and detection rules.
+  reference: https://developers.feedly.com/reference/malware-insight-card-json
+  operations: [get-malware-metadata, get-malware-relationships, get-malware-article-graph, get-malware-detection-rules, trending-new-malware]
+- name: Vulnerability
+  aka: CVE
+  description: CVE with CVSS score/vector, EPSS, exploitation status, CISA KEV membership, affected products.
+  reference: https://developers.feedly.com/reference/cve-json
+  operations: [cve-insights-card, get-multiple-cves, getCveTimeline, getVulnerabilityAgent, trending-cves]
+- name: IoC
+  description: Indicator of compromise — domain, IP address, URL or file hash.
+  operations: [getEntityDetails, collect-iocs, autocomplete-entities]
+  export_formats: [STIX 2.1, MISP, CSV, Markdown]
+- name: TTP
+  description: MITRE ATT&CK tactic, technique or procedure observed in reporting.
+  reference: https://developers.feedly.com/reference/ttp-agent-json-structure
+  operations: [list-ttps, collect-procedures]
+- name: CyberAttack
+  description: A discrete cyberattack incident with timeline events, victim country/industry and source articles.
+  reference: https://developers.feedly.com/reference/cyber-attacks-agent-json-structure
+  operations: [get-cyber-attacks-agent, get-cyber-attacks-statistics, get-individual-cyber-attack-details]
+- name: Company
+  description: Market-intelligence company card with key metrics and article/resource counts.
+  operations: [company-metadata, key-metrics, article-counts, resource-counts, top-stories]
+- name: Trend
+  aka: Meme
+  description: An emergent topic cluster across articles.
+  operations: [trend-analysis-card, emerging-trends, trending-articles]
+- name: Agent
+  description: >-
+    A Threat Intelligence Agent — the built-in TTP, Cyberattacks, Brand Monitoring, Vulnerability and
+    Credential Leaks agents, plus alpha Custom Agents with a schema.columns row/cell model.
+  operations: [get-agents, get-custom-agent]
+- name: IntelProfile
+  aka: Entity list
+  description: >-
+    Named grouping of entities (companies, technologies, threat actors, custom text terms) used to
+    scope and filter feeds. Members may be resolved entities (with an id) or unresolved text.
+  operations: [getEntityLists]
+- name: EnterpriseUser
+  description: A user in the enterprise account with activity metrics and profile information.
+  operations: [listEnterpriseUsers]
+- name: Trigger
+  aka: Webhook
+  description: Registered HTTP callback for NewEntrySaved / NewAnnotation / NewWebAlertEntry events.
+  id_field: triggerId
+  operations: [get-the-list-of-webhooks, create-or-update-a-webhook, delete-a-webhook]
+
+relationships:
+- {from: Stream, to: Entry, kind: has_many, via: streamId}
+- {from: AIFeed, to: Stream, kind: has_one, via: streamId}
+- {from: Folder, to: Stream, kind: has_one, via: streamId}
+- {from: Board, to: Stream, kind: has_one, via: streamId}
+- {from: Folder, to: Feed, kind: has_many, via: feeds}
+- {from: Feed, to: Entry, kind: has_many, via: origin}
+- {from: Entry, to: Feed, kind: belongs_to, via: feedId}
+- {from: Entry, to: Entity, kind: has_many, via: entities, note: "TI and MI entity sections of Article JSON"}
+- {from: Entry, to: Annotation, kind: has_many, via: entryId}
+- {from: Board, to: Entry, kind: has_many, via: resourceId, note: "add-articles-to-board / delete-article-from-board"}
+- {from: ThreatActor, to: Malware, kind: has_many, via: relationships, operation: get-threat-actor-relationships}
+- {from: ThreatActor, to: TTP, kind: has_many, via: relationships, operation: get-threat-actor-relationships}
+- {from: ThreatActor, to: IoC, kind: has_many, via: relationships, operation: get-threat-actor-relationships}
+- {from: Malware, to: ThreatActor, kind: has_many, via: relationships, operation: get-malware-relationships}
+- {from: Malware, to: TTP, kind: has_many, via: relationships, operation: get-malware-relationships}
+- {from: Malware, to: Entry, kind: has_many, via: article-count-graphs, operation: get-malware-article-graph}
+- {from: Malware, to: DetectionRule, kind: has_many, via: detection-rules, operation: get-malware-detection-rules}
+- {from: Vulnerability, to: TimelineEvent, kind: has_many, via: timeline, operation: getCveTimeline}
+- {from: Vulnerability, to: ThreatActor, kind: has_many, via: relationships}
+- {from: Vulnerability, to: Malware, kind: has_many, via: relationships}
+- {from: IoC, to: Entry, kind: has_many, via: article context, operation: collect-iocs}
+- {from: CyberAttack, to: Entry, kind: has_many, via: source articles}
+- {from: CyberAttack, to: ThreatActor, kind: has_many, via: related entities}
+- {from: TTP, to: Entry, kind: has_many, via: procedures, operation: collect-procedures}
+- {from: IntelProfile, to: Entity, kind: has_many, via: members, note: "members may be unresolved text with no id"}
+- {from: Agent, to: AgentRow, kind: has_many, via: rows, operation: get-custom-agent}
+- {from: Trigger, to: Board, kind: belongs_to, via: resourceId, note: "NewEntrySaved fires on a board"}
+- {from: EnterpriseUser, to: Entry, kind: has_many, via: savedBy}
+
+polymorphism_note: >-
+  Five operations in the Entities API — cve-insights-card, get-malware-metadata, entity-lookup,
+  get-threat-actor-metadata and company-metadata — are the SAME path GET /v3/entities/{id} declared
+  five times with five different path-parameter names ({CVEID}, {malwareId}, {entityId},
+  {threatActorId}, {resourceId}). They are one polymorphic endpoint documented as five operations. A
+  code generator will emit five near-identical methods; a consumer should treat them as one.
+
+schema_gap:
+  severity: high
+  finding: >-
+    The published OpenAPI documents carry essentially no response schemas. Across 49 operations, the
+    dominant 200 declaration is `{"type": "object", "properties": {}}` with an example value of
+    `"{}"`. components.schemas is absent or near-empty in every document.
+  consequence: >-
+    No usable client model can be generated from Feedly's OpenAPI. The real object shapes exist only
+    as human-readable tables on seven "JSON structure" reference pages. This is the single largest
+    contract-quality defect in the profile and the reason this data model had to be derived from prose
+    as well as from the spec.
+  affected_references:
+  - https://developers.feedly.com/reference/articlejson
+  - https://developers.feedly.com/reference/cve-json
+  - https://developers.feedly.com/reference/threat-actor-insight-card-json
+  - https://developers.feedly.com/reference/malware-insight-card-json
+  - https://developers.feedly.com/reference/vulnerability-agent-json-structure
+  - https://developers.feedly.com/reference/ttp-agent-json-structure
+  - https://developers.feedly.com/reference/cyber-attacks-agent-json-structure

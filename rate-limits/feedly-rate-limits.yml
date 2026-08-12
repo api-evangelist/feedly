@@ -1,0 +1,82 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://developers.feedly.com/reference/request-limits and
+  https://developers.feedly.com/reference/status-codes — fetched 2026-08-12
+description: >-
+  Feedly publishes a single account-level request quota and returns runtime rate-limit headers on
+  every response, which is the signal an agent actually needs. There is no per-endpoint or burst
+  limit published.
+
+limit_count: 1
+
+limits:
+- name: API requests per token
+  scope: per-token (access token, account-wide)
+  limit: 100000
+  window: month
+  unit: requests
+  burst: null
+  burst_documented: false
+  per_endpoint: false
+  enforcement_status: 429
+  note: >-
+    Documented both as "Access tokens have a limit of 100,000 API requests per month" and as the
+    X-RateLimit-Limit value of 100000. The Authorization page frames the same figure as a plan
+    entitlement ("The Feedly plan includes up to 100,000 requests per month"), so the quota is
+    commercial rather than purely protective.
+  source: https://developers.feedly.com/reference/request-limits
+
+response_headers:
+- name: X-RateLimit-Count
+  description: Number of API requests made with this token so far in the current window.
+  example: '57'
+  always_present: true
+- name: X-RateLimit-Limit
+  description: The token's total allowance for the window.
+  example: '100000'
+  note: >-
+    Documented on the Status Codes page. The Request Limits page describes only Count and Reset, so
+    the two pages disagree about which headers are returned.
+- name: X-RateLimit-Reset
+  description: >-
+    SECONDS remaining until the counter resets — NOT a Unix timestamp and NOT a date.
+  example: '23841'
+  interpretation: >-
+    Feedly's own worked example reads 23841 as "6 hours, 37 minutes, and 21 seconds". A client that
+    treats this value as an epoch timestamp will compute a reset in 1970 and hammer the API.
+  always_present: true
+
+retry_after:
+  supported: false
+  note: >-
+    No Retry-After header is returned on 429. Back off using X-RateLimit-Reset, or exponentially.
+
+standards:
+  ietf_ratelimit_headers: false
+  note: >-
+    Uses the legacy X-RateLimit-* convention, not the standards-track RateLimit / RateLimit-Policy
+    fields from the IETF rate-limit-headers draft.
+
+exhaustion:
+  status: 429
+  body: 'Documented as an "API rate limit reached" response; error envelope per errors/feedly-problem-types.yml.'
+  guidance: >-
+    Feedly advises handling 429 by monitoring the rate-limit headers and implementing retry
+    mechanisms, but publishes no retry schedule, backoff curve, or jitter guidance.
+
+edge_layer:
+  note: >-
+    Distinct from the documented API quota, Feedly's edge fronts feedly.com, api.feedly.com,
+    cloud.feedly.com and developers.feedly.com with an unrelated bot/rate limiter that returns the
+    plain-text body "Too Many Requests (HAP429)." — sometimes with a 429, sometimes with a 200. It
+    triggers on ordinary unauthenticated requests and is not mentioned anywhere in the developer
+    documentation. Observed 2026-08-12 across all four hosts.
+  undocumented: true
+
+gaps:
+- No per-endpoint or per-resource limits published, though the AI/RAG endpoints (search-ask-ai, ai-actions-experimental) are materially more expensive than a stream read.
+- No burst/concurrency limit published.
+- No Retry-After header.
+- The two documentation pages disagree on which X-RateLimit-* headers are returned.
+- Only 3 of 49 published operations declare a 429 response in their OpenAPI, despite the limit being account-wide.

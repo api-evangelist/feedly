@@ -1,0 +1,90 @@
+generated: '2026-08-12'
+method: probed
+status: published
+source: >-
+  https://mcp.feedly.com/mcp — probed 2026-08-12 with an anonymous JSON-RPC tools/list; corroborated by
+  https://docs.feedly.com/article/820-what-is-mcp-feedly and
+  https://feedly.com/new-features/posts/feedly-mcp-server-automate-cti-workflows-with-claude-and-the-feedly-threat-graph
+description: >-
+  Feedly operates a hosted, remote Model Context Protocol server over its Real-Time Threat Graph,
+  marketed as the "Threat Graph MCP Server" and bundled with the Advanced Threat Intelligence plan. It
+  is a first-party production endpoint, not a community wrapper: the host answers a proper OAuth 2.1
+  challenge and publishes RFC 8414 authorization-server metadata.
+
+server:
+  name: feedly-threat-graph
+  transport: http
+  url: https://mcp.feedly.com/mcp
+  vendor: Feedly, Inc.
+  plan_requirement: >-
+    Threat Intelligence "Advanced" plan. The pricing page lists "Threat Graph MCP Server" as an
+    Advanced-tier feature; it is not included in Standard.
+
+x-evidence:
+  fetched: '2026-08-12'
+  probe: 'POST {"jsonrpc":"2.0","id":1,"method":"tools/list"}'
+  url: https://mcp.feedly.com/mcp
+  http_status: 401
+  content_type: application/json
+  body: '{"error":"invalid_token","error_description":"Missing or invalid access token"}'
+  www_authenticate: 'Bearer realm="OAuth", error="invalid_token", error_description="Missing or invalid access token"'
+  interpretation: >-
+    A 401 with a well-formed OAuth challenge is positive evidence the server exists and is correctly
+    protected. It is not a failed probe — it is the expected anonymous response from a production MCP
+    server, and it is what distinguishes a real endpoint from a marketing claim.
+
+authorization:
+  model: OAuth 2.1 (authorization code + PKCE)
+  metadata_document: well-known/feedly-mcp-oauth-authorization-server.json
+  issuer: https://mcp.feedly.com
+  authorization_endpoint: https://mcp.feedly.com/authorize
+  token_endpoint: https://mcp.feedly.com/token
+  registration_endpoint: https://mcp.feedly.com/register
+  revocation_endpoint: https://mcp.feedly.com/token
+  grant_types: [authorization_code, refresh_token]
+  code_challenge_methods: [S256, plain]
+  dynamic_client_registration: true
+  protected_resource_metadata: >-
+    Not published. /.well-known/oauth-protected-resource returns 404 on mcp.feedly.com, so an MCP
+    client must fall back to the WWW-Authenticate challenge and the authorization-server metadata
+    rather than discovering the AS from the resource per RFC 9728.
+
+tools:
+  count_documented: 16
+  enumerated: false
+  note: >-
+    Feedly's own documentation states "the 16 tools exposed by the Threat Graph MCP server" but does
+    not name them, and the live tools/list is OAuth-gated, so the real tool names and inputSchemas
+    could not be read. NO TOOL LIST IS ASSERTED HERE. Deriving one from the REST operations would
+    fabricate the provider's agent surface; the honest record is that the count is published, the
+    schemas require authenticated introspection, and the capability areas below are the ones Feedly
+    describes in prose.
+  capability_areas_documented:
+  - threat actors
+  - malware families
+  - vulnerabilities / CVEs
+  - TTPs (MITRE ATT&CK techniques and procedures)
+  - indicators of compromise
+  - cyberattacks
+  - trending / threat landscape
+  source_for_areas: >-
+    https://feedly.com/new-features/posts/feedly-mcp-server-automate-cti-workflows-with-claude-and-the-feedly-threat-graph
+    and https://docs.feedly.com/article/823-feedly-mcp-server-demo
+
+graph_scale_claimed:
+  threat_actors: 800+
+  malware_families: 10K+
+  cves: 300K+
+  iocs: 500K+
+  techniques_and_tactics: 800+
+  cyber_attacks: 10K+
+  source: https://feedly.com/new-features/posts/feedly-mcp-server-automate-cti-workflows-with-claude-and-the-feedly-threat-graph
+  note: Provider marketing figures, recorded as claims — not independently verified.
+
+clients_documented:
+- Claude (claude.ai, Claude Desktop, Claude Code)
+
+related:
+  rest_api: openapi/
+  crosswalk: mcp/feedly-tool-crosswalk.yml
+  agent_skills: skills/

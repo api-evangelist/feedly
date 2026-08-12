@@ -1,0 +1,44 @@
+generated: '2026-08-12'
+method: derived
+source: openapi/feedly-agents-openapi.yml, openapi/feedly-alerts-openapi.yml, openapi/feedly-annotations-openapi.yml,
+  openapi/feedly-enterprise-collections-openapi.yml, openapi/feedly-enterprise-openapi.yml,
+  openapi/feedly-enterprise-users-openapi.yml, openapi/feedly-entities-openapi.yml, openapi/feedly-entries-openapi.yml,
+  openapi/feedly-intel-profiles-openapi.yml, openapi/feedly-iocs-openapi.yml, openapi/feedly-memes-openapi.yml,
+  openapi/feedly-ml-openapi.yml ...
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: BearerAuth
+  type: http
+  scheme: bearer
+  bearerFormat: token
+  description: 'Pass your Feedly API Access Token in the `Authorization` header as a Bearer
+    token, e.g. `Authorization: Bearer <token>`. See [Authorization](https://developers.feedly.com/reference/authorization)
+    for how to generate one.'
+  sources:
+  - openapi/feedly-agents-openapi.yml
+  - openapi/feedly-enterprise-collections-openapi.yml
+  - openapi/feedly-enterprise-users-openapi.yml
+  - openapi/feedly-intel-profiles-openapi.yml
+  - openapi/feedly-iocs-openapi.yml
+  - openapi/feedly-ti-endpoints-openapi.yml
+- name: sec0
+  type: apiKey
+  in: header
+  parameter: Authorization
+  sources:
+  - openapi/feedly-alerts-openapi.yml
+  - openapi/feedly-annotations-openapi.yml
+  - openapi/feedly-enterprise-openapi.yml
+  - openapi/feedly-entities-openapi.yml
+  - openapi/feedly-entries-openapi.yml
+  - openapi/feedly-memes-openapi.yml
+  - openapi/feedly-ml-openapi.yml
+  - openapi/feedly-search-openapi.yml
+  - openapi/feedly-streams-openapi.yml
+  - openapi/feedly-tags-openapi.yml
+  - openapi/feedly-trends-openapi.yml

@@ -1,0 +1,96 @@
+generated: '2026-08-12'
+method: searched
+source: https://feedly.com/threat-intelligence/pricing — fetched 2026-08-12 (HTTP 200)
+description: >-
+  Feedly Threat Intelligence publishes two named plan tiers with a full feature breakdown, but NO
+  PRICES. Every tier resolves to a "Request pricing" call to sales. The commercially material fact for
+  this catalog is which tier gates the API: both the REST API ("Threat Graph STIX API") and the Threat
+  Graph MCP Server are Advanced-tier only.
+
+plan_count: 2
+pricing_published: false
+prices_on_page: false
+currency: null
+billing_period: null
+self_serve: false
+trial: >-
+  No public self-serve trial or free API tier. The Authorization page states self-service API tokens
+  are available to Enterprise clients only and directs everyone else to sales@feedly.com.
+
+plans:
+- name: Standard
+  price: null
+  price_note: >-
+    Not published. The page renders a "Request pricing" action in place of a figure. Third-party
+    software directories quote monthly figures for these tiers; those are NOT provider-published and
+    are deliberately not recorded here.
+  api_access: false
+  mcp_access: false
+  included:
+  - 1000+ Threat Intelligence AI Models
+  - CVE, Threat Actors, Malware Insights Cards
+  - 50 AI Feeds
+  - 5 Newsletter Templates
+  - Ask AI — CTI optimized LLM & Report Builder
+  - Dedicated TI advisor
+  - Whole team access
+  limits:
+    ai_feeds: 50
+    newsletter_templates: 5
+    api_requests_per_month: null
+- name: Advanced
+  price: null
+  price_note: Not published; "Request pricing".
+  api_access: true
+  mcp_access: true
+  includes_everything_in: Standard
+  included:
+  - Vulnerability, TTP, Cyberattack Intel Agents
+  - 100 AI Feeds
+  - 10 Newsletter Templates
+  - Open CTI, XSOAR, MISP no code integrations
+  - Slack and Microsoft Teams integration
+  - Threat Graph STIX API
+  - Threat Graph MCP Server
+  - Dedicated senior TI advisor
+  - Early access to new AI features
+  limits:
+    ai_feeds: 100
+    newsletter_templates: 10
+    api_requests_per_month: 100000
+    api_requests_source: >-
+      https://developers.feedly.com/reference/request-limits — "The Feedly plan includes up to 100,000
+      requests per month and the full power of the Feedly API."
+
+add_ons:
+- name: Third Party Intelligence
+  price: null
+  note: Request pricing.
+- name: Dark Web Agents
+  price: null
+  note: Request pricing.
+- name: Commercial Access
+  price: null
+  note: Request pricing.
+
+api_gating:
+  summary: >-
+    API and MCP access sit behind the top paid tier AND a sales conversation. There is no free tier,
+    no developer sandbox, and no self-serve signup path to a token — an admin on an Enterprise account
+    must generate it at https://feedly.com/i/team/api.
+  consequence: >-
+    A developer cannot evaluate the Feedly API before purchase. This is a commercial choice, not a
+    documentation gap: the OpenAPI, the reference and the llms.txt are all fully public and readable
+    anonymously; only execution is gated.
+
+consumer_product:
+  note: >-
+    Feedly also sells consumer/Pro feed-reader plans on a separate page (feedly.com/i/pricing, which
+    the edge rate-limiter returned 429 for on probe). Those tiers are not part of the Threat
+    Intelligence API surface and are not modelled here.
+
+overage:
+  documented: false
+  note: >-
+    No published overage rate or behaviour past 100,000 requests/month. Exhaustion returns 429; the
+    docs do not say whether additional volume can be purchased.

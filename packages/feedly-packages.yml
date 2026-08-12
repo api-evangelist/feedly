@@ -1,0 +1,144 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  registry.npmjs.org search + pypi.org/pypi/<pkg>/json + api.github.com/orgs/feedly/repos, probed
+  2026-08-12. Registry metadata read unauthenticated from the JSON endpoints.
+description: >-
+  Feedly ships exactly one first-party client library: a lightweight Python client for the Threat
+  Intelligence API. There is no official JavaScript/TypeScript, Go, Java, Ruby, PHP or .NET SDK — the
+  npm packages carrying "feedly" in the name are all third-party and most are long abandoned.
+
+packages:
+- language: python
+  registry: pypi
+  name: feedly-client
+  url: https://pypi.org/project/feedly-client/
+  repository: https://github.com/feedly/python-api-client
+  install: pip install feedly-client
+  official: true
+  version: '0.27'
+  published: '2025-10-10'
+  license: MIT
+  description: A lightweight client for the feedly api (https://developers.feedly.com).
+  maintainer_email: ml@feedly.com
+  note: >-
+    First-party — authored by Feedly, published from the feedly GitHub org, and named in the setup.py
+    AUTHOR field. Currency check: last release 2025-10-10, and the source repo's last push
+    (2025-10-10) matches, so the package is not stale relative to its own repo. It IS stale relative
+    to the API it wraps: Feedly shipped the Cyberattacks Dashboard API, the Custom Agents endpoints,
+    the CVE timeline endpoint and the IoC details endpoint to the REST surface after that date, and
+    none are covered by this client.
+
+third_party_packages_note: >-
+  Recorded so a consumer can tell them apart from the official client — none of these is published by
+  Feedly, and every one predates the current Threat Intelligence API.
+
+third_party_packages:
+- language: javascript
+  registry: npm
+  name: feedly
+  url: https://www.npmjs.com/package/feedly
+  official: false
+  version: 0.1.6
+  published: '2016-05-02'
+  author: hildjj (github.com/hildjj/node-feedly)
+  note: Community client for the old Feedly Cloud API. Abandoned ~10 years.
+- language: javascript
+  registry: npm
+  name: node-feedly-developer-client
+  url: https://www.npmjs.com/package/node-feedly-developer-client
+  official: false
+  version: 0.0.3
+  published: '2019-04-14'
+  note: Community. Abandoned.
+- language: javascript
+  registry: npm
+  name: feedly-cli
+  url: https://www.npmjs.com/package/feedly-cli
+  official: false
+  version: 1.0.1
+  published: '2019-04-04'
+  note: Community CLI, not a Feedly product. Abandoned.
+- language: javascript
+  registry: npm
+  name: passport-feedly
+  url: https://www.npmjs.com/package/passport-feedly
+  official: false
+  version: 0.1.2
+  published: '2014-07-17'
+  note: Community Passport.js OAuth strategy for the consumer Feedly login. Abandoned.
+- language: python
+  registry: pypi
+  name: python-feedly
+  url: https://pypi.org/project/python-feedly/
+  official: false
+  version: 1.1.0
+  published: '2018-10-08'
+  note: Community client (github.com/WarmongeR1/python-feedly). Abandoned.
+- language: python
+  registry: pypi
+  name: feedly
+  url: https://pypi.org/project/feedly/
+  official: false
+  version: 0.11.3
+  published: '2014-09-22'
+  note: >-
+    NAME COLLISION, NOT A FEEDLY PACKAGE. "feedly" on PyPI is tschellenbach's Redis feed/activity-
+    stream library, unrelated to Feedly, Inc. It later became "Stream Framework". Anyone running
+    `pip install feedly` expecting the Feedly API gets this instead — the official package is
+    `feedly-client`.
+
+first_party_repositories_note: >-
+  Feedly's public GitHub org carries API-adjacent code that is not distributed through a package
+  registry. Recorded here because it is the real supporting surface for API consumers.
+
+first_party_repositories:
+- name: feedly/python-api-client
+  url: https://github.com/feedly/python-api-client
+  language: Python
+  license: MIT
+  last_push: '2025-10-10'
+  role: source for the feedly-client PyPI package
+- name: feedly/sample-customer-scripts
+  url: https://github.com/feedly/sample-customer-scripts
+  language: Python
+  last_push: '2025-10-07'
+  role: worked example scripts against the Feedly API
+- name: feedly/skills
+  url: https://github.com/feedly/skills
+  last_push: '2026-07-31'
+  role: >-
+    Claude Code plugin marketplace of CTI Agent Skills + a 44-prompt CTI prompt library. Distributed
+    as a plugin marketplace and as .skill release bundles, not via npm/PyPI. Captured in skills/.
+- name: feedly/misp-galaxy
+  url: https://github.com/feedly/misp-galaxy
+  language: Python
+  last_push: '2026-07-20'
+  role: fork of the MISP galaxy clusters Feedly's threat-actor taxonomy aligns to
+- name: feedly/connectors
+  url: https://github.com/feedly/connectors
+  language: Python
+  last_push: '2025-12-01'
+  role: fork of the OpenCTI connectors repo, matching the OpenCTI no-code integration
+- name: feedly/Azure-Sentinel
+  url: https://github.com/feedly/Azure-Sentinel
+  language: Python
+  last_push: '2026-03-04'
+  role: fork of Microsoft Sentinel, matching the SIEM integration path
+
+summary:
+  official_count: 1
+  official_languages: [python]
+  registries_searched: [npm, pypi, rubygems, crates.io, packagist, maven-central, nuget, pkg.go.dev]
+  languages_with_no_official_sdk:
+  - javascript
+  - typescript
+  - go
+  - java
+  - ruby
+  - php
+  - dotnet
+  gap: >-
+    A REST API whose primary consumers are SOC and SOAR engineering teams ships no JavaScript, Go or
+    Java client. Integrations are instead delivered as no-code connectors (OpenCTI, XSOAR, MISP,
+    Slack, Microsoft Teams) named on the pricing page, which covers the buyer but not the developer.
