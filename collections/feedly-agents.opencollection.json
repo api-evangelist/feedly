@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Feedly API",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Custom Agents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a Custom Agent's rows",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.feedly.com/v3/custom-agents/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "174aa5c2-e63d-46ff-800e-8d344ba29d57",
+                "type": "path",
+                "description": "Id of the Custom Agent, from the `id` field of a `customAgent` item returned by `GET /dashboards`."
+              },
+              {
+                "name": "count",
+                "value": "20",
+                "type": "query",
+                "description": "Maximum number of rows to return in this page. Defaults to the platform's standard page size when omitted."
+              },
+              {
+                "name": "continuation",
+                "value": "WyIxOWY0MzU4M2ZiODoxZDM2NmU6MzBhZWZhMjAiLCJTQ01CQU5LRVIiXQ==",
+                "type": "query",
+                "description": "Continuation token from a previous response's `continuation` field. Include it to fetch the next page of rows; omit it to fetch the first page. See [Understanding Continuation](https://developers.feedly.com/docs/understanding-continuation).\n"
+              }
+            ]
+          },
+          "docs": "> 🚧 Alpha: Custom Agents is a new capability and still under active development. Endpoints, fields, and behavior may change without notice.\n\nReturns the rows (one per tracked entity) and cell data for a single Custom Agent, paginated with `count`/`continuation`.\n\nFind the `id` to use here from a `customAgent`-type item returned by `GET /dashboards`, and use that same item's `schema.columns` to interpret each row's `cells`.\n"
+        },
+        {
+          "info": {
+            "name": "Get list of agents",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.feedly.com/v3/dashboards"
+          },
+          "docs": "> 🚧 Alpha: Custom Agents is a new capability and still under active development. Endpoints, fields, and behavior may change without notice.\n\nReturns every Threat Intelligence Agent — Custom Agents as well as the built-in TTP, Cyberattacks, Brand Monitoring, Vulnerability, and Credential Leaks agents.\n\nTo find your team's Custom Agents, filter the response for items where `type` is `customAgent`, then pass each one's `id` to `GET /custom-agents/{id}` to fetch that agent's rows.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

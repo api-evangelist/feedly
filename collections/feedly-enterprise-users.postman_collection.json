@@ -1,0 +1,231 @@
+{
+  "item": [
+    {
+      "id": "ffe55685-682b-4a8e-9006-ae6e8bf1b4c2",
+      "name": "Users",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "199c9258-c82d-4170-9675-6de47f6630ff",
+          "name": "List Enterprise Users",
+          "request": {
+            "name": "List Enterprise Users",
+            "description": {
+              "content": "Retrieves a list of all users in the enterprise account with their activity metrics and profile information.\n\n**Export Options:**\n- Add `?format=csv` to the URL to export the user list as a CSV file instead of JSON\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "enterprise",
+                "users"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Response format (omit for JSON, use 'csv' for CSV export)"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2f43b873-8cff-4582-802b-d5a3db151790",
+              "name": "Successfully retrieved list of users",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "csv"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"email\": \"aaron+GIR@feedly.com\",\n    \"firstLogin\": 1714596180521,\n    \"givenName\": \"Aaron\",\n    \"isAdmin\": true,\n    \"joinDate\": 1714596180521,\n    \"lastActivity\": 1737658718941,\n    \"logins\": [\n      \"aaron+GIR@feedly.com\"\n    ],\n    \"name\": \"Aaron O'Maley\",\n    \"numDaysActiveDesktopPastMonth\": 0,\n    \"numDaysActiveDesktopPastWeek\": 0,\n    \"numDaysActiveMobilePastMonth\": 0,\n    \"numDaysActiveMobilePastWeek\": 0,\n    \"numDaysActivePastMonth\": 0,\n    \"numDaysActivePastWeek\": 0,\n    \"numLongReadEntriesPastMonth\": 0,\n    \"numLongReadEntriesPastWeek\": 0,\n    \"numReadEntriesPastMonth\": 0,\n    \"numReadEntriesPastWeek\": 0,\n    \"numTaggedEntriesPastMonth\": 0,\n    \"numTaggedEntriesPastWeek\": 0,\n    \"role\": \"admin\",\n    \"totalReadingTimePastMonth\": 0,\n    \"totalReadingTimePastWeek\": 0,\n    \"userId\": \"23242fbb-f101-4f86-972f-b17be38572f4\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "e6dbcfe8-d22d-4c34-8281-6f2fe49179b6",
+              "name": "Unauthorized - Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "csv"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "77c6df0d-8a4d-47de-a9d2-17a61d820ee9",
+              "name": "Forbidden - Insufficient permissions to access enterprise user data",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "users"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "format",
+                      "value": "csv"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.feedly.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "c4ad3415-b381-46da-94cb-ec85dd0419fd",
+    "name": "Enterprise Users API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for managing Feedly Enterprise users and resources\n\nContact Support:\n Name: Feedly Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,236 @@
+{
+  "item": [
+    {
+      "id": "67b3f9f8-e17c-4cbf-9cf1-a78b1fb679e0",
+      "name": "CVEs",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7f799f2b-6714-48dd-a91c-9188d939066d",
+          "name": "Get CVE Timeline",
+          "request": {
+            "name": "Get CVE Timeline",
+            "description": {
+              "content": "Returns a chronological list of significant events for a given CVE entity, including CVSS score changes, exploitation reports, vendor advisories, threat intelligence reports, and relationship discoveries.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":entityId",
+                "timeline"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) The entity ID of the vulnerability (e.g. `vulnerability/m/entity/CVE-2026-5426`). URL-encode the slashes when calling the API directly."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "46324099-c6dc-4f32-b308-a045914f2923",
+              "name": "Successful response containing the timeline events for the CVE.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "timeline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) The entity ID of the vulnerability (e.g. `vulnerability/m/entity/CVE-2026-5426`). URL-encode the slashes when calling the API directly."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"events\": [\n    {\n      \"id\": \"3c4e29c3-4b44-53ff-82ba-d4a4d6168c5c\",\n      \"type\": \"vulnerability:cvssScoreUpdate\",\n      \"ts\": 1779819616428,\n      \"updated\": 1779819617623,\n      \"score\": 9.1,\n      \"sourceName\": \"nvd\",\n      \"update\": true\n    },\n    {\n      \"id\": \"fda26aa1-797a-527a-826d-96cf9a7ad27e\",\n      \"type\": \"trending\",\n      \"ts\": 1779772863686,\n      \"updated\": 1779772863959,\n      \"trending\": true\n    },\n    {\n      \"id\": \"b19cc6f5-3b38-5a18-9f6c-dde26c6f450e\",\n      \"type\": \"relationship:cveExploit\",\n      \"ts\": 1779707315859,\n      \"updated\": 1779707342615,\n      \"cveId\": \"vulnerability/m/entity/CVE-2026-5426\",\n      \"entryId\": \"BWEgUuMGzJZRGS6YxA9VWNYmgyVV7cj7FVDMsTGdIdY=_19e5ed28693:2fde63a:8dcaf9bf\",\n      \"sourceName\": \"OTX Bot\",\n      \"threatId\": \"nlp/f/entity/gz:mal:1a1d3ea4-972e-4c48-8d85-08d9db8f1550\",\n      \"threatLabel\": \"Cobalt Strike\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fc10563e-c7ac-4f50-a726-5508977ce097",
+              "name": "Missing or invalid authorization token.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "timeline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) The entity ID of the vulnerability (e.g. `vulnerability/m/entity/CVE-2026-5426`). URL-encode the slashes when calling the API directly."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6631c6d4-d722-42b7-ba7e-54a142193f18",
+              "name": "Entity not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId",
+                    "timeline"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) The entity ID of the vulnerability (e.g. `vulnerability/m/entity/CVE-2026-5426`). URL-encode the slashes when calling the API directly."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.feedly.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "90a8cd26-ff2d-40f8-82ce-3ef02182ef09",
+    "name": "TI Endpoints",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Retrieve the event timeline for a CVE vulnerability entity.",
+      "type": "text/plain"
+    }
+  }
+}

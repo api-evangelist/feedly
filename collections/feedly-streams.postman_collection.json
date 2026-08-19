@@ -1,0 +1,408 @@
+{
+  "item": [
+    {
+      "id": "54460dbd-5a39-44f2-8fe3-ff39d0688c96",
+      "name": "Collect articles from streamId",
+      "request": {
+        "name": "Collect articles from streamId",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "contents"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "null"
+            },
+            {
+              "disabled": false,
+              "key": "streamID",
+              "value": "<string>",
+              "description": "(Required) The id of the stream you want to access. Make sure that you are URI encoding the streamId"
+            },
+            {
+              "disabled": false,
+              "key": "count",
+              "value": "20",
+              "description": "The number of articles/entries to return. Pick a number between 1 and 100 (optional, default is 20)"
+            },
+            {
+              "disabled": false,
+              "key": "newerThan",
+              "value": "<string>",
+              "description": "Long timestamp in ms representing the time of your previous call (in Unix/Epoch). Cannot be older than 31 days ago. (optional)"
+            },
+            {
+              "disabled": false,
+              "key": "olderThan",
+              "value": "<string>",
+              "description": "Long timestamp in ms representing the time of your previous call (in Unix/Epoch). (optional)"
+            },
+            {
+              "disabled": false,
+              "key": "continuation",
+              "value": "<string>",
+              "description": "An id is used to page through the articles. The continuation id will be returned as part of each call response. This is useful if you want to fetch more articles than the count = 100 limit (optional)"
+            },
+            {
+              "disabled": false,
+              "key": "includeAiActions",
+              "value": "true",
+              "description": "if true, AI Actions from articles will be returned."
+            },
+            {
+              "disabled": false,
+              "key": "similar",
+              "value": "true",
+              "description": "if true, numRelatedEntries will be returned"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "b993cba7-0de7-4d8c-8a78-9ddd786e945a",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "contents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "streamID",
+                  "value": "<string>"
+                },
+                {
+                  "key": "count",
+                  "value": "20"
+                },
+                {
+                  "key": "newerThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "olderThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "continuation",
+                  "value": "<string>"
+                },
+                {
+                  "key": "includeAiActions",
+                  "value": "true"
+                },
+                {
+                  "key": "similar",
+                  "value": "true"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "db576c30-d3b0-4354-887f-813d83ffe3df",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "contents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "streamID",
+                  "value": "<string>"
+                },
+                {
+                  "key": "count",
+                  "value": "20"
+                },
+                {
+                  "key": "newerThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "olderThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "continuation",
+                  "value": "<string>"
+                },
+                {
+                  "key": "includeAiActions",
+                  "value": "true"
+                },
+                {
+                  "key": "similar",
+                  "value": "true"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\" {\\\"errorMessage\\\":\\\"Invalid JSON\\\", \\\"errorId\\\":\\\"xyz.2018021111.12345\\\"}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "564bb97d-d192-4980-8d77-25a3e6da465e",
+          "name": "401",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "contents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "streamID",
+                  "value": "<string>"
+                },
+                {
+                  "key": "count",
+                  "value": "20"
+                },
+                {
+                  "key": "newerThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "olderThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "continuation",
+                  "value": "<string>"
+                },
+                {
+                  "key": "includeAiActions",
+                  "value": "true"
+                },
+                {
+                  "key": "similar",
+                  "value": "true"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Unauthorized",
+          "code": 401,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"errorCode\\\": 401,\\n  \\\"requestId\\\": \\\"853eb1877eebc529-SEA\\\",\\n  \\\"errorMessage\\\": \\\"must provide authorization token\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "33542878-22d8-4a46-a871-42e00ac11472",
+          "name": "403",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "contents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "streamID",
+                  "value": "<string>"
+                },
+                {
+                  "key": "count",
+                  "value": "20"
+                },
+                {
+                  "key": "newerThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "olderThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "continuation",
+                  "value": "<string>"
+                },
+                {
+                  "key": "includeAiActions",
+                  "value": "true"
+                },
+                {
+                  "key": "similar",
+                  "value": "true"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Forbidden",
+          "code": 403,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"errorCode\\\": 403,\\n  \\\"requestId\\\": \\\"854333815f54c4d4-SEA\\\",\\n  \\\"errorMessage\\\": \\\"unauthorized access: enterprise collection\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.feedly.com/v3/streams/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "46a331e1-7799-4d6f-8aae-08198be927bf",
+    "name": "Streams API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

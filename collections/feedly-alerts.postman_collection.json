@@ -1,0 +1,159 @@
+{
+  "item": [
+    {
+      "id": "52431fc6-bf52-4119-8b0b-226664c08f19",
+      "name": "Get list of AI Feeds",
+      "request": {
+        "name": "Get list of AI Feeds",
+        "description": {
+          "content": "Return AI Feeds from enterprise team",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            ""
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "2029a33c-a138-46d3-b935-c5f4a492ec46",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"userAlerts\\\": [],\\n  \\\"enterpriseAlerts\\\": [\\n    {\\n      \\\"hasNewsletter\\\": false,\\n      \\\"label\\\": \\\"LiveScore\\\",\\n      \\\"id\\\": \\\"fbe3c317-d724-4d5f-ab56-93c27eafb5b6\\\",\\n      \\\"source\\\": {\\n        \\\"items\\\": [\\n          {\\n            \\\"type\\\": \\\"stream\\\",\\n            \\\"id\\\": \\\"enterprise/akko/category/global.all\\\"\\n          },\\n          {\\n            \\\"type\\\": \\\"publicationBucket\\\",\\n            \\\"id\\\": \\\"discovery:all-topics\\\",\\n            \\\"tier\\\": \\\"tier2\\\"\\n          }\\n        ]\\n      },\\n      \\\"createdBy\\\": \\\"4d39f1d8-ed47-432f-92ad-5eecc570a6dd\\\",\\n      \\\"feedId\\\": \\\"feed/https://feedly.com/f/alert/fbe3c317-d724-4d5f-ab56-93c27eafb5b6\\\",\\n      \\\"velocity\\\": 4.1,\\n      \\\"created\\\": 1701350298150,\\n      \\\"layers\\\": [\\n        {\\n          \\\"type\\\": \\\"matches\\\",\\n          \\\"complexFilter\\\": false,\\n          \\\"parts\\\": [\\n            {\\n              \\\"text\\\": \\\"livescore\\\"\\n            }\\n          ],\\n          \\\"salience\\\": \\\"about\\\"\\n        },\\n        {\\n          \\\"type\\\": \\\"matches\\\",\\n          \\\"complexFilter\\\": true,\\n          \\\"parts\\\": [\\n            {\\n              \\\"id\\\": \\\"nlp/f/businessEvent/funding\\\",\\n              \\\"label\\\": \\\"Funding Events\\\"\\n            },\\n            {\\n              \\\"id\\\": \\\"nlp/f/businessEvent/partnership\\\",\\n              \\\"label\\\": \\\"Partnerships\\\"\\n            },\\n            {\\n              \\\"id\\\": \\\"nlp/f/businessEvent/mergers-acquisitions\\\",\\n              \\\"label\\\": \\\"Mergers and Acquisitions\\\"\\n            },\\n            {\\n              \\\"id\\\": \\\"nlp/f/businessEvent/productLaunch\\\",\\n              \\\"label\\\": \\\"Product Launches\\\"\\n            },\\n            {\\n              \\\"id\\\": \\\"nlp/f/businessEvent/ipo\\\",\\n              \\\"label\\\": \\\"Initial Public Offerings\\\"\\n            },\\n            {\\n              \\\"id\\\": \\\"nlp/f/businessEvent/layoffs\\\",\\n              \\\"label\\\": \\\"Layoffs\\\"\\n            },\\n            {\\n              \\\"id\\\": \\\"nlp/f/businessEvent/leadershipChange\\\",\\n              \\\"label\\\": \\\"Leadership Changes\\\"\\n            },\\n            {\\n              \\\"id\\\": \\\"nlp/f/businessEvent/location-expansions\\\",\\n              \\\"label\\\": \\\"Location Expansions\\\"\\n            }\\n          ],\\n          \\\"salience\\\": \\\"mention\\\"\\n        }\\n      ]\\n    }\\n  ]\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "bba1b24b-1bf5-434b-a8ba-974bc22f932f",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.feedly.com/v3/alerts",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "a5e80eb7-49a6-480b-8d39-c934a357834f",
+    "name": "Alerts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

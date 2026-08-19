@@ -1,0 +1,241 @@
+{
+  "item": [
+    {
+      "id": "e303338f-39fa-4c60-b716-e9c27200ef83",
+      "name": "Folders",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f09a8eee-45ec-464d-b469-723abd7f0261",
+          "name": "Get all team folders",
+          "request": {
+            "name": "Get all team folders",
+            "description": {
+              "content": "Retrieve a list of all team folders with their associated feeds. Supports CSV export via the `format=csv` query parameter.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "enterprise",
+                "collections"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "includeArchived",
+                  "value": "<boolean>",
+                  "description": "Include archived folders in the response (default is false)"
+                },
+                {
+                  "disabled": false,
+                  "key": "format",
+                  "value": "<string>",
+                  "description": "Export format for the response"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "e7ca9ddf-1db7-405e-8fde-8954fee44517",
+              "name": "Successful retrieval of team folders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeArchived",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"enterprise/christeam/category/fa84365d-6433-400e-bbbf-9d3c010889c4\",\n    \"label\": \"*CTI Vendor Reports\",\n    \"description\": \"\",\n    \"createdBy\": \"7b966855-c953-4ec8-b271-cf554996c1ab\",\n    \"created\": 1758036126516,\n    \"updated\": 1761742717599,\n    \"private\": false,\n    \"collectionArchived\": false,\n    \"disabled\": false,\n    \"includeFollowers\": false,\n    \"feeds\": [\n      {\n        \"id\": \"feed/http://blog.checkpoint.com/feed/\",\n        \"feedId\": \"feed/http://blog.checkpoint.com/feed/\",\n        \"title\": \"Check Point Blog\",\n        \"description\": \"Blog\",\n        \"website\": \"https://blog.checkpoint.com/\",\n        \"language\": \"en\",\n        \"topics\": [\n          \"security\",\n          \"vendor\",\n          \"tech\"\n        ],\n        \"subscribers\": 9964,\n        \"velocity\": 3.8,\n        \"estimatedEngagement\": 1,\n        \"created\": 1424817030751,\n        \"updated\": 1761742717599,\n        \"addedBy\": \"7b966855-c953-4ec8-b271-cf554996c1ab\",\n        \"addedDate\": 1758707494466,\n        \"isFeedlyFeed\": false,\n        \"partial\": true\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "93e83570-16fe-43aa-a1f0-4afdb9d2563b",
+              "name": "Unauthorized - Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeArchived",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "233bd9c1-883b-4daa-85eb-99a7a818d5ea",
+              "name": "Forbidden - Insufficient permissions to access team folders",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "collections"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "includeArchived",
+                      "value": "false"
+                    },
+                    {
+                      "key": "format",
+                      "value": "json"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.feedly.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "e684d2b4-9c2d-4dbd-8a61-310c5a19a1f0",
+    "name": "Enterprise Collections",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Feedly Enterprise API for managing team folders and collections\n\nContact Support:\n Name: Feedly Support",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,392 @@
+{
+  "item": [
+    {
+      "id": "1501ed67-eb03-428e-8e69-ef8dc4a5cfbb",
+      "name": "Entity Lists",
+      "description": {
+        "content": "Manage and retrieve enterprise entity lists",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "2716be04-6fb8-49b9-ba05-fe127ab6c0da",
+          "name": "Get Intel Profile data",
+          "request": {
+            "name": "Get Intel Profile data",
+            "description": {
+              "content": "Returns all intel profiles associated with the authenticated enterprise account. When `details=true` is passed, each list includes its full entity membership. Entity lists group named entities (companies, technologies, threat actors, custom text terms) that can be used to scope and filter intelligence feeds.\n\nEntity members may be resolved Feedly entities (returned with an `id`) or unresolved custom text strings (returned with a `text` field only).\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "enterprise",
+                "entityLists"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "details",
+                  "value": "false",
+                  "description": "When `true`, each entity list object includes the full `entities` array with all member IDs and text values. When omitted or `false`, the `entities` array is empty or absent.\n"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}"
+                }
+              ]
+            }
+          },
+          "response": [
+            {
+              "id": "325e07fc-b50f-449a-b2cc-587f0a076761",
+              "name": "An array of entity list objects for the enterprise account. Returns all lists when `details=true`, each fully populated with its entity membership.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "entityLists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "details",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"label\": \"A1 Customers\",\n    \"id\": \"nlp/f/entity/cl:christeam:A1Customers-lr7vjf\",\n    \"type\": \"customTopic\",\n    \"description\": \"adope, Adobe, Apple, Microsoft, Microsoft Azure\",\n    \"createdBy\": \"7b966855-c953-4ec8-b271-cf554996c1ab\",\n    \"created\": 1679494776618,\n    \"inferredType\": \"org\",\n    \"entities\": [\n      {\n        \"text\": \"adope\"\n      },\n      {\n        \"id\": \"nlp/f/entity/gz:org:adobe\"\n      },\n      {\n        \"id\": \"nlp/f/entity/gz:org:apple\"\n      },\n      {\n        \"id\": \"nlp/f/entity/gz:org:microsoft\"\n      },\n      {\n        \"id\": \"nlp/f/entity/gz:org:microsoft-azure\"\n      }\n    ]\n  },\n  {\n    \"label\": \"ACME Tech Stack\",\n    \"id\": \"nlp/f/entity/cl:christeam:ACMETechStack-yzg276\",\n    \"type\": \"customTopic\",\n    \"description\": \"Adobe, Apple, Cisco, Fortinet, Google, Google Chrome, Mandiant, Microsoft, UXLINK, Log4j\",\n    \"createdBy\": \"31b26dc3-6b98-4192-b906-89aa8952fe47\",\n    \"created\": 1750963550938,\n    \"inferredType\": \"org\",\n    \"updated\": 1774032310459,\n    \"updatedBy\": \"d7fa6923-61da-4f14-abc2-4871d985bb30\",\n    \"entities\": [\n      {\n        \"id\": \"nlp/f/entity/gz:org:adobe\"\n      },\n      {\n        \"id\": \"nlp/f/entity/gz:org:apple\"\n      },\n      {\n        \"id\": \"nlp/f/entity/gz:org:cisco-systems\"\n      },\n      {\n        \"id\": \"nlp/f/entity/gz:org:fortinet\"\n      },\n      {\n        \"id\": \"nlp/f/entity/gz:org:google\"\n      },\n      {\n        \"id\": \"nlp/f/entity/gz:org:mandiant\"\n      },\n      {\n        \"id\": \"nlp/f/entity/gz:org:microsoft\"\n      },\n      {\n        \"id\": \"nlp/f/entity/gz:org:log4j\"\n      }\n    ]\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "75e56383-2dbc-4937-9142-10e11e32c24e",
+              "name": "Bad request — invalid query parameter value.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "entityLists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "details",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": 400,\n  \"message\": \"Invalid value for parameter 'details'. Expected boolean.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f6092824-7684-432b-91eb-7902bf551b49",
+              "name": "Unauthorized — the Bearer token is missing, expired, or invalid.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "entityLists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "details",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": 401,\n  \"message\": \"Unauthorized. Please provide a valid Bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ba18cdd9-a6c0-4203-9a8d-88285a6f612c",
+              "name": "Forbidden — the authenticated user does not have enterprise access or lacks permission to view entity lists.\n",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "entityLists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "details",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": 403,\n  \"message\": \"Access denied. Enterprise subscription required.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "b1382b50-db3d-4157-b040-631271756c08",
+              "name": "Rate limit exceeded.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "entityLists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "details",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "disabled": false,
+                  "description": "Number of seconds to wait before retrying.",
+                  "key": "Retry-After",
+                  "value": "6871"
+                },
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": 429,\n  \"message\": \"Too many requests. Please slow down.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8d7436b1-949b-4168-b009-c477715b519a",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "enterprise",
+                    "entityLists"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "details",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": 401,\n  \"message\": \"Unauthorized. Please provide a valid Bearer token.\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.feedly.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "1e2ce65c-daba-4b29-a330-6194bdb0d074",
+    "name": "Get Intel Profiles",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for Feedly Enterprise features including Entity Lists — curated collections of named entities (companies, technologies, threat actors, etc.) used to scope and filter intelligence feeds across your organization.\n\n\nContact Support:\n Name: Feedly Support",
+      "type": "text/plain"
+    }
+  }
+}

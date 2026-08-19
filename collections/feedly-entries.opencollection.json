@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Entries",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Ask AI with structured outputs",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/entries/prediction",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "The Feedly Ask AI API allows developers to leverage the power of Large Language Models (LLMs) to ask questions and gather insights from a set of articles."
+    },
+    {
+      "info": {
+        "name": "Get article metadata",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/entries/:entryId",
+        "params": [
+          {
+            "name": "entryId",
+            "value": "",
+            "type": "path",
+            "description": "entryId of article"
+          }
+        ]
+      },
+      "docs": "Get article metadata"
+    },
+    {
+      "info": {
+        "name": "Get multiple article metadata",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/entries/.mget",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Get multiple article metadata"
+    }
+  ],
+  "bundled": true
+}

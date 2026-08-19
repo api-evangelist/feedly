@@ -1,0 +1,734 @@
+{
+  "item": [
+    {
+      "id": "f5caf156-95fd-469b-a1c6-5f520a94499d",
+      "name": "Collect IoCs with rich context",
+      "request": {
+        "name": "Collect IoCs with rich context",
+        "description": {
+          "content": "This guide contains a step-by-step guide for exporting all IoCs referenced in articles contained within a Feedly AI Feed, Folder, or Board using the Feedly API. The article will show how to access the Feedly Enterprise API token, and the stream ID as well as show examples of the API output using the Postman API platform.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "ioc"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "key": "/streamid",
+              "value": ""
+            },
+            {
+              "disabled": false,
+              "key": "streamId",
+              "value": "<string>",
+              "description": "(Required) The id of the stream you want to access. Make sure that you are URI encoding the streamId"
+            },
+            {
+              "disabled": false,
+              "key": "count",
+              "value": "<string>",
+              "description": "The number of articles/entries to return. Pick a number between 1 and 100 (optional, default is 20)"
+            },
+            {
+              "disabled": false,
+              "key": "newerThan",
+              "value": "<string>",
+              "description": "Long timestamp in ms representing the time of your previous call (in Unix/Epoch). Cannot be older than 31 days ago. (optional)"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "255f0c2e-a8e6-4016-adec-805b8063f87a",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "ioc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "streamId",
+                  "value": "<string>"
+                },
+                {
+                  "key": "count",
+                  "value": "<string>"
+                },
+                {
+                  "key": "newerThan",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d3e457c4-4d4c-48eb-bdd6-aa2bdb8b9488",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "ioc"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "streamId",
+                  "value": "<string>"
+                },
+                {
+                  "key": "count",
+                  "value": "<string>"
+                },
+                {
+                  "key": "newerThan",
+                  "value": "<string>"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "e29d2834-e4cd-4095-a9bc-c0ce7408e4c1",
+      "name": "Get the List of Webhooks",
+      "request": {
+        "name": "Get the List of Webhooks",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "triggers"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "34481c78-f5c5-4d02-b89f-449bd87f9f9d",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "triggers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "393b49d3-4750-4247-b01a-e231e777c01d",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "triggers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "4b57e9a0-3e08-46c2-99df-51187c2975ef",
+      "name": "Create or Update a Webhook",
+      "request": {
+        "name": "Create or Update a Webhook",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "triggers"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"RAW_BODY\": \"<json>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "76860cc6-8957-4038-a209-308460d06498",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "triggers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "13cc74ea-7cc3-4135-8e79-817f0919330a",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "triggers"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "2d57419c-42ed-4cba-9ae0-4f8c7ad5b49b",
+      "name": "Delete a Webhook",
+      "request": {
+        "name": "Delete a Webhook",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "triggers",
+            ":{{triggerid}}"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "DELETE",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "3b1d03cc-0113-41b1-b6e5-09691664c74e",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "triggers",
+                ":{{triggerid}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "0043859e-1556-4af4-aa31-1ff3550ddb8e",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "triggers",
+                ":{{triggerid}}"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "DELETE",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "9e791a7d-4690-42d6-99bd-ee9c16e43134",
+      "name": "Get list of team board streamIds",
+      "request": {
+        "name": "Get list of team board streamIds",
+        "description": {
+          "content": "Return a list of team boards",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "tags"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "993084aa-96a8-481e-a77e-a45f5399ef1a",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"[\\n  {\\n    \\\"bufferSettings\\\": {\\n      \\\"disabled\\\": true,\\n      \\\"profileSelection\\\": \\\"allProfiles\\\",\\n      \\\"sendNow\\\": false,\\n      \\\"includeHighlight\\\": false\\n    },\\n    \\\"created\\\": 1737736144960,\\n    \\\"createdBy\\\": \\\"71bcd854-acb0-4b55-9e82-c49bd12ea6c3\\\",\\n    \\\"emailSettings\\\": {\\n      \\\"daysOfWeek\\\": [\\n        \\\"Monday\\\",\\n        \\\"Thursday\\\",\\n        \\\"Tuesday\\\",\\n        \\\"Wednesday\\\",\\n        \\\"Sunday\\\",\\n        \\\"Friday\\\",\\n        \\\"Saturday\\\"\\n      ],\\n      \\\"disabled\\\": true,\\n      \\\"hourOfDay\\\": 10,\\n      \\\"includeFollowers\\\": true,\\n      \\\"includeHighlights\\\": true,\\n      \\\"includeImages\\\": true,\\n      \\\"includeNotes\\\": true,\\n      \\\"ranked\\\": \\\"newest\\\",\\n      \\\"subjectTemplate\\\": \\\"NameAndDate\\\",\\n      \\\"timeZone\\\": \\\"America/Detroit\\\",\\n      \\\"useLeoSummary\\\": true\\n    },\\n    \\\"id\\\": \\\"enterprise/akko/tag/002820c3-918f-4052-b5c9-595091c2e419\\\",\\n    \\\"label\\\": \\\"API Test Board\\\",\\n    \\\"lastEntryAdded\\\": 1737736477703,\\n    \\\"microsoftTeamsSettings\\\": {\\n      \\\"disabled\\\": true\\n    },\\n    \\\"tagArchived\\\": false,\\n    \\\"totalEntries\\\": 4,\\n    \\\"users\\\": [\\n      {\\n        \\\"userId\\\": \\\"9ec2f23d-0fbb-49a5-bcc8-bcbceb05e563\\\",\\n        \\\"name\\\": \\\"Gaby\\\",\\n        \\\"email\\\": \\\"gaby+mi+content@feedly.com\\\",\\n        \\\"isAdmin\\\": false,\\n        \\\"joinDate\\\": 1747842012518\\n      },\\n      {\\n        \\\"userId\\\": \\\"71bcd854-acb0-4b55-9e82-c49bd12ea6c3\\\",\\n        \\\"givenName\\\": \\\"Aaron\\\",\\n        \\\"name\\\": \\\"Aaron O'Maley\\\",\\n        \\\"email\\\": \\\"aaronwfv+mipersonal@gmail.com\\\",\\n        \\\"isAdmin\\\": false,\\n        \\\"joinDate\\\": 1737736145236\\n      }\\n    ]\\n  }\\n]\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "ec10f0eb-56bf-4298-b024-77365e2adc89",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "tags"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.feedly.com/v3/enterprise",
+      "key": "baseUrl"
+    },
+    {
+      "disabled": false,
+      "description": {
+        "content": "(Required) id of the webhook you want to delete",
+        "type": "text/plain"
+      },
+      "type": "any",
+      "value": "<string>",
+      "key": "triggerid"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "2b4268e1-97ad-4426-b60d-ae2aebea8168",
+    "name": "Enterprise API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

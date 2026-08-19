@@ -1,0 +1,29 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Alerts API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Get list of AI Feeds",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/alerts/"
+      },
+      "docs": "Return AI Feeds from enterprise team"
+    }
+  ],
+  "bundled": true
+}

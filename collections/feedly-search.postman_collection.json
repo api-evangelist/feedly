@@ -1,0 +1,681 @@
+{
+  "item": [
+    {
+      "id": "4d3f259f-d046-45c7-b60a-85b962b28cf7",
+      "name": "Search",
+      "request": {
+        "name": "Search",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "contents"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "null"
+            },
+            {
+              "disabled": false,
+              "key": "count",
+              "value": "10",
+              "description": "Integer number of articles to return. default is 10. (optional)"
+            },
+            {
+              "disabled": false,
+              "key": "newerThan",
+              "value": "<integer>",
+              "description": "Long timestamp in ms (optional)"
+            },
+            {
+              "disabled": false,
+              "key": "olderThan",
+              "value": "<integer>",
+              "description": "Long timestamp in ms (optional)"
+            },
+            {
+              "disabled": false,
+              "key": "unreadOnly",
+              "value": "<boolean>",
+              "description": "Boolean if true, only unread articles will be returned; default is false. Reminder: entries older than 31 days are automatically marked as read (optional)"
+            },
+            {
+              "disabled": false,
+              "key": "continuation",
+              "value": "<string>",
+              "description": "String a continuation id is used to page through the content. Pass the continuation from a search result to get the next set of results for this search (optional)"
+            },
+            {
+              "disabled": false,
+              "key": "includeAiActions",
+              "value": "true"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"RAW_BODY\": \"{\\\"layers\\\":[{\\\"severities\\\":[\\\"HIGH\\\"],\\\"type\\\":\\\"security\\\"},{\\\"parts\\\":[{\\\"id\\\":\\\"nlp/f/entity/gz:org:microsoft\\\"}],\\\"type\\\":\\\"matches\\\",\\\"salience\\\":\\\"about\\\"},{\\\"type\\\":\\\"language\\\",\\\"languages\\\":[\\\"en\\\"]}],\\\"source\\\":{\\\"items\\\":[{\\\"type\\\":\\\"publicationBucket\\\",\\\"id\\\":\\\"byf:cybersecurity-bundle\\\",\\\"tier\\\":\\\"tier1\\\"},{\\\"type\\\":\\\"publicationBucket\\\",\\\"id\\\":\\\"cybersecurity:vulnerabilities\\\",\\\"tier\\\":\\\"tier2\\\"}]}}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "29d464ab-128b-4048-90ee-10e653752e65",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "contents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "count",
+                  "value": "10"
+                },
+                {
+                  "key": "newerThan",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "olderThan",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "unreadOnly",
+                  "value": "<boolean>"
+                },
+                {
+                  "key": "continuation",
+                  "value": "<string>"
+                },
+                {
+                  "key": "includeAiActions",
+                  "value": "true"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"{\\\"layers\\\":[{\\\"severities\\\":[\\\"HIGH\\\"],\\\"type\\\":\\\"security\\\"},{\\\"parts\\\":[{\\\"id\\\":\\\"nlp/f/entity/gz:org:microsoft\\\"}],\\\"type\\\":\\\"matches\\\",\\\"salience\\\":\\\"about\\\"},{\\\"type\\\":\\\"language\\\",\\\"languages\\\":[\\\"en\\\"]}],\\\"source\\\":{\\\"items\\\":[{\\\"type\\\":\\\"publicationBucket\\\",\\\"id\\\":\\\"byf:cybersecurity-bundle\\\",\\\"tier\\\":\\\"tier1\\\"},{\\\"type\\\":\\\"publicationBucket\\\",\\\"id\\\":\\\"cybersecurity:vulnerabilities\\\",\\\"tier\\\":\\\"tier2\\\"}]}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "361e516e-e622-4167-a1a5-e4c5504f5fe1",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "contents"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "count",
+                  "value": "10"
+                },
+                {
+                  "key": "newerThan",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "olderThan",
+                  "value": "<integer>"
+                },
+                {
+                  "key": "unreadOnly",
+                  "value": "<boolean>"
+                },
+                {
+                  "key": "continuation",
+                  "value": "<string>"
+                },
+                {
+                  "key": "includeAiActions",
+                  "value": "true"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"{\\\"layers\\\":[{\\\"severities\\\":[\\\"HIGH\\\"],\\\"type\\\":\\\"security\\\"},{\\\"parts\\\":[{\\\"id\\\":\\\"nlp/f/entity/gz:org:microsoft\\\"}],\\\"type\\\":\\\"matches\\\",\\\"salience\\\":\\\"about\\\"},{\\\"type\\\":\\\"language\\\",\\\"languages\\\":[\\\"en\\\"]}],\\\"source\\\":{\\\"items\\\":[{\\\"type\\\":\\\"publicationBucket\\\",\\\"id\\\":\\\"byf:cybersecurity-bundle\\\",\\\"tier\\\":\\\"tier1\\\"},{\\\"type\\\":\\\"publicationBucket\\\",\\\"id\\\":\\\"cybersecurity:vulnerabilities\\\",\\\"tier\\\":\\\"tier2\\\"}]}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"errorCode\\\": 400,\\n  \\\"requestId\\\": \\\"835133063819c36c-SEA\\\",\\n  \\\"errorMessage\\\": \\\"Invalid JSON\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "1ce3b076-5b2b-46e3-b31c-015da0b46226",
+      "name": "Autocomplete Entities",
+      "request": {
+        "name": "Autocomplete Entities",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "entities"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "key": "",
+              "value": "null"
+            },
+            {
+              "disabled": false,
+              "key": "query",
+              "value": "<string>",
+              "description": "(Required) The keyword you want to match to an entity or AI Model"
+            },
+            {
+              "disabled": false,
+              "key": "count",
+              "value": "10",
+              "description": "The number of suggestions. Recommendation: 10"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "ae9220c7-4fdd-4bf9-a5c0-f3e017e760cf",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "key": "count",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "89f1c118-c1ea-4502-9b03-81b21f2f252e",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "key": "count",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{\\n  \\\"errorCode\\\": 400,\\n  \\\"requestId\\\": \\\"835133063819c36c-SEA\\\",\\n  \\\"errorMessage\\\": \\\"Invalid JSON\\\"\\n}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "920515bc-03a4-4d53-9ebf-6702aa8f0c89",
+          "name": "405",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "entities"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "query",
+                  "value": "<string>"
+                },
+                {
+                  "key": "count",
+                  "value": "10"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "text/plain"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Method Not Allowed",
+          "code": 405,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "text/plain"
+            }
+          ],
+          "body": "\"errorCode\": 405,\n  \"requestId\": \"8351587fdc5a6808-SEA\",\n  \"errorMessage\": \"POST not allowed\"",
+          "cookie": [],
+          "_postman_previewlanguage": "text"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "df2b04be-0c5a-497c-8e47-b7a52ec8034a",
+      "name": "Ask AI",
+      "request": {
+        "name": "Ask AI",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "rag"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "newerThan",
+              "value": "<string>",
+              "description": "Filter articles crawled after the given timestamp (epoch timestamp in milliseconds)"
+            },
+            {
+              "disabled": false,
+              "key": "olderThan",
+              "value": "<string>",
+              "description": "Filter articles crawled before the given timestamp (epoch timestamp in milliseconds)"
+            },
+            {
+              "disabled": false,
+              "key": "stream",
+              "value": "false",
+              "description": "Should the response be streamed"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"query\": \"<json>\",\n  \"source\": \"<json>\",\n  \"entityIds\": \"<json>\",\n  \"agentQueries\": \"<json>\",\n  \"layers\": \"<json>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "2328abc5-1976-4247-9f5a-892705e71bab",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "rag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "newerThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "olderThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "stream",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<json>\",\n  \"source\": \"<json>\",\n  \"entityIds\": \"<json>\",\n  \"agentQueries\": \"<json>\",\n  \"layers\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "5090a093-1bf3-466e-8651-b4ba9c0c12af",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "rag"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "newerThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "olderThan",
+                  "value": "<string>"
+                },
+                {
+                  "key": "stream",
+                  "value": "false"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"query\": \"<json>\",\n  \"source\": \"<json>\",\n  \"entityIds\": \"<json>\",\n  \"agentQueries\": \"<json>\",\n  \"layers\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.feedly.com/v3/search/",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "07e3d559-5aa0-487a-b0fe-3ed11361608d",
+    "name": "Search API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,506 @@
+{
+  "item": [
+    {
+      "id": "6111b3e7-69b4-414b-99e2-3e4597c10973",
+      "name": "Custom Agents",
+      "description": {
+        "content": "> 🚧 Alpha: Custom Agents is a new capability and still under active development. Endpoints, fields, and behavior may change without notice.\n\nCustom Agents let enterprise teams stand up their own tables of AI-tracked entities (malware families, threat actors, vendors, etc.) driven by a natural-language Priority Intelligence Requirement (PIR). Custom Agents are one `type` of dashboard returned by `GET /dashboards`.\n",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "260b6d0d-5800-4f6f-8ceb-059dbc0c02a5",
+          "name": "Get a Custom Agent's rows",
+          "request": {
+            "name": "Get a Custom Agent's rows",
+            "description": {
+              "content": "> 🚧 Alpha: Custom Agents is a new capability and still under active development. Endpoints, fields, and behavior may change without notice.\n\nReturns the rows (one per tracked entity) and cell data for a single Custom Agent, paginated with `count`/`continuation`.\n\nFind the `id` to use here from a `customAgent`-type item returned by `GET /dashboards`, and use that same item's `schema.columns` to interpret each row's `cells`.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "custom-agents",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "count",
+                  "value": "<integer>",
+                  "description": "Maximum number of rows to return in this page. Defaults to the platform's standard page size when omitted."
+                },
+                {
+                  "disabled": false,
+                  "key": "continuation",
+                  "value": "<string>",
+                  "description": "Continuation token from a previous response's `continuation` field. Include it to fetch the next page of rows; omit it to fetch the first page. See [Understanding Continuation](https://developers.feedly.com/docs/understanding-continuation).\n"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "id",
+                  "description": "(Required) Id of the Custom Agent, from the `id` field of a `customAgent` item returned by `GET /dashboards`."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a812c3d4-0eaa-4601-a21a-ade3816ec25d",
+              "name": "A page of rows for this Custom Agent.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom-agents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "WyIxOWY0MzU4M2ZiODoxZDM2NmU6MzBhZWZhMjAiLCJTQ01CQU5LRVIiXQ=="
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Id of the Custom Agent, from the `id` field of a `customAgent` item returned by `GET /dashboards`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"items\": [\n    {\n      \"created\": 1783541284792,\n      \"updated\": 1783541284792,\n      \"id\": \"SCMBANKER\",\n      \"cells\": [\n        {\n          \"entity\": \"SCMBANKER\",\n          \"column\": \"Malware Category\",\n          \"value\": \"Banker\",\n          \"citations\": [\n            {\n              \"llmPredictionMatch\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"citedText\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"entry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"llmPredictionMatch\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"citedText\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"entry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"insufficientData\": false\n        },\n        {\n          \"entity\": \"SCMBANKER\",\n          \"column\": \"Malware Category\",\n          \"value\": \"Banker\",\n          \"citations\": [\n            {\n              \"llmPredictionMatch\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"citedText\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"entry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"llmPredictionMatch\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"citedText\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"entry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"insufficientData\": false\n        }\n      ],\n      \"events\": [\n        {\n          \"key_0\": 3435\n        },\n        {\n          \"key_0\": false\n        }\n      ]\n    },\n    {\n      \"created\": 1783541284792,\n      \"updated\": 1783541284792,\n      \"id\": \"SCMBANKER\",\n      \"cells\": [\n        {\n          \"entity\": \"SCMBANKER\",\n          \"column\": \"Malware Category\",\n          \"value\": \"Banker\",\n          \"citations\": [\n            {\n              \"llmPredictionMatch\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"citedText\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"entry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"llmPredictionMatch\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"citedText\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"entry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"insufficientData\": false\n        },\n        {\n          \"entity\": \"SCMBANKER\",\n          \"column\": \"Malware Category\",\n          \"value\": \"Banker\",\n          \"citations\": [\n            {\n              \"llmPredictionMatch\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"citedText\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"entry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            },\n            {\n              \"llmPredictionMatch\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"citedText\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              },\n              \"entry\": {\n                \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n              }\n            }\n          ],\n          \"insufficientData\": false\n        }\n      ],\n      \"events\": [\n        {\n          \"key_0\": true,\n          \"key_1\": 8892\n        },\n        {\n          \"key_0\": 2277\n        }\n      ]\n    }\n  ],\n  \"lastRefresh\": 1783539484792,\n  \"continuation\": \"WyIxOWY0MzU4M2ZiODoxZDM2NmU6MzBhZWZhMjAiLCJTQ01CQU5LRVIiXQ==\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "780632da-1f72-4143-8951-a7340c187880",
+              "name": "Missing or invalid Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom-agents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "WyIxOWY0MzU4M2ZiODoxZDM2NmU6MzBhZWZhMjAiLCJTQ01CQU5LRVIiXQ=="
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Id of the Custom Agent, from the `id` field of a `customAgent` item returned by `GET /dashboards`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"must provide authorization token\",\n  \"errorId\": \"xyz.2018021111.12345\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "66b18006-c00c-4cfa-bd30-3ac34512cc12",
+              "name": "No Custom Agent exists with the given `id` for this enterprise team.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom-agents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "WyIxOWY0MzU4M2ZiODoxZDM2NmU6MzBhZWZhMjAiLCJTQ01CQU5LRVIiXQ=="
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Id of the Custom Agent, from the `id` field of a `customAgent` item returned by `GET /dashboards`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"must provide authorization token\",\n  \"errorId\": \"xyz.2018021111.12345\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "ae655403-3d81-49f9-bb9d-e8445fc9adab",
+              "name": "Rate limit exceeded. See [Request Limits](https://developers.feedly.com/reference/request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "custom-agents",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "count",
+                      "value": "20"
+                    },
+                    {
+                      "key": "continuation",
+                      "value": "WyIxOWY0MzU4M2ZiODoxZDM2NmU6MzBhZWZhMjAiLCJTQ01CQU5LRVIiXQ=="
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "id",
+                      "description": "(Required) Id of the Custom Agent, from the `id` field of a `customAgent` item returned by `GET /dashboards`."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"must provide authorization token\",\n  \"errorId\": \"xyz.2018021111.12345\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "063c7c0a-7895-48f0-9792-f218f4ff9b6c",
+          "name": "Get list of agents",
+          "request": {
+            "name": "Get list of agents",
+            "description": {
+              "content": "> 🚧 Alpha: Custom Agents is a new capability and still under active development. Endpoints, fields, and behavior may change without notice.\n\nReturns every Threat Intelligence Agent — Custom Agents as well as the built-in TTP, Cyberattacks, Brand Monitoring, Vulnerability, and Credential Leaks agents.\n\nTo find your team's Custom Agents, filter the response for items where `type` is `customAgent`, then pass each one's `id` to `GET /custom-agents/{id}` to fetch that agent's rows.\n",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "dashboards"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6fcea9ab-31ae-4c60-ac2c-7448ca2c6f25",
+              "name": "A list of agents for the enterprise team.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dashboards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"id\": \"174aa5c2-e63d-46ff-800e-8d344ba29d57\",\n    \"type\": \"customAgent\",\n    \"name\": \"Malware families targeting financial institutions\",\n    \"created\": 1783541284792,\n    \"createdBy\": \"c6d7e1e8-072b-42b8-9484-f873be3ce4dd\",\n    \"pir\": \"What malware families are being used in attacks against financial institutions?\",\n    \"pirMentions\": [],\n    \"schema\": {\n      \"entityType\": \"malware\",\n      \"entityTypeLabel\": \"Malware Family\",\n      \"columns\": [\n        {\n          \"id\": null,\n          \"name\": \"Malware Category\",\n          \"type\": \"userProvided\",\n          \"description\": \"The category of malware (e.g. Banker, Ransomware, Infostealer).\",\n          \"prompt\": \"Classify the malware family into a single category.\"\n        }\n      ]\n    }\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "74c1df9d-57b2-4658-ae9b-b7bf2dd5dc69",
+              "name": "Missing or invalid Authorization header.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dashboards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"must provide authorization token\",\n  \"errorId\": \"xyz.2018021111.12345\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "122660c9-150b-422a-a6af-c55ee0a11b36",
+              "name": "Rate limit exceeded. See [Request Limits](https://developers.feedly.com/reference/request-limits).",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "dashboards"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Too Many Requests",
+              "code": 429,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorMessage\": \"must provide authorization token\",\n  \"errorId\": \"xyz.2018021111.12345\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.feedly.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "f4645421-265a-4bbb-a200-7140e8ddb405",
+    "name": "Feedly API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "Feedly's public REST API — Articles, Search, Enterprise, Feedly AI, Threat Intelligence (TI) Endpoints, Market Intelligence (MI) Endpoints, Custom Agents, and Webhooks.\n\nThis spec is the source of truth for the [Feedly API Reference](https://developers.feedly.com/reference) on ReadMe, migrated from ReadMe into GitHub so it can be reviewed and edited as code. See the repo README for the migration status and the contribution workflow (lint, bundle, and how to push changes back to ReadMe).\n\n\nContact Support:\n Name: Feedly Support",
+      "type": "text/plain"
+    }
+  }
+}

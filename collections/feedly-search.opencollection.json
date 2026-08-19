@@ -1,0 +1,130 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Search API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Search",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/search/contents?",
+        "params": [
+          {
+            "name": "count",
+            "value": "",
+            "type": "query",
+            "description": "Integer number of articles to return. default is 10. (optional)"
+          },
+          {
+            "name": "newerThan",
+            "value": "",
+            "type": "query",
+            "description": "Long timestamp in ms (optional)"
+          },
+          {
+            "name": "olderThan",
+            "value": "",
+            "type": "query",
+            "description": "Long timestamp in ms (optional)"
+          },
+          {
+            "name": "unreadOnly",
+            "value": "",
+            "type": "query",
+            "description": "Boolean if true, only unread articles will be returned; default is false. Reminder: entries older than 31 days are automatically marked as read (optional)"
+          },
+          {
+            "name": "continuation",
+            "value": "",
+            "type": "query",
+            "description": "String a continuation id is used to page through the content. Pass the continuation from a search result to get the next set of results for this search (optional)"
+          },
+          {
+            "name": "includeAiActions",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Search"
+    },
+    {
+      "info": {
+        "name": "Autocomplete Entities",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/search/entities?",
+        "params": [
+          {
+            "name": "query",
+            "value": "",
+            "type": "query",
+            "description": "The keyword you want to match to an entity or AI Model"
+          },
+          {
+            "name": "count",
+            "value": "",
+            "type": "query",
+            "description": "The number of suggestions. Recommendation: 10"
+          }
+        ]
+      },
+      "docs": "Autocomplete Entities"
+    },
+    {
+      "info": {
+        "name": "Ask AI",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/search/rag",
+        "params": [
+          {
+            "name": "newerThan",
+            "value": "",
+            "type": "query",
+            "description": "Filter articles crawled after the given timestamp (epoch timestamp in milliseconds)"
+          },
+          {
+            "name": "olderThan",
+            "value": "",
+            "type": "query",
+            "description": "Filter articles crawled before the given timestamp (epoch timestamp in milliseconds)"
+          },
+          {
+            "name": "stream",
+            "value": "",
+            "type": "query",
+            "description": "Should the response be streamed"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Ask AI"
+    }
+  ],
+  "bundled": true
+}

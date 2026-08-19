@@ -1,0 +1,66 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Tags API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Add articles to board",
+        "type": "http"
+      },
+      "http": {
+        "method": "PUT",
+        "url": "https://api.feedly.com/v3/tags/:streamId",
+        "params": [
+          {
+            "name": "streamId",
+            "value": "",
+            "type": "path",
+            "description": "The streamId of your Team Board (Must be URL encoded)"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Add articleIds to team board"
+    },
+    {
+      "info": {
+        "name": "Delete article from Board",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://api.feedly.com/v3/tags/:streamId/:entryId",
+        "params": [
+          {
+            "name": "streamId",
+            "value": "",
+            "type": "path",
+            "description": "Must be URL encoded.  The board's stream ID. Format: enterprise/{enterpriseName}/tag/{boardId}"
+          },
+          {
+            "name": "entryId",
+            "value": "",
+            "type": "path",
+            "description": "The article entry ID to remove from the board"
+          }
+        ]
+      },
+      "docs": "Remove an article from a team board by its entry ID."
+    }
+  ],
+  "bundled": true
+}

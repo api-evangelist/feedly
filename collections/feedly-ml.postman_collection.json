@@ -1,0 +1,2039 @@
+{
+  "item": [
+    {
+      "id": "8f4da0bf-30c6-48aa-8519-9c4ad1e92285",
+      "name": "Get Malware Relationships",
+      "request": {
+        "name": "Get Malware Relationships",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "relationships",
+            "malware",
+            ":malwareId"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "intervalType",
+              "value": "LAST_7_DAYS",
+              "description": "(Required) See table below for possible intervalType values"
+            }
+          ],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b",
+              "key": "malwareId",
+              "description": "(Required) ID of malware family"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "23419f80-4be4-4056-9ba6-49e22aa561ef",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "relationships",
+                "malware",
+                ":malwareId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "intervalType",
+                  "value": "LAST_7_DAYS"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b",
+                  "key": "malwareId",
+                  "description": "(Required) ID of malware family"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "77a05301-64b9-4910-9c58-bb322b634e44",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "relationships",
+                "malware",
+                ":malwareId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "intervalType",
+                  "value": "LAST_7_DAYS"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b",
+                  "key": "malwareId",
+                  "description": "(Required) ID of malware family"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "dce8fefb-c365-47e8-b512-9d75e77fe668",
+      "name": "Get Malware Article Graph",
+      "request": {
+        "name": "Get Malware Article Graph",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "memes",
+            "article-count-graphs"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "resourceId",
+              "value": "nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b",
+              "description": "(Required) ID of malware family"
+            },
+            {
+              "disabled": false,
+              "key": "intervalType",
+              "value": "LAST_7_DAYS",
+              "description": "(Required) See table below for possible intervalType values"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "8fe2c4c0-a7b4-4145-b312-be70cb1cb1a1",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "memes",
+                "article-count-graphs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "resourceId",
+                  "value": "nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b"
+                },
+                {
+                  "key": "intervalType",
+                  "value": "LAST_7_DAYS"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "e0a3dae8-f4c4-4300-aa34-9e779daedbc8",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "memes",
+                "article-count-graphs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "resourceId",
+                  "value": "nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b"
+                },
+                {
+                  "key": "intervalType",
+                  "value": "LAST_7_DAYS"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "47137214-6a65-4acf-aae7-de3bca69ef4a",
+      "name": "Article Counts",
+      "request": {
+        "name": "Article Counts",
+        "description": {
+          "content": "Get article count graphs across different categories",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "memes",
+            "article-count-graphs"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "intervalType",
+              "value": "LAST_7_DAYS",
+              "description": "(Required) Time interval (LAST_7_DAYS, LAST_30_DAYS, LAST_3_MONTHS, LAST_6_MONTHS, LAST_1_YEAR)"
+            },
+            {
+              "disabled": false,
+              "key": "requestType",
+              "value": "insightCard",
+              "description": "(Required) Must be set to insightCard"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"RAW_BODY\": \"{\\\"articleCountTypes\\\":[\\\"NEWS\\\"],\\\"searchLayers\\\":[{\\\"parts\\\":[{\\\"id\\\":\\\"nlp/f/entity/gz:org:openai\\\"}],\\\"salience\\\":\\\"mention\\\",\\\"type\\\":\\\"matches\\\"}]}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "3b57ebee-44e5-495b-8b86-7812fb2e448e",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "memes",
+                "article-count-graphs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "intervalType",
+                  "value": "LAST_7_DAYS"
+                },
+                {
+                  "key": "requestType",
+                  "value": "insightCard"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"{\\\"articleCountTypes\\\":[\\\"NEWS\\\"],\\\"searchLayers\\\":[{\\\"parts\\\":[{\\\"id\\\":\\\"nlp/f/entity/gz:org:openai\\\"}],\\\"salience\\\":\\\"mention\\\",\\\"type\\\":\\\"matches\\\"}]}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "21fb8d80-a6da-45de-a751-751ac53d212b",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "memes",
+                "article-count-graphs"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "intervalType",
+                  "value": "LAST_7_DAYS"
+                },
+                {
+                  "key": "requestType",
+                  "value": "insightCard"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"{\\\"articleCountTypes\\\":[\\\"NEWS\\\"],\\\"searchLayers\\\":[{\\\"parts\\\":[{\\\"id\\\":\\\"nlp/f/entity/gz:org:openai\\\"}],\\\"salience\\\":\\\"mention\\\",\\\"type\\\":\\\"matches\\\"}]}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "638ce411-7fbe-45d2-b072-2703fbb47c07",
+      "name": "Get Malware Detection Rules",
+      "request": {
+        "name": "Get Malware Detection Rules",
+        "description": {
+          "content": "",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "detection-rules",
+            "threat",
+            ":malwareId"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b",
+              "key": "malwareId",
+              "description": "(Required) ID of malware family"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "f15b0a5b-6bd3-41d6-a7e9-5b8d92655644",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "detection-rules",
+                "threat",
+                ":malwareId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b",
+                  "key": "malwareId",
+                  "description": "(Required) ID of malware family"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "9346b619-4e4e-4ef4-b9ee-4a730ee34eba",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "detection-rules",
+                "threat",
+                ":malwareId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b",
+                  "key": "malwareId",
+                  "description": "(Required) ID of malware family"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "ee345e51-22fc-48f3-bc5f-1a7ccfe717e8",
+      "name": "Get Threat Actor Relationships",
+      "request": {
+        "name": "Get Threat Actor Relationships",
+        "description": {
+          "content": "Retrieves relationship information (such as IoCs or TTPs) for a specific threat actor.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "relationships",
+            "actor",
+            ":threatActorId"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "intervalType",
+              "value": "FOREVER",
+              "description": "(Required) The time interval for the relationships (e.g., 'FOREVER')"
+            }
+          ],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "<string>",
+              "key": "threatActorId",
+              "description": "(Required) The ID of the threat actor (URL encoded)"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "dcc6d104-c95f-4336-9fd8-e8da25de7312",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "relationships",
+                "actor",
+                ":threatActorId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "intervalType",
+                  "value": "FOREVER"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "threatActorId",
+                  "description": "(Required) The ID of the threat actor (URL encoded)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "d3a85cb9-f34b-4232-858e-4d7e15710b7a",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "relationships",
+                "actor",
+                ":threatActorId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "intervalType",
+                  "value": "FOREVER"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "threatActorId",
+                  "description": "(Required) The ID of the threat actor (URL encoded)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "ec22576d-ae77-4213-9c98-9b541fa1783f",
+      "name": "Emerging Trends",
+      "request": {
+        "name": "Emerging Trends",
+        "description": {
+          "content": "Retrieve trends based on specific industries, filters, and sorting criteria.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "trend-discovery",
+            "trends"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "count",
+              "value": "200",
+              "description": "(Required) Number of trends to return"
+            },
+            {
+              "disabled": false,
+              "key": "newOnly",
+              "value": "false",
+              "description": "Whether to only return freshly added trends"
+            },
+            {
+              "disabled": false,
+              "key": "sort",
+              "value": "-growth",
+              "description": "(Required) Criteria to retrieve top count trends and sort response. Value should be one of: [\"-size\", \"size\", \"-growth\", \"growth\"].  If starts with \"-\" output will be in decreasing order (higher values first, generally preferred) Example: \"-growth\" returns trends with highest growth first"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"RAW_BODY\": \"{   \\\"filters\\\": [     {\\\"type\\\": \\\"growth\\\", \\\"values\\\": [\\\"Exploding\\\", \\\"Surging\\\", \\\"Growing\\\"]},     {\\\"type\\\": \\\"size\\\", \\\"values\\\": [\\\"Mainstream\\\", \\\"Known\\\", \\\"Niche\\\"]},     {\\\"type\\\": \\\"industry\\\", \\\"values\\\": []}   ],   \\\"period\\\": \\\"Last6Months\\\",   \\\"searchLayers\\\": [     {       \\\"parts\\\": [         {\\\"id\\\": \\\"nlp/f/entity/gz:no-code-development-platform\\\"}       ]     }   ] }\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "4120c23d-e9ed-44c4-b7a4-22eff85226a0",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "trend-discovery",
+                "trends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "count",
+                  "value": "200"
+                },
+                {
+                  "key": "newOnly",
+                  "value": "false"
+                },
+                {
+                  "key": "sort",
+                  "value": "-growth"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"{   \\\"filters\\\": [     {\\\"type\\\": \\\"growth\\\", \\\"values\\\": [\\\"Exploding\\\", \\\"Surging\\\", \\\"Growing\\\"]},     {\\\"type\\\": \\\"size\\\", \\\"values\\\": [\\\"Mainstream\\\", \\\"Known\\\", \\\"Niche\\\"]},     {\\\"type\\\": \\\"industry\\\", \\\"values\\\": []}   ],   \\\"period\\\": \\\"Last6Months\\\",   \\\"searchLayers\\\": [     {       \\\"parts\\\": [         {\\\"id\\\": \\\"nlp/f/entity/gz:no-code-development-platform\\\"}       ]     }   ] }\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "39354625-3758-47b0-b29f-d8ead7b64292",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "trend-discovery",
+                "trends"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "count",
+                  "value": "200"
+                },
+                {
+                  "key": "newOnly",
+                  "value": "false"
+                },
+                {
+                  "key": "sort",
+                  "value": "-growth"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"{   \\\"filters\\\": [     {\\\"type\\\": \\\"growth\\\", \\\"values\\\": [\\\"Exploding\\\", \\\"Surging\\\", \\\"Growing\\\"]},     {\\\"type\\\": \\\"size\\\", \\\"values\\\": [\\\"Mainstream\\\", \\\"Known\\\", \\\"Niche\\\"]},     {\\\"type\\\": \\\"industry\\\", \\\"values\\\": []}   ],   \\\"period\\\": \\\"Last6Months\\\",   \\\"searchLayers\\\": [     {       \\\"parts\\\": [         {\\\"id\\\": \\\"nlp/f/entity/gz:no-code-development-platform\\\"}       ]     }   ] }\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "f17308e9-4d21-471d-bec2-d5636968faf5",
+      "name": "Key Metrics",
+      "request": {
+        "name": "Key Metrics",
+        "description": {
+          "content": "Retrieve key metrics points for a company",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "insight-cards",
+            "key-data-points"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "resourceId",
+              "value": "nlp%2Ff%2Fentity%2Fgz%3Aorg%3Aopenai",
+              "description": "(Required) resourceId (must be URL encoded)"
+            },
+            {
+              "disabled": false,
+              "key": "lastNDays",
+              "value": "365",
+              "description": "(Required) Last number of days (IE: 365)"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "8fd95aa1-216c-4ce8-a387-625d8a815e78",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "insight-cards",
+                "key-data-points"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "resourceId",
+                  "value": "nlp%2Ff%2Fentity%2Fgz%3Aorg%3Aopenai"
+                },
+                {
+                  "key": "lastNDays",
+                  "value": "365"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "be07eaf4-5ba9-4276-850c-272e8e2ccdd1",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "insight-cards",
+                "key-data-points"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "resourceId",
+                  "value": "nlp%2Ff%2Fentity%2Fgz%3Aorg%3Aopenai"
+                },
+                {
+                  "key": "lastNDays",
+                  "value": "365"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "c91dd78f-88fd-49c0-aa41-0a7f2efb4b9d",
+      "name": "Resource Counts",
+      "request": {
+        "name": "Resource Counts",
+        "description": {
+          "content": "Get resource count data for a company",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "ner-gazetteer",
+            "resource-count"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "intervalType",
+              "value": "LAST_7_DAYS",
+              "description": "(Required) "
+            },
+            {
+              "disabled": false,
+              "key": "requestType",
+              "value": "insightCard",
+              "description": "(Required) "
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"RAW_BODY\": \"{\\\"searchLayers\\\":[{\\\"parts\\\":[{\\\"id\\\":\\\"nlp/f/entity/gz:org:openai\\\"}],\\\"salience\\\":\\\"about\\\",\\\"type\\\":\\\"matches\\\"}]}\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "1c80c9bf-d14c-4803-b2c5-ccebeffb6f69",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "ner-gazetteer",
+                "resource-count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "intervalType",
+                  "value": "LAST_7_DAYS"
+                },
+                {
+                  "key": "requestType",
+                  "value": "insightCard"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"{\\\"searchLayers\\\":[{\\\"parts\\\":[{\\\"id\\\":\\\"nlp/f/entity/gz:org:openai\\\"}],\\\"salience\\\":\\\"about\\\",\\\"type\\\":\\\"matches\\\"}]}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "74682f4d-c58c-4910-a867-14092383285c",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "ner-gazetteer",
+                "resource-count"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "intervalType",
+                  "value": "LAST_7_DAYS"
+                },
+                {
+                  "key": "requestType",
+                  "value": "insightCard"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"{\\\"searchLayers\\\":[{\\\"parts\\\":[{\\\"id\\\":\\\"nlp/f/entity/gz:org:openai\\\"}],\\\"salience\\\":\\\"about\\\",\\\"type\\\":\\\"matches\\\"}]}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "02933326-5672-4fd7-9f7f-405e8e226026",
+      "name": "Top Stories",
+      "request": {
+        "name": "Top Stories",
+        "description": {
+          "content": "Get trending news stories related to a company",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "memes",
+            "trending-news"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [
+            {
+              "disabled": false,
+              "key": "resourceId",
+              "value": "nlp%2Ff%2Fentity%2Fgz%3Aorg%3Aopenai",
+              "description": "(Required) The resourceId of the company (must be URL encoded)"
+            },
+            {
+              "disabled": false,
+              "key": "lastNDays",
+              "value": "30",
+              "description": "(Required) Last number of days (IE: 30)"
+            },
+            {
+              "disabled": false,
+              "key": "size",
+              "value": "20",
+              "description": "(Required) Number of articles to return (IE: 20)"
+            }
+          ],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "2c6b2e72-c5b2-4eee-9135-c391feb41d8d",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "memes",
+                "trending-news"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "resourceId",
+                  "value": "nlp%2Ff%2Fentity%2Fgz%3Aorg%3Aopenai"
+                },
+                {
+                  "key": "lastNDays",
+                  "value": "30"
+                },
+                {
+                  "key": "size",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "33c1fb6c-519e-48bf-b877-9533a19f425a",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "memes",
+                "trending-news"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "key": "resourceId",
+                  "value": "nlp%2Ff%2Fentity%2Fgz%3Aorg%3Aopenai"
+                },
+                {
+                  "key": "lastNDays",
+                  "value": "30"
+                },
+                {
+                  "key": "size",
+                  "value": "20"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "6fcad973-5ac3-417a-bdaa-f1138bf9cdf9",
+      "name": "Get Cyberattacks Agent",
+      "request": {
+        "name": "Get Cyberattacks Agent",
+        "description": {
+          "content": "The Cyberattacks Agent API provides access to structured cyber attack data, allowing you to query, filter, and analyze security incidents across different time periods, regions, and attack types.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "relationships",
+            "cyber-attacks",
+            "dashboard",
+            "table"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"RAW_BODY\": \"<json>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "f14382e9-82c5-448a-b8ef-5d1733f3a085",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "relationships",
+                "cyber-attacks",
+                "dashboard",
+                "table"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "98a6d358-3541-4bb7-bf69-3a385994924e",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "relationships",
+                "cyber-attacks",
+                "dashboard",
+                "table"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "de2ffbbc-1e7a-4f98-bcc2-ddfe1965fc44",
+      "name": "Get Cyberattacks Statistics",
+      "request": {
+        "name": "Get Cyberattacks Statistics",
+        "description": {
+          "content": "Retrieve aggregated statistics and trends for cyber attacks based on your query filters. This endpoint provides statistical breakdowns by attack type, victim country, victim industry, and other dimensions.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "relationships",
+            "cyber-attacks",
+            "dashboard",
+            "stats"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": []
+        },
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          },
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "POST",
+        "auth": null,
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"RAW_BODY\": \"<json>\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        }
+      },
+      "response": [
+        {
+          "id": "dca96078-f26f-4dcd-b08b-199cbc51cbc8",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "relationships",
+                "cyber-attacks",
+                "dashboard",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "cdde091b-c635-4d57-99a6-4c998ae87f72",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "relationships",
+                "cyber-attacks",
+                "dashboard",
+                "stats"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"RAW_BODY\": \"<json>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    },
+    {
+      "id": "813c6971-7e18-454d-9bd7-7a8e23453de5",
+      "name": "Get Individual Cyberattack Details",
+      "request": {
+        "name": "Get Individual Cyberattack Details",
+        "description": {
+          "content": "Retrieve comprehensive details about a specific cyberattack, including timeline events, related entities, source articles, and mention trends over time.",
+          "type": "text/plain"
+        },
+        "url": {
+          "path": [
+            "relationships",
+            "cyber-attacks",
+            ":resourceId"
+          ],
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "query": [],
+          "variable": [
+            {
+              "disabled": false,
+              "type": "any",
+              "value": "nlp%2Ff%2FcyberAttack%2Faf0591a6-a2a4-4db9-9ddb-b3586182c04b",
+              "key": "resourceId",
+              "description": "(Required) Unique identifier for the cyber attack (URL-encoded)"
+            }
+          ]
+        },
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json"
+          }
+        ],
+        "method": "GET",
+        "auth": null
+      },
+      "response": [
+        {
+          "id": "c6139c03-58e6-4db6-b1c3-9c2fd5c88e25",
+          "name": "200",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "relationships",
+                "cyber-attacks",
+                ":resourceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "nlp%2Ff%2FcyberAttack%2Faf0591a6-a2a4-4db9-9ddb-b3586182c04b",
+                  "key": "resourceId",
+                  "description": "(Required) Unique identifier for the cyber attack (URL-encoded)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "OK",
+          "code": 200,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        },
+        {
+          "id": "22044eff-abab-4be9-8126-2b4867b5dc57",
+          "name": "400",
+          "originalRequest": {
+            "url": {
+              "path": [
+                "relationships",
+                "cyber-attacks",
+                ":resourceId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "nlp%2Ff%2FcyberAttack%2Faf0591a6-a2a4-4db9-9ddb-b3586182c04b",
+                  "key": "resourceId",
+                  "description": "(Required) Unique identifier for the cyber attack (URL-encoded)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "description": {
+                  "content": "Added as a part of security scheme: apikey",
+                  "type": "text/plain"
+                },
+                "key": "Authorization",
+                "value": "<API Key>"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "body": {}
+          },
+          "status": "Bad Request",
+          "code": 400,
+          "header": [
+            {
+              "key": "Content-Type",
+              "value": "application/json"
+            }
+          ],
+          "body": "\"{}\"",
+          "cookie": [],
+          "_postman_previewlanguage": "json"
+        }
+      ],
+      "event": [],
+      "protocolProfileBehavior": {
+        "disableBodyPruning": true
+      }
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.feedly.com/v3/ml",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}"
+      },
+      {
+        "key": "in",
+        "value": "header"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "dc6d6e52-b48c-4259-bcaf-40414a9caa60",
+    "name": "ML Endpoint",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "",
+      "type": "text/plain"
+    }
+  }
+}

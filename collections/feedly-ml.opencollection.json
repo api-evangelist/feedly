@@ -1,0 +1,308 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "ML Endpoint",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Get Malware Relationships",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/ml/relationships/malware/:malwareId",
+        "params": [
+          {
+            "name": "malwareId",
+            "value": "",
+            "type": "path",
+            "description": "ID of malware family"
+          },
+          {
+            "name": "intervalType",
+            "value": "",
+            "type": "query",
+            "description": "See table below for possible intervalType values"
+          }
+        ]
+      },
+      "docs": "Get Malware Relationships"
+    },
+    {
+      "info": {
+        "name": "Get Malware Article Graph",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/ml/memes/article-count-graphs",
+        "params": [
+          {
+            "name": "resourceId",
+            "value": "",
+            "type": "query",
+            "description": "ID of malware family"
+          },
+          {
+            "name": "intervalType",
+            "value": "",
+            "type": "query",
+            "description": "See table below for possible intervalType values"
+          }
+        ]
+      },
+      "docs": "Get Malware Article Graph"
+    },
+    {
+      "info": {
+        "name": "Article Counts",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/ml/memes/article-count-graphs",
+        "params": [
+          {
+            "name": "intervalType",
+            "value": "",
+            "type": "query",
+            "description": "Time interval (LAST_7_DAYS, LAST_30_DAYS, LAST_3_MONTHS, LAST_6_MONTHS, LAST_1_YEAR)"
+          },
+          {
+            "name": "requestType",
+            "value": "",
+            "type": "query",
+            "description": "Must be set to insightCard"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Get article count graphs across different categories"
+    },
+    {
+      "info": {
+        "name": "Get Malware Detection Rules",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/ml/detection-rules/threat/:malwareId",
+        "params": [
+          {
+            "name": "malwareId",
+            "value": "",
+            "type": "path",
+            "description": "ID of malware family"
+          }
+        ]
+      },
+      "docs": "Get Malware Detection Rules"
+    },
+    {
+      "info": {
+        "name": "Get Threat Actor Relationships",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/ml/relationships/actor/:threatActorId",
+        "params": [
+          {
+            "name": "threatActorId",
+            "value": "",
+            "type": "path",
+            "description": "The ID of the threat actor (URL encoded)"
+          },
+          {
+            "name": "intervalType",
+            "value": "",
+            "type": "query",
+            "description": "The time interval for the relationships (e.g., 'FOREVER')"
+          }
+        ]
+      },
+      "docs": "Retrieves relationship information (such as IoCs or TTPs) for a specific threat actor."
+    },
+    {
+      "info": {
+        "name": "Emerging Trends",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/ml/trend-discovery/trends",
+        "params": [
+          {
+            "name": "count",
+            "value": "",
+            "type": "query",
+            "description": "Number of trends to return"
+          },
+          {
+            "name": "newOnly",
+            "value": "",
+            "type": "query",
+            "description": "Whether to only return freshly added trends"
+          },
+          {
+            "name": "sort",
+            "value": "",
+            "type": "query",
+            "description": "Criteria to retrieve top count trends and sort response. Value should be one of: [\"-size\", \"size\", \"-growth\", \"growth\"].  If starts with \"-\" output will be in decreasing order (higher values first, generally preferred) Example: \"-growth\" returns trends with highest growth first"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Retrieve trends based on specific industries, filters, and sorting criteria."
+    },
+    {
+      "info": {
+        "name": "Key Metrics",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/ml/insight-cards/key-data-points",
+        "params": [
+          {
+            "name": "resourceId",
+            "value": "",
+            "type": "query",
+            "description": "resourceId (must be URL encoded)"
+          },
+          {
+            "name": "lastNDays",
+            "value": "",
+            "type": "query",
+            "description": "Last number of days (IE: 365)"
+          }
+        ]
+      },
+      "docs": "Retrieve key metrics points for a company"
+    },
+    {
+      "info": {
+        "name": "Resource Counts",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/ml/ner-gazetteer/resource-count",
+        "params": [
+          {
+            "name": "intervalType",
+            "value": "",
+            "type": "query"
+          },
+          {
+            "name": "requestType",
+            "value": "",
+            "type": "query"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Get resource count data for a company"
+    },
+    {
+      "info": {
+        "name": "Top Stories",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/ml/memes/trending-news",
+        "params": [
+          {
+            "name": "resourceId",
+            "value": "",
+            "type": "query",
+            "description": "The resourceId of the company (must be URL encoded)"
+          },
+          {
+            "name": "lastNDays",
+            "value": "",
+            "type": "query",
+            "description": "Last number of days (IE: 30)"
+          },
+          {
+            "name": "size",
+            "value": "",
+            "type": "query",
+            "description": "Number of articles to return (IE: 20)"
+          }
+        ]
+      },
+      "docs": "Get trending news stories related to a company"
+    },
+    {
+      "info": {
+        "name": "Get Cyberattacks Agent",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/ml/relationships/cyber-attacks/dashboard/table",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "The Cyberattacks Agent API provides access to structured cyber attack data, allowing you to query, filter, and analyze security incidents across different time periods, regions, and attack types."
+    },
+    {
+      "info": {
+        "name": "Get Cyberattacks Statistics",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/ml/relationships/cyber-attacks/dashboard/stats",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Retrieve aggregated statistics and trends for cyber attacks based on your query filters. This endpoint provides statistical breakdowns by attack type, victim country, victim industry, and other dimensions."
+    },
+    {
+      "info": {
+        "name": "Get Individual Cyberattack Details",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/ml/relationships/cyber-attacks/:resourceId",
+        "params": [
+          {
+            "name": "resourceId",
+            "value": "",
+            "type": "path",
+            "description": "Unique identifier for the cyber attack (URL-encoded)"
+          }
+        ]
+      },
+      "docs": "Retrieve comprehensive details about a specific cyberattack, including timeline events, related entities, source articles, and mention trends over time."
+    }
+  ],
+  "bundled": true
+}

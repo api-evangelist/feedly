@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Get Intel Profiles",
+    "version": "3.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entity Lists",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Intel Profile data",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.feedly.com/v3/enterprise/entityLists",
+            "params": [
+              {
+                "name": "details",
+                "value": "true",
+                "type": "query",
+                "description": "When `true`, each entity list object includes the full `entities` array with all member IDs and text values. When omitted or `false`, the `entities` array is empty or absent.\n"
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns all intel profiles associated with the authenticated enterprise account. When `details=true` is passed, each list includes its full entity membership. Entity lists group named entities (companies, technologies, threat actors, custom text terms) that can be used to scope and filter intelligence feeds.\n\nEntity members may be resolved Feedly entities (returned with an `id`) or unresolved custom text strings (returned with a `text` field only).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

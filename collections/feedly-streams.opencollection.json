@@ -1,0 +1,73 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Streams API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Collect articles from streamId",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/streams/contents?",
+        "params": [
+          {
+            "name": "streamID",
+            "value": "",
+            "type": "query",
+            "description": "The id of the stream you want to access. Make sure that you are URI encoding the streamId"
+          },
+          {
+            "name": "count",
+            "value": "",
+            "type": "query",
+            "description": "The number of articles/entries to return. Pick a number between 1 and 100 (optional, default is 20)"
+          },
+          {
+            "name": "newerThan",
+            "value": "",
+            "type": "query",
+            "description": "Long timestamp in ms representing the time of your previous call (in Unix/Epoch). Cannot be older than 31 days ago. (optional)"
+          },
+          {
+            "name": "olderThan",
+            "value": "",
+            "type": "query",
+            "description": "Long timestamp in ms representing the time of your previous call (in Unix/Epoch). (optional)"
+          },
+          {
+            "name": "continuation",
+            "value": "",
+            "type": "query",
+            "description": "An id is used to page through the articles. The continuation id will be returned as part of each call response. This is useful if you want to fetch more articles than the count = 100 limit (optional)"
+          },
+          {
+            "name": "includeAiActions",
+            "value": "",
+            "type": "query",
+            "description": "if true, AI Actions from articles will be returned."
+          },
+          {
+            "name": "similar",
+            "value": "",
+            "type": "query",
+            "description": "if true, numRelatedEntries will be returned"
+          }
+        ]
+      },
+      "docs": "Collect articles from streamId"
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,105 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Enterprise API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Collect IoCs with rich context",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/enterprise/ioc?/streamid=",
+        "params": [
+          {
+            "name": "streamId",
+            "value": "",
+            "type": "query",
+            "description": "The id of the stream you want to access. Make sure that you are URI encoding the streamId"
+          },
+          {
+            "name": "count",
+            "value": "",
+            "type": "query",
+            "description": "The number of articles/entries to return. Pick a number between 1 and 100 (optional, default is 20)"
+          },
+          {
+            "name": "newerThan",
+            "value": "",
+            "type": "query",
+            "description": "Long timestamp in ms representing the time of your previous call (in Unix/Epoch). Cannot be older than 31 days ago. (optional)"
+          }
+        ]
+      },
+      "docs": "This guide contains a step-by-step guide for exporting all IoCs referenced in articles contained within a Feedly AI Feed, Folder, or Board using the Feedly API. The article will show how to access the Feedly Enterprise API token, and the stream ID as well as show examples of the API output using the Postman API platform."
+    },
+    {
+      "info": {
+        "name": "Get the List of Webhooks",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/enterprise/triggers"
+      },
+      "docs": "Get the List of Webhooks"
+    },
+    {
+      "info": {
+        "name": "Create or Update a Webhook",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/enterprise/triggers",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Create or Update a Webhook"
+    },
+    {
+      "info": {
+        "name": "Delete a Webhook",
+        "type": "http"
+      },
+      "http": {
+        "method": "DELETE",
+        "url": "https://api.feedly.com/v3/enterprise/triggers/::triggerid",
+        "params": [
+          {
+            "name": "triggerid",
+            "value": "",
+            "type": "path",
+            "description": "id of the webhook you want to delete"
+          }
+        ]
+      },
+      "docs": "Delete a Webhook"
+    },
+    {
+      "info": {
+        "name": "Get list of team board streamIds",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/enterprise/tags"
+      },
+      "docs": "Return a list of team boards"
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Annotations API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Annotate articles",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/annotations/",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Add annotations to articleIds"
+    }
+  ],
+  "bundled": true
+}

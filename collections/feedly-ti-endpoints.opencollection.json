@@ -1,0 +1,41 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "TI Endpoints",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "CVEs",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get CVE Timeline",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.feedly.com/v3/entities/:entityId/timeline",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "vulnerability/m/entity/CVE-2026-5426",
+                "type": "path",
+                "description": "The entity ID of the vulnerability (e.g. `vulnerability/m/entity/CVE-2026-5426`). URL-encode the slashes when calling the API directly."
+              }
+            ],
+            "auth": {
+              "type": "bearer",
+              "token": "{{bearerToken}}"
+            }
+          },
+          "docs": "Returns a chronological list of significant events for a given CVE entity, including CVSS score changes, exploitation reports, vendor advisories, threat intelligence reports, and relationship discoveries."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

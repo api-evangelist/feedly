@@ -1,0 +1,263 @@
+{
+  "item": [
+    {
+      "id": "4dbc79d7-4a67-48c4-81f1-8c36c2d77e16",
+      "name": "Entities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "cec07eed-b7e1-4466-834d-a0d7fe13e1d5",
+          "name": "Get IoC Metadata with or without Artilces",
+          "request": {
+            "name": "Get IoC Metadata with or without Artilces",
+            "description": {
+              "content": "Retrieves detailed information about a specific IoC, including statistics, relationships, and export options",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "entities",
+                ":entityId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "withStats",
+                  "value": "false",
+                  "description": "Include statistics about entity mentions over time"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "entityId",
+                  "description": "(Required) Entity ID (e.g., nlp/f/entity/ioc:74fba9a5-04c1-5b42-8b7e-16dc482dc841)"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fa6d8a66-9332-4878-b05b-a52a87ef3c69",
+              "name": "Successfully retrieved entity details",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withStats",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Entity ID (e.g., nlp/f/entity/ioc:74fba9a5-04c1-5b42-8b7e-16dc482dc841)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"enterpriseFeatures\": [\n    \"LeoSecurity\"\n  ],\n  \"hasSalience\": true,\n  \"id\": \"nlp/f/entity/ioc:74fba9a5-04c1-5b42-8b7e-16dc482dc841\",\n  \"iocDetails\": {\n    \"exports\": [\n      {\n        \"type\": \"markdown\",\n        \"url\": \"https://exports.feedly.com/ioc/5e5008f6b5a732c4e2e3258f35686286/markdown-20251024.010428.all-ioc.md\"\n      },\n      {\n        \"type\": \"stix2.1\",\n        \"url\": \"https://exports.feedly.com/ioc/5e5008f6b5a732c4e2e3258f35686286/stix2.1-20251024.010428.all-ioc.json\"\n      },\n      {\n        \"type\": \"misp\",\n        \"url\": \"https://exports.feedly.com/ioc/5e5008f6b5a732c4e2e3258f35686286/misp-20251024.010428.all-ioc.json\"\n      },\n      {\n        \"type\": \"csv\",\n        \"url\": \"https://exports.feedly.com/ioc/5e5008f6b5a732c4e2e3258f35686286/csv-20251024.010428.all-ioc.csv\"\n      }\n    ],\n    \"subtype\": \"md5\",\n    \"type\": \"hash\"\n  },\n  \"label\": \"d04b6410dddee19adec75f597c52e386\",\n  \"popularity\": 0,\n  \"relationships\": {\n    \"actors\": [\n      {\n        \"count\": 1,\n        \"entity\": {\n          \"id\": \"nlp/f/entity/gz:ta:00220228-a5a4-4032-a30d-826bb55aa3fb\",\n          \"label\": \"FIN7\",\n          \"type\": \"threatActor\"\n        },\n        \"entryIds\": [\n          \"4Qghfl1fiG/tkzg+TgNOjFyT4cdIDkUZMXHOhRfrvuI=_19a153f6854:5bc16d9:752f71fa\"\n        ],\n        \"firstMention\": \"2025-10-24T08:04:28.372000+00:00\",\n        \"lastMention\": \"2025-10-24T08:04:28.372000+00:00\"\n      }\n    ],\n    \"cyberAttacks\": [],\n    \"malwares\": [\n      {\n        \"count\": 1,\n        \"entity\": {\n          \"id\": \"nlp/f/entity/gz:mal:8c246ec4-eaa5-42c0-b137-29f28cbb6832\",\n          \"label\": \"Carbanak\",\n          \"type\": \"malwareFamily\"\n        },\n        \"entryIds\": [\n          \"4Qghfl1fiG/tkzg+TgNOjFyT4cdIDkUZMXHOhRfrvuI=_19a153f6854:5bc16d9:752f71fa\"\n        ],\n        \"firstMention\": \"2025-10-24T08:04:28.372000+00:00\",\n        \"lastMention\": \"2025-10-24T08:04:28.372000+00:00\"\n      }\n    ]\n  },\n  \"stats\": {\n    \"graph\": {\n      \"2025-10-24\": 9\n    },\n    \"lastMention\": 1761264000000,\n    \"numMentionsLast3Months\": 9\n  },\n  \"type\": \"indicatorOfCompromise\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "7bf2e4a3-23f1-4fb6-82bb-166121461807",
+              "name": "Unauthorized - Invalid or missing API key",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withStats",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Entity ID (e.g., nlp/f/entity/ioc:74fba9a5-04c1-5b42-8b7e-16dc482dc841)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "50bf762e-5a21-4abb-a638-ec68efdec4ae",
+              "name": "Entity not found",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "entities",
+                    ":entityId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "withStats",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "entityId",
+                      "description": "(Required) Entity ID (e.g., nlp/f/entity/ioc:74fba9a5-04c1-5b42-8b7e-16dc482dc841)"
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "description": {
+                      "content": "Added as a part of security scheme: bearer",
+                      "type": "text/plain"
+                    },
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"errorCode\": \"string\",\n  \"errorMessage\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://api.feedly.com/v3",
+      "key": "baseUrl"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}"
+      }
+    ]
+  },
+  "info": {
+    "_postman_id": "756d1666-c610-44cc-9e10-18acee285f1a",
+    "name": "IoCs",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "API for retrieving detailed information about entities including IOCs, threat actors, malware, and vulnerabilities\n\nContact Support:\n Name: Feedly API Support",
+      "type": "text/plain"
+    }
+  }
+}

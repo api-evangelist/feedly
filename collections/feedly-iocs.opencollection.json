@@ -1,0 +1,49 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "IoCs",
+    "version": "1.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Entities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get IoC Metadata with or without Artilces",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://api.feedly.com/v3/entities/:entityId",
+            "params": [
+              {
+                "name": "entityId",
+                "value": "nlp/f/entity/ioc:74fba9a5-04c1-5b42-8b7e-16dc482dc841",
+                "type": "path",
+                "description": "Entity ID (e.g., nlp/f/entity/ioc:74fba9a5-04c1-5b42-8b7e-16dc482dc841)"
+              },
+              {
+                "name": "withStats",
+                "value": "true",
+                "type": "query",
+                "description": "Include statistics about entity mentions over time"
+              }
+            ]
+          },
+          "docs": "Retrieves detailed information about a specific IoC, including statistics, relationships, and export options"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

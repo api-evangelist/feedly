@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Entities API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Get CVE Metadata with or without Articles",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/entities/:CVEID",
+        "params": [
+          {
+            "name": "withStats",
+            "value": "",
+            "type": "query",
+            "description": "You can add a parameter query withStats=true to the previous endpoint to get access to the References and Chatter articles. The previous data will also be included."
+          },
+          {
+            "name": "CVEID",
+            "value": "",
+            "type": "path"
+          }
+        ]
+      },
+      "docs": "Research critical vulnerabilities with the CVE Insights Card"
+    },
+    {
+      "info": {
+        "name": "Get CVE Metadata on Multiple CVEs",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/entities/.mget",
+        "params": [
+          {
+            "name": "withStats",
+            "value": "",
+            "type": "query",
+            "description": "You can add a parameter query withStats=true to the previous endpoint to get access to the References and Chatter articles. The previous data will also be included."
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Get CVE Metadata on Multiple CVEs"
+    },
+    {
+      "info": {
+        "name": "Get Malware Metadata",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/entities/:malwareId",
+        "params": [
+          {
+            "name": "malwareId",
+            "value": "",
+            "type": "path",
+            "description": "ID of the malware family"
+          }
+        ]
+      },
+      "docs": "A GET request to the following endpoint can retrieve some of the meta-data contained in the Malware Insights Card, including the `description`,  `label`, `aliases`, `malware type`and more."
+    },
+    {
+      "info": {
+        "name": "Entity Lookup",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/entities/:entityId",
+        "params": [
+          {
+            "name": "entityId",
+            "value": "",
+            "type": "path",
+            "description": "(Must be URL encoded)"
+          }
+        ]
+      },
+      "docs": "Entity Lookup"
+    },
+    {
+      "info": {
+        "name": "Get Threat Actor Metadata",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/entities/:threatActorId",
+        "params": [
+          {
+            "name": "threatActorId",
+            "value": "",
+            "type": "path",
+            "description": "The ID of the threat actor (URL encoded)"
+          }
+        ]
+      },
+      "docs": "Retrieves metadata and details about a specific threat actor."
+    },
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/entities/:resourceId",
+        "params": [
+          {
+            "name": "resourceId",
+            "value": "",
+            "type": "path",
+            "description": "The resourceId of the company (must be URL encoded)"
+          }
+        ]
+      },
+      "docs": "Retrieves metadata and details about a specific company"
+    }
+  ],
+  "bundled": true
+}

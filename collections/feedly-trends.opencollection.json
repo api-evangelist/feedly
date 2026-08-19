@@ -1,0 +1,89 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Trends API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "List TTPs from TTP Agent",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/trends/ttp-dashboard",
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "List TTPs from TTP Agent"
+    },
+    {
+      "info": {
+        "name": "Collect Procedures and articles from the TTP Agent",
+        "type": "http"
+      },
+      "http": {
+        "method": "POST",
+        "url": "https://api.feedly.com/v3/trends/ttp-dashboard/entries?ttpId=:ttpId",
+        "params": [
+          {
+            "name": "ttpId",
+            "value": "",
+            "type": "path",
+            "description": "ttpId taken from step 1 in this guide"
+          }
+        ],
+        "body": {
+          "type": "json",
+          "data": "{}"
+        }
+      },
+      "docs": "Collect Procedures and articles from the TTP Agent"
+    },
+    {
+      "info": {
+        "name": "Trending Articles",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/trends/threats"
+      },
+      "docs": "A guide to extract trending trending Cybersecurity articles from the Threat Landscape Agent."
+    },
+    {
+      "info": {
+        "name": "Trending New Malware",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/trends/new-malwares"
+      },
+      "docs": "A guide to extract trending new malware from the Threat Landscape Dashboard."
+    },
+    {
+      "info": {
+        "name": "Trending Attackers",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/trends/threat-actors"
+      },
+      "docs": "A guide to extract trending attackers from the Threat Landscape Dashboard."
+    }
+  ],
+  "bundled": true
+}

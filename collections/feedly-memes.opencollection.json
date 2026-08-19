@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Memes API",
+    "version": "1.0"
+  },
+  "request": {
+    "auth": {
+      "type": "apikey",
+      "key": "Authorization",
+      "value": "{{Authorization}}",
+      "placement": "header"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Trending Vulnerabilities",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/memes/vulnerabilities/en?",
+        "params": [
+          {
+            "name": "count",
+            "value": "",
+            "type": "query",
+            "description": "The number of articles/entries to return. Maximum is 25."
+          }
+        ]
+      },
+      "docs": "A guide to extract trending vulnerabilities from the Threat Landscape Dashboard."
+    },
+    {
+      "info": {
+        "name": "Trend analysis card",
+        "type": "http"
+      },
+      "http": {
+        "method": "GET",
+        "url": "https://api.feedly.com/v3/memes/contents/:memeId",
+        "params": [
+          {
+            "name": "memeId",
+            "value": "",
+            "type": "path",
+            "description": "id of the topic (must be properly url encoded)"
+          },
+          {
+            "name": "count",
+            "value": "",
+            "type": "query",
+            "description": "number of articles returned in the API call"
+          }
+        ]
+      },
+      "docs": "Trend analysis card"
+    }
+  ],
+  "bundled": true
+}
