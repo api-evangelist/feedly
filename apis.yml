@@ -18,6 +18,23 @@ specificationVersion: '0.23'
 created: '2026-08-12'
 modified: '2026-08-12'
 tags:
+- Threat Intelligence
+- Cybersecurity
+- cyber-threat-intelligence
+- Content Aggregation
+- RSS
+- News
+- Vulnerability Management
+- Indicators of Compromise
+- Malware
+- threat-actors
+- mitre-attack
+- Security Automation
+- Artificial Intelligence
+- MCP
+- agent-native
+- Webhook
+tags_raw:
 - threat-intelligence
 - cybersecurity
 - cyber-threat-intelligence
@@ -45,6 +62,15 @@ apis:
   humanURL: https://developers.feedly.com/reference/introduction
   baseURL: https://api.feedly.com/v3
   tags:
+  - Threat Intelligence
+  - Cybersecurity
+  - Vulnerability Management
+  - Indicators of Compromise
+  - Malware
+  - threat-actors
+  - News
+  - Artificial Intelligence
+  tags_raw:
   - threat-intelligence
   - cybersecurity
   - vulnerability-management
@@ -106,6 +132,11 @@ apis:
   humanURL: https://docs.feedly.com/article/820-what-is-mcp-feedly
   baseURL: https://mcp.feedly.com/mcp
   tags:
+  - MCP
+  - agent-native
+  - Threat Intelligence
+  - Cybersecurity
+  tags_raw:
   - mcp
   - agent-native
   - threat-intelligence
