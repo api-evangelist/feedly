@@ -52,83 +52,12 @@ tags_raw:
 - agent-native
 - webhooks
 apis:
-- name: Feedly API
-  description: REST API over api.feedly.com/v3 for the Feedly Threat Intelligence platform. Collect articles
-    from AI Feeds, Folders and Boards by streamId; search and query the corpus with the Ask AI (RAG) endpoints;
-    retrieve CVE, malware, threat-actor and company insight cards plus their relationship graphs; pull
-    trending vulnerabilities, malware and attackers; export IoCs with context; manage team boards, annotations,
-    enterprise users, collections and intel profiles; and register webhooks. Bearer-token authenticated,
-    JSON over HTTPS, cursor pagination via continuation tokens.
-  humanURL: https://developers.feedly.com/reference/introduction
-  baseURL: https://api.feedly.com/v3
-  tags:
-  - Threat Intelligence
-  - Cybersecurity
-  - Vulnerability Management
-  - Indicators of Compromise
-  - Malware
-  - threat-actors
-  - News
-  - Artificial Intelligence
-  tags_raw:
-  - threat-intelligence
-  - cybersecurity
-  - vulnerability-management
-  - indicators-of-compromise
-  - malware
-  - threat-actors
-  - news
-  - artificial-intelligence
-  properties:
-  - type: Documentation
-    url: https://developers.feedly.com/reference/introduction
-  - type: APIReference
-    url: https://developers.feedly.com/reference/introduction
-  - type: GettingStarted
-    url: https://developers.feedly.com/reference/building-your-first-ti-integration
-  - type: Authentication
-    url: https://developers.feedly.com/reference/authorization
-  - type: OpenAPI
-    url: openapi/feedly-streams-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-search-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-entries-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-entities-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-ml-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-trends-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-enterprise-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-enterprise-users-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-enterprise-collections-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-intel-profiles-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-iocs-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-ti-endpoints-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-agents-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-alerts-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-annotations-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-tags-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-memes-openapi.yml
-  - type: OpenAPI
-    url: openapi/feedly-vulnerability-agent-openapi.yml
 - name: Feedly Threat Graph MCP Server
-  description: Hosted, remote Model Context Protocol server exposing the Feedly Real-Time Threat Graph
-    to AI agents. Feedly documents 16 tools covering threat actors, malware, vulnerabilities, TTPs, IoCs
-    and cyberattacks. Protected by OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE; anonymous
-    tools/list returns 401 invalid_token. Bundled with the Advanced plan.
+  description: >-
+    Hosted, remote Model Context Protocol server exposing the Feedly Real-Time Threat Graph to AI agents.
+    Feedly documents 16 tools covering threat actors, malware, vulnerabilities, TTPs, IoCs and cyberattacks.
+    Protected by OAuth 2.1 with dynamic client registration (RFC 7591) and PKCE; anonymous tools/list
+    returns 401 invalid_token. Bundled with the Advanced plan.
   humanURL: https://docs.feedly.com/article/820-what-is-mcp-feedly
   baseURL: https://mcp.feedly.com/mcp
   tags:
@@ -148,6 +77,535 @@ apis:
     url: mcp/feedly-tool-crosswalk.yml
   - type: Documentation
     url: https://docs.feedly.com/article/820-what-is-mcp-feedly
+- aid: feedly:feedly-alerts-api-api
+  name: Feedly Alerts API
+  description: The Alerts API API from Feedly — 1 operation(s) for alerts api.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Alerts API
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-alerts-api-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-annotations-api-api
+  name: Feedly Annotations API
+  description: The Annotations API API from Feedly — 1 operation(s) for annotations api.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Annotations API
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-annotations-api-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-contents-api
+  name: Feedly Contents API
+  description: The Contents API from Feedly — 2 operation(s) for contents.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Contents
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-contents-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-custom-agents-api
+  name: Feedly Custom Agents API
+  description: >-
+    > 🚧 Alpha: Custom Agents is a new capability and still under active development. Endpoints, fields,
+    and behavior may change without notice.
+
+
+    Custom Agents let enterprise teams stand up their own tables of AI-tracked entities (malware families,
+    threat actors, vendors, etc.) driven by a natural-language Priority Intelligence Requirement (PIR).
+    Custom Agents are one `type` of dashboard returned by `GET /dashboards`.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Custom Agents
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-custom-agents-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-cves-api
+  name: Feedly CV Es API
+  description: The CVEs API from Feedly — 2 operation(s) for cves.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - CVEs
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-cves-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-detection-rules-api
+  name: Feedly Detection Rules API
+  description: The Detection Rules API from Feedly — 1 operation(s) for detection rules.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Detection Rules
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-detection-rules-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-entities-api-api
+  name: Feedly Entities API
+  description: The Entities API API from Feedly — 5 operation(s) for entities api.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Entities API
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-entities-api-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-entities-api
+  name: Feedly Entities API
+  description: The Entities API from Feedly — 2 operation(s) for entities.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Entities
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-entities-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-entity-lists-api
+  name: Feedly Entity Lists API
+  description: Manage and retrieve enterprise entity lists
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Entity Lists
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-entity-lists-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-entries-api
+  name: Feedly Entries API
+  description: The Entries API from Feedly — 1 operation(s) for entries.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Entries
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-entries-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-folders-api
+  name: Feedly Folders API
+  description: The Folders API from Feedly — 1 operation(s) for folders.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Folders
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-folders-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-insight-cards-api
+  name: Feedly Insight Cards API
+  description: The Insight Cards API from Feedly — 1 operation(s) for insight cards.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Insight Cards
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-insight-cards-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-ioc-api
+  name: Feedly Ioc? API
+  description: The Ioc? API from Feedly — 1 operation(s) for ioc?.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Ioc?
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-ioc-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-memes-api
+  name: Feedly Memes API
+  description: The Memes API from Feedly — 2 operation(s) for memes.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Memes
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-memes-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-mget-api
+  name: Feedly .mget API
+  description: The .mget API from Feedly — 1 operation(s) for .mget.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - .mget
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-mget-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-ner-gazetteer-api
+  name: Feedly Ner Gazetteer API
+  description: The Ner Gazetteer API from Feedly — 1 operation(s) for ner gazetteer.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Ner Gazetteer
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-ner-gazetteer-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-new-malwares-api
+  name: Feedly New Malwares API
+  description: The New Malwares API from Feedly — 1 operation(s) for new malwares.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - New Malwares
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-new-malwares-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-prediction-api
+  name: Feedly Prediction API
+  description: The Prediction API from Feedly — 1 operation(s) for prediction.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Prediction
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-prediction-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-rag-api
+  name: Feedly Rag API
+  description: The Rag API from Feedly — 1 operation(s) for rag.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Rag
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-rag-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-relationships-api
+  name: Feedly Relationships API
+  description: The Relationships API from Feedly — 5 operation(s) for relationships.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Relationships
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-relationships-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-tags-api-api
+  name: Feedly Tags API
+  description: The Tags API API from Feedly — 2 operation(s) for tags api.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Tags API
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-tags-api-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-tags-api
+  name: Feedly Tags API
+  description: The Tags API from Feedly — 1 operation(s) for tags.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-tags-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-threat-actors-api
+  name: Feedly Threat Actors API
+  description: The Threat Actors API from Feedly — 1 operation(s) for threat actors.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Threat Actors
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-threat-actors-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-threats-api
+  name: Feedly Threats API
+  description: The Threats API from Feedly — 1 operation(s) for threats.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Threats
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-threats-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-trend-discovery-api
+  name: Feedly Trend Discovery API
+  description: The Trend Discovery API from Feedly — 1 operation(s) for trend discovery.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Trend Discovery
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-trend-discovery-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-triggers-api
+  name: Feedly Triggers API
+  description: The Triggers API from Feedly — 2 operation(s) for triggers.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Triggers
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-triggers-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-ttp-dashboard-api
+  name: Feedly Ttp Dashboard API
+  description: The Ttp Dashboard API from Feedly — 2 operation(s) for ttp dashboard.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Ttp Dashboard
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-ttp-dashboard-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-users-api
+  name: Feedly Users API
+  description: The Users API from Feedly — 1 operation(s) for users.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-users-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-vulnerabilities-api
+  name: Feedly Vulnerabilities API
+  description: The Vulnerabilities API from Feedly — 1 operation(s) for vulnerabilities.
+  humanURL: https://developers.feedly.com/reference/introduction
+  baseURL: https://api.feedly.com/v3
+  tags:
+  - Vulnerabilities
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-vulnerabilities-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
