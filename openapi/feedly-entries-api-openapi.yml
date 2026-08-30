@@ -1,0 +1,336 @@
+openapi: 3.2.0
+info:
+  title: Entries API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/entries/
+security:
+- sec0: []
+tags:
+- name: Entries
+paths:
+  /{entryId}:
+    get:
+      summary: Get article metadata
+      description: ''
+      operationId: get-article-metadata
+      parameters:
+      - name: entryId
+        in: path
+        description: entryId of article
+        schema:
+          type: string
+        required: true
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "[\n  {\n    \"fingerprint\": \"c392b42\",\n    \"id\": \"UybWZO8Gre9MphC4ZSsEQwKCOEGrCNXcYdJXbwlpiMI=_19a0d0d8f78:497f7ef:752f71fa\",\n    \"language\": \"en\",\n    \"originId\": \"https://detection.fyi/sigmahq/sigma/cloud/aws/cloudtrail/aws_cloudtrail_console_login_failed_authentication/\",\n    \"origin\": {\n      \"streamId\": \"feed/https://detection.fyi/index.xml\",\n      \"title\": \"Detection.FYI\",\n      \"htmlUrl\": \"https://detection.fyi/\"\n    },\n    \"title\": \"AWS ConsoleLogin Failed Authentication\",\n    \"published\": 1761136602000,\n    \"crawled\": 1761155583864,\n    \"summary\": {\n      \"content\": \"Detects failed AWS console login attempts due to authentication failures. Monitoring these events is crucial for identifying potential brute-force attacks or unauthorized access attempts to AWS accounts.\",\n      \"direction\": \"ltr\"\n    },\n    \"alternate\": [\n      {\n        \"href\": \"https://detection.fyi/sigmahq/sigma/cloud/aws/cloudtrail/aws_cloudtrail_console_login_failed_authentication/\",\n        \"type\": \"text/html\"\n      }\n    ],\n    \"canonicalUrl\": \"https://detection.fyi/sigmahq/sigma/cloud/aws/cloudtrail/aws_cloudtrail_console_login_failed_authentication/\",\n    \"snippet\": \"\\n<div><div><div><div><div>\\n<p>Detects failed AWS console login attempts due to authentication failures. Monitoring these events is crucial for identifying potential brute-force attacks or unauthorized access attempts to AWS accounts.</p>\\n<div><pre tabindex=\\\"0\\\"><code><span><span> 1</span><span><span>title</span><span>:</span><span> </span><span>AWS ConsoleLogin Failed Authentication</span><span>\\n</span></span></span><span><span> 2</span><span><span></span><span>id</span><span>:</span><span> </span><span>6393e346-1977</span>-<span>46ef-8987-ad414a145fad</span><span>\\n</span></span></span><span><span> 3</span><span><span></span><span></span></span></span></code></pre></div></div></div></div></div></div>\",\n    \"originContentType\": \"text/html\",\n    \"fullContent\": \"\\n<div><div><div><div><div>\\n<p>Detects failed AWS console login attempts due to authentication failures. Monitoring these events is crucial for identifying potential brute-force attacks or unauthorized access attempts to AWS accounts.</p>\\n<div><pre tabindex=\\\"0\\\"><code><span><span> 1</span><span><span>title</span><span>:</span><span> </span><span>AWS ConsoleLogin Failed Authentication</span><span>\\n</span></span></span><span><span> 2</span><span><span></span><span>id</span><span>:</span><span> </span><span>6393e346-1977</span>-<span>46ef-8987-ad414a145fad</span><span>\\n</span></span></span><span><span> 3</span><span><span></span><span>status</span><span>:</span><span> </span><span>experimental</span><span>\\n</span></span></span><span><span> 4</span><span><span></span><span>description</span><span>:</span><span> </span><span>|</span><span>\\n</span></span></span><span><span> 5</span><span><span> </span><span> </span><span>Detects failed AWS console login attempts due to authentication failures. Monitoring these events is crucial for identifying potential brute-force attacks or unauthorized access attempts to AWS accounts.</span><span>\\n</span></span></span><span><span> 6</span><span><span></span><span>references</span><span>:</span><span>\\n</span></span></span><span><span> 7</span><span><span> </span>- <span>https://naikordian.github.io/blog/posts/brute-force-aws-console/</span><span>\\n</span></span></span><span><span> 8</span><span><span> </span>- <span>https://help.fortinet.com/fsiem/Public_Resource_Access/7_2_1/rules/PH_RULE_AWS_Management_Console_Brute_Force_of_Root_User_Identity.htm</span><span>\\n</span></span></span><span><span> 9</span><span><span> </span>- <span>https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.001/aws_login_failure/aws_cloudtrail_events.json</span><span>\\n</span></span></span><span><span>10</span><span><span></span><span>author</span><span>:</span><span> </span><span>Ivan Saakov, Nasreddine Bencherchali</span><span>\\n</span></span></span><span><span>11</span><span><span></span><span>date</span><span>:</span><span> </span><span>2025-10-19</span><span>\\n</span></span></span><span><span>12</span><span><span></span><span>tags</span><span>:</span><span>\\n</span></span></span><span><span>13</span><span><span> </span>- <span>attack.credential-access</span><span>\\n</span></span></span><span><span>14</span><span><span> </span>- <span>attack.t1110</span><span>\\n</span></span></span><span><span>15</span><span><span></span><span>logsource</span><span>:</span><span>\\n</span></span></span><span><span>16</span><span><span> </span><span>product</span><span>:</span><span> </span><span>aws</span><span>\\n</span></span></span><span><span>17</span><span><span> </span><span>service</span><span>:</span><span> </span><span>cloudtrail</span><span>\\n</span></span></span><span><span>18</span><span><span></span><span>detection</span><span>:</span><span>\\n</span></span></span><span><span>19</span><span><span> </span><span>selection</span><span>:</span><span>\\n</span></span></span><span><span>20</span><span><span> </span><span>eventName</span><span>:</span><span> </span><span>'ConsoleLogin'</span><span>\\n</span></span></span><span><span>21</span><span><span> </span><span>errorMessage</span><span>:</span><span> </span><span>'Failed authentication'</span><span>\\n</span></span></span><span><span>22</span><span><span> </span><span>condition</span><span>:</span><span> </span><span>selection</span><span>\\n</span></span></span><span><span>23</span><span><span></span><span>falsepositives</span><span>:</span><span>\\n</span></span></span><span><span>24</span><span><span> </span>- <span>Legitimate failed login attempts by authorized users. Investigate the source of repeated failed login attempts.</span><span>\\n</span></span></span><span><span>25</span><span><span></span><span>level</span><span>:</span><span> </span><span>medium</span><span>\\n</span></span></span></code></pre></div>\\n</div>\\n</div></div></div></div>\",\n    \"unread\": true,\n    \"categories\": [\n      {\n        \"id\": \"enterprise/christeam/category/a1b9d077-7806-4b29-8f1c-d17ebc172ea3\",\n        \"label\": \"AI: Ad-Hoc Research\"\n      }\n    ],\n    \"commonTopics\": [\n      {\n        \"type\": \"detectionRule\",\n        \"label\": \"Sigma rules\",\n        \"id\": \"nlp/f/topic/7010\",\n        \"score\": 1,\n        \"salienceLevel\": \"about\"\n      }\n    ],\n    \"entities\": [\n      {\n        \"type\": \"org\",\n        \"disambiguated\": true,\n        \"label\": \"Amazon Web Services\",\n        \"id\": \"nlp/f/entity/gz:org:amazon-web-services\",\n        \"mentions\": [\n          {\n            \"text\": \"AWS\"\n          }\n        ],\n        \"salienceLevel\": \"about\"\n      },\n      {\n        \"type\": \"mitreAttack\",\n        \"disambiguated\": true,\n        \"label\": \"Brute Force (Enterprise T1110)\",\n        \"id\": \"nlp/f/entity/gz:mi:attack-pattern-a93494bb-4b80-4ea1-8695-3236a49916fd\",\n        \"mentions\": [\n          {\n            \"text\": \"brute-force\"\n          },\n          {\n            \"text\": \"t1110\"\n          }\n        ],\n        \"salienceLevel\": \"mention\"\n      },\n      {\n        \"type\": \"mitreAttack\",\n        \"disambiguated\": true,\n        \"label\": \"Credential Access (Enterprise TA0006)\",\n        \"id\": \"nlp/f/entity/gz:mi:x-mitre-tactic-2558fd61-8c75-4730-94c4-11926db2a263\",\n        \"causes\": [\n          {\n            \"label\": \"Brute Force (Enterprise T1110)\",\n            \"id\": \"nlp/f/entity/gz:mi:attack-pattern-a93494bb-4b80-4ea1-8695-3236a49916fd\"\n          }\n        ],\n        \"mentions\": [\n          {\n            \"text\": \"credential-access\"\n          }\n        ],\n        \"salienceLevel\": \"mention\"\n      },\n      {\n        \"type\": \"mitreAttack\",\n        \"disambiguated\": true,\n        \"label\": \"Tactics and Techniques\",\n        \"id\": \"nlp/f/entity/gz:mi-any\",\n        \"causes\": [\n          {\n            \"label\": \"Brute Force (Enterprise T1110)\",\n            \"id\": \"nlp/f/entity/gz:mi:attack-pattern-a93494bb-4b80-4ea1-8695-3236a49916fd\"\n          },\n          {\n            \"label\": \"Credential Access (Enterprise TA0006)\",\n            \"id\": \"nlp/f/entity/gz:mi:x-mitre-tactic-2558fd61-8c75-4730-94c4-11926db2a263\"\n          }\n        ],\n        \"mentions\": [],\n        \"salienceLevel\": \"mention\"\n      }\n    ],\n    \"leoSummary\": {\n      \"sentences\": []\n    },\n    \"indicatorsOfCompromise\": {\n      \"mentions\": [],\n      \"exports\": [],\n      \"sigmaRules\": {\n        \"count\": 1,\n        \"url\": \"https://exports.feedly.com/sigma/sigma-342359ad452d13341f73665ef05c1f60.yaml\"\n      }\n    },\n    \"attackNavigator\": {\n      \"url\": \"https://exports.feedly.com/attacks/a322aeb98ff575dbc66b638386190651/feedly-ai-aws-consolelogin-failed-authentication.json\",\n      \"ttpCount\": 1\n    },\n    \"sources\": [\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/278c354e-67ae-4509-b708-a354b8a41f9c\",\n        \"title\": \"Detection rules\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/topic/7010\",\n              \"label\": \"Sigma rules\"\n            }\n          ],\n          \"isComplexFilter\": true\n        }\n      },\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/225a0035-48b9-407b-b2bb-853f005cb2ce\",\n        \"title\": \"Sigma Rules\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/topic/7010\",\n              \"label\": \"Sigma rules\"\n            }\n          ],\n          \"isComplexFilter\": false\n        }\n      },\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/6f87a1f0-f3cc-4738-a006-11ee08d9347a\",\n        \"title\": \"Detection Rules\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/topic/7010\",\n              \"label\": \"Sigma rules\"\n            }\n          ],\n          \"isComplexFilter\": true\n        }\n      },\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/0022a78d-2857-4f9a-b3d1-ed323bfd3265\",\n        \"title\": \"PIR5.4 What new detection rules have been published?\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/topic/7010\",\n              \"label\": \"Sigma rules\"\n            }\n          ],\n          \"isComplexFilter\": true\n        }\n      },\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/2c25ced4-db7a-400b-a711-802391d9089e\",\n        \"title\": \"Sigma rules\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/topic/7010\",\n              \"label\": \"Sigma rules\"\n            }\n          ],\n          \"isComplexFilter\": false\n        }\n      },\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/78ab8692-fa50-4ed7-954c-fadc12cba288\",\n        \"title\": \"MITRE Tactics\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/entity/gz:mi:x-mitre-tactic-2558fd61-8c75-4730-94c4-11926db2a263\",\n              \"label\": \"Credential Access (Enterprise TA0006)\",\n              \"type\": \"mitreAttack\"\n            }\n          ],\n          \"isComplexFilter\": true\n        }\n      },\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/6c001996-3191-4cfb-918f-7ad1482a8999\",\n        \"title\": \"Detection Rules\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/topic/7010\",\n              \"label\": \"Sigma rules\"\n            }\n          ],\n          \"isComplexFilter\": true\n        }\n      },\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/d25940c2-348f-4f2f-8bcd-e1b9a4dcc990\",\n        \"title\": \"Detection Rules\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/topic/7010\",\n              \"label\": \"Sigma rules\"\n            }\n          ],\n          \"isComplexFilter\": true\n        }\n      },\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/28239608-5466-42b5-bc81-c29166fd46a8\",\n        \"title\": \"Sigma rules and hunting queries\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/topic/7010\",\n              \"label\": \"Sigma rules\"\n            }\n          ],\n          \"isComplexFilter\": true\n        }\n      },\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/af41b13b-f3a2-4cff-be47-b60f605a6c4c\",\n        \"title\": \"Detection Rules\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/topic/7010\",\n              \"label\": \"Sigma rules\"\n            }\n          ],\n          \"isComplexFilter\": true\n        }\n      },\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/3579d95a-7561-4017-8744-5518b125f475\",\n        \"title\": \"Troubleshooting\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/entity/gz:org:amazon-web-services\",\n              \"label\": \"Amazon Web Services\",\n              \"type\": \"org\"\n            }\n          ],\n          \"isComplexFilter\": true\n        }\n      },\n      {\n        \"streamId\": \"feed/https://feedly.com/f/alert/1bb46cb3-0465-4a06-aaf7-795b5d062aca\",\n        \"title\": \"DT Rules\",\n        \"feedlyFeedType\": \"WebAlert\",\n        \"searchTerms\": {\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/topic/7010\",\n              \"label\": \"Sigma rules\"\n            }\n          ],\n          \"isComplexFilter\": true\n        }\n      }\n    ]\n  }\n]"
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    fingerprint:
+                      type: string
+                      example: c392b42
+                    id:
+                      type: string
+                      example: UybWZO8Gre9MphC4ZSsEQwKCOEGrCNXcYdJXbwlpiMI=_19a0d0d8f78:497f7ef:752f71fa
+                    language:
+                      type: string
+                      example: en
+                    originId:
+                      type: string
+                      example: https://detection.fyi/sigmahq/sigma/cloud/aws/cloudtrail/aws_cloudtrail_console_login_failed_authentication/
+                    origin:
+                      type: object
+                      properties:
+                        streamId:
+                          type: string
+                          example: feed/https://detection.fyi/index.xml
+                        title:
+                          type: string
+                          example: Detection.FYI
+                        htmlUrl:
+                          type: string
+                          example: https://detection.fyi/
+                    title:
+                      type: string
+                      example: AWS ConsoleLogin Failed Authentication
+                    published:
+                      type: integer
+                      example: 1761136602000
+                      default: 0
+                    crawled:
+                      type: integer
+                      example: 1761155583864
+                      default: 0
+                    summary:
+                      type: object
+                      properties:
+                        content:
+                          type: string
+                          example: Detects failed AWS console login attempts due to authentication failures. Monitoring these events is crucial for identifying potential brute-force attacks or unauthorized access attempts to AWS accounts.
+                        direction:
+                          type: string
+                          example: ltr
+                    alternate:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          href:
+                            type: string
+                            example: https://detection.fyi/sigmahq/sigma/cloud/aws/cloudtrail/aws_cloudtrail_console_login_failed_authentication/
+                          type:
+                            type: string
+                            example: text/html
+                    canonicalUrl:
+                      type: string
+                      example: https://detection.fyi/sigmahq/sigma/cloud/aws/cloudtrail/aws_cloudtrail_console_login_failed_authentication/
+                    snippet:
+                      type: string
+                      example: '
+
+                        <div><div><div><div><div>
+
+                        <p>Detects failed AWS console login attempts due to authentication failures. Monitoring these events is crucial for identifying potential brute-force attacks or unauthorized access attempts to AWS accounts.</p>
+
+                        <div><pre tabindex="0"><code><span><span> 1</span><span><span>title</span><span>:</span><span> </span><span>AWS ConsoleLogin Failed Authentication</span><span>
+
+                        </span></span></span><span><span> 2</span><span><span></span><span>id</span><span>:</span><span> </span><span>6393e346-1977</span>-<span>46ef-8987-ad414a145fad</span><span>
+
+                        </span></span></span><span><span> 3</span><span><span></span><span></span></span></span></code></pre></div></div></div></div></div></div>'
+                    originContentType:
+                      type: string
+                      example: text/html
+                    fullContent:
+                      type: string
+                      example: '
+
+                        <div><div><div><div><div>
+
+                        <p>Detects failed AWS console login attempts due to authentication failures. Monitoring these events is crucial for identifying potential brute-force attacks or unauthorized access attempts to AWS accounts.</p>
+
+                        <div><pre tabindex="0"><code><span><span> 1</span><span><span>title</span><span>:</span><span> </span><span>AWS ConsoleLogin Failed Authentication</span><span>
+
+                        </span></span></span><span><span> 2</span><span><span></span><span>id</span><span>:</span><span> </span><span>6393e346-1977</span>-<span>46ef-8987-ad414a145fad</span><span>
+
+                        </span></span></span><span><span> 3</span><span><span></span><span>status</span><span>:</span><span> </span><span>experimental</span><span>
+
+                        </span></span></span><span><span> 4</span><span><span></span><span>description</span><span>:</span><span> </span><span>|</span><span>
+
+                        </span></span></span><span><span> 5</span><span><span> </span><span> </span><span>Detects failed AWS console login attempts due to authentication failures. Monitoring these events is crucial for identifying potential brute-force attacks or unauthorized access attempts to AWS accounts.</span><span>
+
+                        </span></span></span><span><span> 6</span><span><span></span><span>references</span><span>:</span><span>
+
+                        </span></span></span><span><span> 7</span><span><span> </span>- <span>https://naikordian.github.io/blog/posts/brute-force-aws-console/</span><span>
+
+                        </span></span></span><span><span> 8</span><span><span> </span>- <span>https://help.fortinet.com/fsiem/Public_Resource_Access/7_2_1/rules/PH_RULE_AWS_Management_Console_Brute_Force_of_Root_User_Identity.htm</span><span>
+
+                        </span></span></span><span><span> 9</span><span><span> </span>- <span>https://media.githubusercontent.com/media/splunk/attack_data/master/datasets/attack_techniques/T1110.001/aws_login_failure/aws_cloudtrail_events.json</span><span>
+
+                        </span></span></span><span><span>10</span><span><span></span><span>author</span><span>:</span><span> </span><span>Ivan Saakov, Nasreddine Bencherchali</span><span>
+
+                        </span></span></span><span><span>11</span><span><span></span><span>date</span><span>:</span><span> </span><span>2025-10-19</span><span>
+
+                        </span></span></span><span><span>12</span><span><span></span><span>tags</span><span>:</span><span>
+
+                        </span></span></span><span><span>13</span><span><span> </span>- <span>attack.credential-access</span><span>
+
+                        </span></span></span><span><span>14</span><span><span> </span>- <span>attack.t1110</span><span>
+
+                        </span></span></span><span><span>15</span><span><span></span><span>logsource</span><span>:</span><span>
+
+                        </span></span></span><span><span>16</span><span><span> </span><span>product</span><span>:</span><span> </span><span>aws</span><span>
+
+                        </span></span></span><span><span>17</span><span><span> </span><span>service</span><span>:</span><span> </span><span>cloudtrail</span><span>
+
+                        </span></span></span><span><span>18</span><span><span></span><span>detection</span><span>:</span><span>
+
+                        </span></span></span><span><span>19</span><span><span> </span><span>selection</span><span>:</span><span>
+
+                        </span></span></span><span><span>20</span><span><span> </span><span>eventName</span><span>:</span><span> </span><span>''ConsoleLogin''</span><span>
+
+                        </span></span></span><span><span>21</span><span><span> </span><span>errorMessage</span><span>:</span><span> </span><span>''Failed authentication''</span><span>
+
+                        </span></span></span><span><span>22</span><span><span> </span><span>condition</span><span>:</span><span> </span><span>selection</span><span>
+
+                        </span></span></span><span><span>23</span><span><span></span><span>falsepositives</span><span>:</span><span>
+
+                        </span></span></span><span><span>24</span><span><span> </span>- <span>Legitimate failed login attempts by authorized users. Investigate the source of repeated failed login attempts.</span><span>
+
+                        </span></span></span><span><span>25</span><span><span></span><span>level</span><span>:</span><span> </span><span>medium</span><span>
+
+                        </span></span></span></code></pre></div>
+
+                        </div>
+
+                        </div></div></div></div>'
+                    unread:
+                      type: boolean
+                      example: true
+                      default: true
+                    categories:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          id:
+                            type: string
+                            example: enterprise/christeam/category/a1b9d077-7806-4b29-8f1c-d17ebc172ea3
+                          label:
+                            type: string
+                            example: 'AI: Ad-Hoc Research'
+                    commonTopics:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            example: detectionRule
+                          label:
+                            type: string
+                            example: Sigma rules
+                          id:
+                            type: string
+                            example: nlp/f/topic/7010
+                          score:
+                            type: integer
+                            example: 1
+                            default: 0
+                          salienceLevel:
+                            type: string
+                            example: about
+                    entities:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          type:
+                            type: string
+                            example: org
+                          disambiguated:
+                            type: boolean
+                            example: true
+                            default: true
+                          label:
+                            type: string
+                            example: Amazon Web Services
+                          id:
+                            type: string
+                            example: nlp/f/entity/gz:org:amazon-web-services
+                          mentions:
+                            type: array
+                            items:
+                              type: object
+                              properties:
+                                text:
+                                  type: string
+                                  example: AWS
+                          salienceLevel:
+                            type: string
+                            example: about
+                    leoSummary:
+                      type: object
+                      properties:
+                        sentences:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                    indicatorsOfCompromise:
+                      type: object
+                      properties:
+                        mentions:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        exports:
+                          type: array
+                          items:
+                            type: object
+                            properties: {}
+                        sigmaRules:
+                          type: object
+                          properties:
+                            count:
+                              type: integer
+                              example: 1
+                              default: 0
+                            url:
+                              type: string
+                              example: https://exports.feedly.com/sigma/sigma-342359ad452d13341f73665ef05c1f60.yaml
+                    attackNavigator:
+                      type: object
+                      properties:
+                        url:
+                          type: string
+                          example: https://exports.feedly.com/attacks/a322aeb98ff575dbc66b638386190651/feedly-ai-aws-consolelogin-failed-authentication.json
+                        ttpCount:
+                          type: integer
+                          example: 1
+                          default: 0
+                    sources:
+                      type: array
+                      items:
+                        type: object
+                        properties:
+                          streamId:
+                            type: string
+                            example: feed/https://feedly.com/f/alert/278c354e-67ae-4509-b708-a354b8a41f9c
+                          title:
+                            type: string
+                            example: Detection rules
+                          feedlyFeedType:
+                            type: string
+                            example: WebAlert
+                          searchTerms:
+                            type: object
+                            properties:
+                              parts:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    id:
+                                      type: string
+                                      example: nlp/f/topic/7010
+                                    label:
+                                      type: string
+                                      example: Sigma rules
+                              isComplexFilter:
+                                type: boolean
+                                example: true
+                                default: true
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Entries
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

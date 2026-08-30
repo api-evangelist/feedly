@@ -1,0 +1,248 @@
+openapi: 3.2.0
+info:
+  title: Enterprise Users API
+  description: API for managing Feedly Enterprise users and resources
+  version: 1.0.0
+  contact:
+    name: Feedly Support
+    url: https://feedly.com/support
+servers:
+- url: https://api.feedly.com/v3
+  description: Feedly API v3
+security:
+- BearerAuth: []
+tags:
+- name: Users
+paths:
+  /enterprise/users:
+    get:
+      summary: List Enterprise Users
+      description: 'Retrieves a list of all users in the enterprise account with their activity metrics and profile information.
+
+
+        **Export Options:**
+
+        - Add `?format=csv` to the URL to export the user list as a CSV file instead of JSON
+
+        '
+      operationId: listEnterpriseUsers
+      tags:
+      - Users
+      parameters:
+      - name: format
+        in: query
+        description: Response format (omit for JSON, use 'csv' for CSV export)
+        required: false
+        schema:
+          type: string
+          enum:
+          - csv
+        example: csv
+      responses:
+        '200':
+          description: Successfully retrieved list of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+              example:
+              - email: aaron+GIR@feedly.com
+                firstLogin: 1714596180521
+                givenName: Aaron
+                isAdmin: true
+                joinDate: 1714596180521
+                lastActivity: 1737658718941
+                logins:
+                - aaron+GIR@feedly.com
+                name: Aaron O'Maley
+                numDaysActiveDesktopPastMonth: 0
+                numDaysActiveDesktopPastWeek: 0
+                numDaysActiveMobilePastMonth: 0
+                numDaysActiveMobilePastWeek: 0
+                numDaysActivePastMonth: 0
+                numDaysActivePastWeek: 0
+                numLongReadEntriesPastMonth: 0
+                numLongReadEntriesPastWeek: 0
+                numReadEntriesPastMonth: 0
+                numReadEntriesPastWeek: 0
+                numTaggedEntriesPastMonth: 0
+                numTaggedEntriesPastWeek: 0
+                role: admin
+                totalReadingTimePastMonth: 0
+                totalReadingTimePastWeek: 0
+                userId: 23242fbb-f101-4f86-972f-b17be38572f4
+            text/csv:
+              schema:
+                type: string
+                description: CSV export of user data
+              example: 'email,firstLogin,givenName,isAdmin,joinDate,lastActivity,logins,name,numDaysActiveDesktopPastMonth,numDaysActiveDesktopPastWeek,numDaysActiveMobilePastMonth,numDaysActiveMobilePastWeek,numDaysActivePastMonth,numDaysActivePastWeek,numLongReadEntriesPastMonth,numLongReadEntriesPastWeek,numReadEntriesPastMonth,numReadEntriesPastWeek,numTaggedEntriesPastMonth,numTaggedEntriesPastWeek,role,totalReadingTimePastMonth,totalReadingTimePastWeek,userId
+
+                aaron+GIR@feedly.com,1714596180521,Aaron,true,1714596180521,1737658718941,aaron+GIR@feedly.com,Aaron O''Maley,0,0,0,0,0,0,0,0,0,0,0,0,admin,0,0,23242fbb-f101-4f86-972f-b17be38572f4
+
+                '
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Insufficient permissions to access enterprise user data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Error code identifier
+        errorMessage:
+          type: string
+          description: Human-readable error message
+    User:
+      type: object
+      required:
+      - email
+      - firstLogin
+      - isAdmin
+      - joinDate
+      - lastActivity
+      - logins
+      - numDaysActiveDesktopPastMonth
+      - numDaysActiveDesktopPastWeek
+      - numDaysActiveMobilePastMonth
+      - numDaysActiveMobilePastWeek
+      - numDaysActivePastMonth
+      - numDaysActivePastWeek
+      - numLongReadEntriesPastMonth
+      - numLongReadEntriesPastWeek
+      - numReadEntriesPastMonth
+      - numReadEntriesPastWeek
+      - numTaggedEntriesPastMonth
+      - numTaggedEntriesPastWeek
+      - role
+      - totalReadingTimePastMonth
+      - totalReadingTimePastWeek
+      - userId
+      properties:
+        email:
+          type: string
+          format: email
+          description: User's email address
+          example: aaron@feedly.com
+        firstLogin:
+          type: integer
+          format: int64
+          description: EPOCH timestamp in milliseconds of the user's first login
+          example: 1714596180521
+        givenName:
+          type: string
+          description: User's given/first name (optional)
+          example: Aaron
+        isAdmin:
+          type: boolean
+          description: Whether the user has administrator privileges
+          example: true
+        joinDate:
+          type: integer
+          format: int64
+          description: EPOCH timestamp in milliseconds when the user joined
+          example: 1714596180521
+        lastActivity:
+          type: integer
+          format: int64
+          description: EPOCH timestamp in milliseconds of the user's last activity
+          example: 1737658718941
+        logins:
+          type: array
+          description: Array of login identifiers associated with this user
+          items:
+            type: string
+          example:
+          - aaron@feedly.com
+        name:
+          type: string
+          description: User's full name (optional)
+          example: Aaron O'Maley
+        numDaysActiveDesktopPastMonth:
+          type: integer
+          description: Number of days the user was active on desktop in the past month
+          example: 15
+        numDaysActiveDesktopPastWeek:
+          type: integer
+          description: Number of days the user was active on desktop in the past week
+          example: 3
+        numDaysActiveMobilePastMonth:
+          type: integer
+          description: Number of days the user was active on mobile in the past month
+          example: 10
+        numDaysActiveMobilePastWeek:
+          type: integer
+          description: Number of days the user was active on mobile in the past week
+          example: 2
+        numDaysActivePastMonth:
+          type: integer
+          description: Total number of days the user was active in the past month
+          example: 20
+        numDaysActivePastWeek:
+          type: integer
+          description: Total number of days the user was active in the past week
+          example: 4
+        numLongReadEntriesPastMonth:
+          type: integer
+          description: Number of long-read articles read in the past month
+          example: 5
+        numLongReadEntriesPastWeek:
+          type: integer
+          description: Number of long-read articles read in the past week
+          example: 1
+        numReadEntriesPastMonth:
+          type: integer
+          description: Total number of articles read in the past month
+          example: 150
+        numReadEntriesPastWeek:
+          type: integer
+          description: Total number of articles read in the past week
+          example: 35
+        numTaggedEntriesPastMonth:
+          type: integer
+          description: Number of articles tagged in the past month
+          example: 12
+        numTaggedEntriesPastWeek:
+          type: integer
+          description: Number of articles tagged in the past week
+          example: 3
+        role:
+          type: string
+          description: User's role in the organization
+          enum:
+          - admin
+          - member
+          example: admin
+        totalReadingTimePastMonth:
+          type: integer
+          description: Total reading time in seconds for the past month
+          example: 18000
+        totalReadingTimePastWeek:
+          type: integer
+          description: Total reading time in seconds for the past week
+          example: 3600
+        userId:
+          type: string
+          format: uuid
+          description: Unique identifier for the user
+          example: 23242fbb-f101-4f86-972f-b17be38572f4
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      description: Enterprise API key for authentication
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

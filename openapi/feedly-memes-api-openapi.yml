@@ -1,0 +1,176 @@
+openapi: 3.2.0
+info:
+  title: ML Endpoint Memes API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/ml
+security:
+- sec0: []
+tags:
+- name: Memes
+paths:
+  /memes/article-count-graphs:
+    get:
+      summary: Get Malware Article Graph
+      description: ''
+      operationId: get-malware-article-graph
+      parameters:
+      - name: resourceId
+        in: query
+        description: ID of malware family
+        required: true
+        schema:
+          type: string
+          default: nlp/f/entity/gz:mal:fd035735-1ab9-419d-a94c-d560612e970b
+      - name: intervalType
+        in: query
+        description: See table below for possible intervalType values
+        required: true
+        schema:
+          type: string
+          default: LAST_7_DAYS
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Memes
+    post:
+      summary: Article Counts
+      description: Get article count graphs across different categories
+      operationId: article-counts
+      parameters:
+      - name: intervalType
+        in: query
+        description: Time interval (LAST_7_DAYS, LAST_30_DAYS, LAST_3_MONTHS, LAST_6_MONTHS, LAST_1_YEAR)
+        required: true
+        schema:
+          type: string
+          default: LAST_7_DAYS
+      - name: requestType
+        in: query
+        description: Must be set to insightCard
+        required: true
+        schema:
+          type: string
+          default: insightCard
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - RAW_BODY
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: See table below
+                  default: '{"articleCountTypes":["NEWS"],"searchLayers":[{"parts":[{"id":"nlp/f/entity/gz:org:openai"}],"salience":"mention","type":"matches"}]}'
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Memes
+  /memes/trending-news:
+    get:
+      summary: Top Stories
+      description: Get trending news stories related to a company
+      operationId: top-stories
+      parameters:
+      - name: resourceId
+        in: query
+        description: The resourceId of the company (must be URL encoded)
+        required: true
+        schema:
+          type: string
+          default: nlp%2Ff%2Fentity%2Fgz%3Aorg%3Aopenai
+      - name: lastNDays
+        in: query
+        description: 'Last number of days (IE: 30)'
+        required: true
+        schema:
+          type: integer
+          format: int32
+          default: 30
+      - name: size
+        in: query
+        description: 'Number of articles to return (IE: 20)'
+        required: true
+        schema:
+          type: integer
+          format: int32
+          default: 20
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Memes
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

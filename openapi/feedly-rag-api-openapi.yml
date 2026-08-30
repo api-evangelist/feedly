@@ -1,0 +1,97 @@
+openapi: 3.2.0
+info:
+  title: Search Rag API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/search/
+security:
+- sec0: []
+tags:
+- name: Rag
+paths:
+  /rag:
+    post:
+      summary: Ask AI
+      description: ''
+      operationId: search-ask-ai
+      parameters:
+      - name: newerThan
+        in: query
+        description: Filter articles crawled after the given timestamp (epoch timestamp in milliseconds)
+        schema:
+          type: string
+      - name: olderThan
+        in: query
+        description: Filter articles crawled before the given timestamp (epoch timestamp in milliseconds)
+        schema:
+          type: string
+      - name: stream
+        in: query
+        description: Should the response be streamed
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - query
+              properties:
+                query:
+                  type: string
+                  description: The search query
+                  format: json
+                source:
+                  type: string
+                  description: Prioritize articles from the selected sources.
+                  format: json
+                entityIds:
+                  type: string
+                  description: A list empty or of one element containing eg. cve id, malware id, cyber attack id, meme id
+                  format: json
+                agentQueries:
+                  type: string
+                  description: A list of agent queries
+                  format: json
+                layers:
+                  type: string
+                  description: Prioritize articles from the selected layers and ai models.
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Rag
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

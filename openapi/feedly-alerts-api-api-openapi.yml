@@ -1,0 +1,123 @@
+openapi: 3.2.0
+info:
+  title: Alerts API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/alerts
+security:
+- sec0: []
+tags:
+- name: Alerts API
+paths:
+  /:
+    get:
+      summary: Get list of AI Feeds
+      description: Return AI Feeds from enterprise team
+      operationId: get-list-of-ai-feeds
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"userAlerts\": [],\n  \"enterpriseAlerts\": [\n    {\n      \"hasNewsletter\": false,\n      \"label\": \"LiveScore\",\n      \"id\": \"fbe3c317-d724-4d5f-ab56-93c27eafb5b6\",\n      \"source\": {\n        \"items\": [\n          {\n            \"type\": \"stream\",\n            \"id\": \"enterprise/akko/category/global.all\"\n          },\n          {\n            \"type\": \"publicationBucket\",\n            \"id\": \"discovery:all-topics\",\n            \"tier\": \"tier2\"\n          }\n        ]\n      },\n      \"createdBy\": \"4d39f1d8-ed47-432f-92ad-5eecc570a6dd\",\n      \"feedId\": \"feed/https://feedly.com/f/alert/fbe3c317-d724-4d5f-ab56-93c27eafb5b6\",\n      \"velocity\": 4.1,\n      \"created\": 1701350298150,\n      \"layers\": [\n        {\n          \"type\": \"matches\",\n          \"complexFilter\": false,\n          \"parts\": [\n            {\n              \"text\": \"livescore\"\n            }\n          ],\n          \"salience\": \"about\"\n        },\n        {\n          \"type\": \"matches\",\n          \"complexFilter\": true,\n          \"parts\": [\n            {\n              \"id\": \"nlp/f/businessEvent/funding\",\n              \"label\": \"Funding Events\"\n            },\n            {\n              \"id\": \"nlp/f/businessEvent/partnership\",\n              \"label\": \"Partnerships\"\n            },\n            {\n              \"id\": \"nlp/f/businessEvent/mergers-acquisitions\",\n              \"label\": \"Mergers and Acquisitions\"\n            },\n            {\n              \"id\": \"nlp/f/businessEvent/productLaunch\",\n              \"label\": \"Product Launches\"\n            },\n            {\n              \"id\": \"nlp/f/businessEvent/ipo\",\n              \"label\": \"Initial Public Offerings\"\n            },\n            {\n              \"id\": \"nlp/f/businessEvent/layoffs\",\n              \"label\": \"Layoffs\"\n            },\n            {\n              \"id\": \"nlp/f/businessEvent/leadershipChange\",\n              \"label\": \"Leadership Changes\"\n            },\n            {\n              \"id\": \"nlp/f/businessEvent/location-expansions\",\n              \"label\": \"Location Expansions\"\n            }\n          ],\n          \"salience\": \"mention\"\n        }\n      ]\n    }\n  ]\n}"
+              schema:
+                type: object
+                properties:
+                  userAlerts:
+                    type: array
+                    items:
+                      type: object
+                      properties: {}
+                  enterpriseAlerts:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        hasNewsletter:
+                          type: boolean
+                          example: false
+                          default: true
+                        label:
+                          type: string
+                          example: LiveScore
+                        id:
+                          type: string
+                          example: fbe3c317-d724-4d5f-ab56-93c27eafb5b6
+                        source:
+                          type: object
+                          properties:
+                            items:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  type:
+                                    type: string
+                                    example: stream
+                                  id:
+                                    type: string
+                                    example: enterprise/akko/category/global.all
+                        createdBy:
+                          type: string
+                          example: 4d39f1d8-ed47-432f-92ad-5eecc570a6dd
+                        feedId:
+                          type: string
+                          example: feed/https://feedly.com/f/alert/fbe3c317-d724-4d5f-ab56-93c27eafb5b6
+                        velocity:
+                          type: number
+                          example: 4.1
+                          default: 0
+                        created:
+                          type: integer
+                          example: 1701350298150
+                          default: 0
+                        layers:
+                          type: array
+                          items:
+                            type: object
+                            properties:
+                              type:
+                                type: string
+                                example: matches
+                              complexFilter:
+                                type: boolean
+                                example: false
+                                default: true
+                              parts:
+                                type: array
+                                items:
+                                  type: object
+                                  properties:
+                                    text:
+                                      type: string
+                                      example: livescore
+                              salience:
+                                type: string
+                                example: about
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Alerts API
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

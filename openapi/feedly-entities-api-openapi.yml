@@ -1,0 +1,328 @@
+openapi: 3.2.0
+info:
+  title: Feedly Entities API
+  version: '1.0'
+  description: 'Operations tagged Entities across 2 of this provider''s published API definitions: feedly-iocs-openapi.yml, feedly-search-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.feedly.com/v3
+  description: Feedly API
+- url: https://api.feedly.com/v3/search/
+tags:
+- name: Entities
+paths:
+  /entities/{entityId}:
+    get:
+      summary: Get IoC Metadata with or without Artilces
+      description: Retrieves detailed information about a specific IoC, including statistics, relationships, and export options
+      operationId: getEntityDetails
+      tags:
+      - Entities
+      parameters:
+      - name: entityId
+        in: path
+        required: true
+        description: Entity ID (e.g., nlp/f/entity/ioc:74fba9a5-04c1-5b42-8b7e-16dc482dc841)
+        schema:
+          type: string
+        example: nlp/f/entity/ioc:74fba9a5-04c1-5b42-8b7e-16dc482dc841
+      - name: withStats
+        in: query
+        required: false
+        description: Include statistics about entity mentions over time
+        schema:
+          type: boolean
+          default: false
+        example: true
+      responses:
+        '200':
+          description: Successfully retrieved entity details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EntityDetails'
+              example:
+                enterpriseFeatures:
+                - LeoSecurity
+                hasSalience: true
+                id: nlp/f/entity/ioc:74fba9a5-04c1-5b42-8b7e-16dc482dc841
+                iocDetails:
+                  exports:
+                  - type: markdown
+                    url: https://exports.feedly.com/ioc/5e5008f6b5a732c4e2e3258f35686286/markdown-20251024.010428.all-ioc.md
+                  - type: stix2.1
+                    url: https://exports.feedly.com/ioc/5e5008f6b5a732c4e2e3258f35686286/stix2.1-20251024.010428.all-ioc.json
+                  - type: misp
+                    url: https://exports.feedly.com/ioc/5e5008f6b5a732c4e2e3258f35686286/misp-20251024.010428.all-ioc.json
+                  - type: csv
+                    url: https://exports.feedly.com/ioc/5e5008f6b5a732c4e2e3258f35686286/csv-20251024.010428.all-ioc.csv
+                  subtype: md5
+                  type: hash
+                label: d04b6410dddee19adec75f597c52e386
+                popularity: 0
+                relationships:
+                  actors:
+                  - count: 1
+                    entity:
+                      id: nlp/f/entity/gz:ta:00220228-a5a4-4032-a30d-826bb55aa3fb
+                      label: FIN7
+                      type: threatActor
+                    entryIds:
+                    - 4Qghfl1fiG/tkzg+TgNOjFyT4cdIDkUZMXHOhRfrvuI=_19a153f6854:5bc16d9:752f71fa
+                    firstMention: '2025-10-24T08:04:28.372000+00:00'
+                    lastMention: '2025-10-24T08:04:28.372000+00:00'
+                  cyberAttacks: []
+                  malwares:
+                  - count: 1
+                    entity:
+                      id: nlp/f/entity/gz:mal:8c246ec4-eaa5-42c0-b137-29f28cbb6832
+                      label: Carbanak
+                      type: malwareFamily
+                    entryIds:
+                    - 4Qghfl1fiG/tkzg+TgNOjFyT4cdIDkUZMXHOhRfrvuI=_19a153f6854:5bc16d9:752f71fa
+                    firstMention: '2025-10-24T08:04:28.372000+00:00'
+                    lastMention: '2025-10-24T08:04:28.372000+00:00'
+                stats:
+                  graph:
+                    '2025-10-24': 9
+                  lastMention: 1761264000000
+                  numMentionsLast3Months: 9
+                type: indicatorOfCompromise
+        '401':
+          description: Unauthorized - Invalid or missing API key
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Entity not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      security:
+      - BearerAuth: []
+    servers:
+    - url: https://api.feedly.com/v3
+      description: Feedly API
+  /entities?:
+    get:
+      summary: Autocomplete Entities
+      description: ''
+      operationId: autocomplete-entities
+      parameters:
+      - name: query
+        in: query
+        description: The keyword you want to match to an entity or AI Model
+        required: true
+        schema:
+          type: string
+      - name: count
+        in: query
+        description: 'The number of suggestions. Recommendation: 10'
+        schema:
+          type: integer
+          format: int32
+          default: 10
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: "{\n  \"errorCode\": 400,\n  \"requestId\": \"835133063819c36c-SEA\",\n  \"errorMessage\": \"Invalid JSON\"\n}"
+              schema:
+                type: object
+                properties:
+                  errorCode:
+                    type: integer
+                    example: 400
+                    default: 0
+                  requestId:
+                    type: string
+                    example: 835133063819c36c-SEA
+                  errorMessage:
+                    type: string
+                    example: Invalid JSON
+        '405':
+          description: '405'
+          content:
+            text/plain:
+              examples:
+                Result:
+                  value: "\"errorCode\": 405,\n  \"requestId\": \"8351587fdc5a6808-SEA\",\n  \"errorMessage\": \"POST not allowed\""
+      deprecated: false
+      tags:
+      - Entities
+      security:
+      - sec0: []
+    servers:
+    - url: https://api.feedly.com/v3/search/
+components:
+  schemas:
+    Relationships:
+      type: object
+      properties:
+        actors:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedEntity'
+          description: Threat actors associated with this entity
+        cyberAttacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedEntity'
+          description: Cyber attacks associated with this entity
+        malwares:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedEntity'
+          description: Malware families associated with this entity
+    IOCDetails:
+      type: object
+      properties:
+        exports:
+          type: array
+          items:
+            $ref: '#/components/schemas/Export'
+          description: Available export formats for the IOC
+        subtype:
+          type: string
+          description: Subtype of the IOC (e.g., md5, sha256, ip, domain)
+        type:
+          type: string
+          description: Type of IOC (e.g., hash, ip, domain, url)
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+        errorMessage:
+          type: string
+          description: Human-readable error message
+    EntityReference:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the referenced entity
+        label:
+          type: string
+          description: Human-readable label
+        type:
+          type: string
+          description: Type of referenced entity
+    RelatedEntity:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Number of mentions linking this entity
+        entity:
+          $ref: '#/components/schemas/EntityReference'
+        entryIds:
+          type: array
+          items:
+            type: string
+          description: IDs of entries mentioning this relationship
+        firstMention:
+          type: string
+          format: date-time
+          description: Timestamp of first mention
+        lastMention:
+          type: string
+          format: date-time
+          description: Timestamp of most recent mention
+    Export:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Export format type
+          enum:
+          - markdown
+          - stix2.1
+          - misp
+          - csv
+        url:
+          type: string
+          format: uri
+          description: URL to download the export file
+    EntityDetails:
+      type: object
+      properties:
+        enterpriseFeatures:
+          type: array
+          items:
+            type: string
+          description: List of enterprise features associated with this entity
+        hasSalience:
+          type: boolean
+          description: Indicates if the entity has salience information
+        id:
+          type: string
+          description: Unique identifier for the entity
+        iocDetails:
+          $ref: '#/components/schemas/IOCDetails'
+        label:
+          type: string
+          description: Human-readable label for the entity
+        popularity:
+          type: number
+          format: float
+          description: Popularity score of the entity
+        relationships:
+          $ref: '#/components/schemas/Relationships'
+        stats:
+          $ref: '#/components/schemas/Statistics'
+        type:
+          type: string
+          description: Type of entity
+          enum:
+          - indicatorOfCompromise
+          - threatActor
+          - malwareFamily
+          - vulnerability
+    Statistics:
+      type: object
+      properties:
+        graph:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Daily mention counts (date as key, count as value)
+        lastMention:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) of last mention
+        numMentionsLast3Months:
+          type: integer
+          description: Total mentions in the last 3 months
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: API Key
+      description: Feedly API key passed as Bearer token
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+x-refined-from:
+- feedly-iocs-openapi.yml
+- feedly-search-openapi.yml
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

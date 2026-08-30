@@ -1,0 +1,52 @@
+openapi: 3.2.0
+info:
+  title: Trends Threat Actors API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/trends/
+security:
+- sec0: []
+tags:
+- name: Threat Actors
+paths:
+  /threat-actors:
+    get:
+      summary: Trending Attackers
+      description: A guide to extract trending attackers from the Threat Landscape Dashboard.
+      operationId: trending-attackers
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Threat Actors
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

@@ -1,0 +1,87 @@
+openapi: 3.2.0
+info:
+  title: ML Endpoint Trend Discovery API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/ml
+security:
+- sec0: []
+tags:
+- name: Trend Discovery
+paths:
+  /trend-discovery/trends:
+    post:
+      summary: Emerging Trends
+      description: Retrieve trends based on specific industries, filters, and sorting criteria.
+      operationId: emerging-trends
+      parameters:
+      - name: count
+        in: query
+        description: Number of trends to return
+        required: true
+        schema:
+          type: integer
+          format: int32
+          default: 200
+      - name: newOnly
+        in: query
+        description: Whether to only return freshly added trends
+        schema:
+          type: boolean
+          default: false
+      - name: sort
+        in: query
+        description: 'Criteria to retrieve top count trends and sort response. Value should be one of: ["-size", "size", "-growth", "growth"].  If starts with "-" output will be in decreasing order (higher values first, generally preferred) Example: "-growth" returns trends with highest growth first'
+        required: true
+        schema:
+          type: string
+          default: -growth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - RAW_BODY
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: JSON Body of the request
+                  default: '{   "filters": [     {"type": "growth", "values": ["Exploding", "Surging", "Growing"]},     {"type": "size", "values": ["Mainstream", "Known", "Niche"]},     {"type": "industry", "values": []}   ],   "period": "Last6Months",   "searchLayers": [     {       "parts": [         {"id": "nlp/f/entity/gz:no-code-development-platform"}       ]     }   ] }'
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Trend Discovery
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

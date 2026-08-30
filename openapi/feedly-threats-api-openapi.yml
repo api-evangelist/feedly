@@ -1,0 +1,52 @@
+openapi: 3.2.0
+info:
+  title: Trends Threats API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/trends/
+security:
+- sec0: []
+tags:
+- name: Threats
+paths:
+  /threats:
+    get:
+      summary: Trending Articles
+      description: A guide to extract trending trending Cybersecurity articles from the Threat Landscape Agent.
+      operationId: trending-articles
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Threats
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true

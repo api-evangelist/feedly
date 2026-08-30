@@ -1,0 +1,77 @@
+openapi: 3.2.0
+info:
+  title: Feedly .mget API
+  version: '1.0'
+  description: 'Operations tagged .mget across 2 of this provider''s published API definitions: feedly-entities-openapi.yml, feedly-entries-openapi.yml. Each path carries the servers of the definition it was published in.'
+servers:
+- url: https://api.feedly.com/v3/entities
+- url: https://api.feedly.com/v3/entries/
+security:
+- sec0: []
+tags:
+- name: .mget
+paths:
+  /.mget:
+    post:
+      summary: Get CVE Metadata on Multiple CVEs
+      description: ''
+      operationId: get-multiple-cves
+      parameters:
+      - name: withStats
+        in: query
+        description: You can add a parameter query withStats=true to the previous endpoint to get access to the References and Chatter articles. The previous data will also be included.
+        schema:
+          type: boolean
+          default: false
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - RAW_BODY
+              properties:
+                RAW_BODY:
+                  type: string
+                  description: Paste a list of CVEs (limited to 100)
+                  default: '["CVE-2021-26084", "CVE-2021-22005"]'
+                  format: json
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - .mget
+    servers:
+    - url: https://api.feedly.com/v3/entities
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      in: header
+      name: Authorization
+      x-bearer-format: bearer
+x-refined-from:
+- feedly-entities-openapi.yml
+- feedly-entries-openapi.yml
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true

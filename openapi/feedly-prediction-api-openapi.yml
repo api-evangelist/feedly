@@ -1,0 +1,66 @@
+openapi: 3.2.0
+info:
+  title: Entries Prediction API
+  version: '1.0'
+servers:
+- url: https://api.feedly.com/v3/entries/
+security:
+- sec0: []
+tags:
+- name: Prediction
+paths:
+  /prediction:
+    post:
+      summary: Ask AI with structured outputs
+      description: The Feedly Ask AI API allows developers to leverage the power of Large Language Models (LLMs) to ask questions and gather insights from a set of articles.
+      operationId: ai-actions-experimental
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                entryIds:
+                  type: array
+                  description: An array of article IDs to perform AI actions on
+                  items:
+                    type: string
+                prompt:
+                  type: string
+                  description: The user-generated prompt to ask questions or gather insights from the articles
+      responses:
+        '200':
+          description: '200'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+        '400':
+          description: '400'
+          content:
+            application/json:
+              examples:
+                Result:
+                  value: '{}'
+              schema:
+                type: object
+                properties: {}
+      deprecated: false
+      tags:
+      - Prediction
+components:
+  securitySchemes:
+    sec0:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-bearer-format: bearer
+x-readme:
+  headers: []
+  explorer-enabled: true
+  proxy-enabled: true
+x-readme-fauxas: true
