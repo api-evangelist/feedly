@@ -33,16 +33,16 @@ tags:
 - Threat Intelligence
 - Cybersecurity
 - cyber-threat-intelligence
-- Content Aggregation
-- RSS
+- content-aggregation
+- rss
 - News
-- Vulnerability Management
-- Indicators of Compromise
-- Malware
-- threat-actors
+- vulnerability-management
+- indicators-of-compromise
+- malware
+- Threat Actors
 - mitre-attack
-- Security Automation
-- Artificial Intelligence
+- security-automation
+- artificial-intelligence
 - MCP
 - agent-native
 - Webhook
@@ -318,6 +318,8 @@ apis:
   humanURL: https://developers.feedly.com/reference/introduction
   baseURL: https://api.feedly.com/v3
   tags:
+  - IOC
+  tags_raw:
   - Ioc?
   properties:
   - type: OpenAPI
@@ -426,6 +428,8 @@ apis:
   humanURL: https://developers.feedly.com/reference/introduction
   baseURL: https://api.feedly.com/v3
   tags:
+  - RAG
+  tags_raw:
   - Rag
   properties:
   - type: OpenAPI
@@ -588,6 +592,8 @@ apis:
   humanURL: https://developers.feedly.com/reference/introduction
   baseURL: https://api.feedly.com/v3
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
