@@ -22,6 +22,21 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+accessModel:
+  pricing: paid
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Paid
+  confidence: high
+  source:
+  - plans
+  - authentication
+  - rate-limits
+  - security
+  generated: '2026-09-03'
+  method: derived
 image: https://feedly.com/favicon.ico
 url: https://raw.githubusercontent.com/api-evangelist/feedly/refs/heads/main/apis.yml
 x-type: company
@@ -630,6 +645,9 @@ maintainers:
 - FN: APIs.json
   email: info@apis.io
 common:
+- type: CapabilityMap
+  url: capabilities/feedly-capability-edges.yml
+  name: Feedly Business Capability Map
 - type: DomainSecurity
   url: security/feedly-domain-security.yml
 - type: Authentication
