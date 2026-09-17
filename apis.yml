@@ -183,24 +183,6 @@ apis:
     url: https://developers.feedly.com/reference/building-your-first-ti-integration
   - type: Authentication
     url: https://developers.feedly.com/reference/authorization
-- aid: feedly:feedly-cves-api
-  name: Feedly CV Es API
-  description: The CVEs API from Feedly — 2 operation(s) for cves.
-  humanURL: https://developers.feedly.com/reference/introduction
-  baseURL: https://api.feedly.com/v3
-  tags:
-  - CVEs
-  properties:
-  - type: OpenAPI
-    url: openapi/feedly-cves-api-openapi.yml
-  - type: Documentation
-    url: https://developers.feedly.com/reference/introduction
-  - type: APIReference
-    url: https://developers.feedly.com/reference/introduction
-  - type: GettingStarted
-    url: https://developers.feedly.com/reference/building-your-first-ti-integration
-  - type: Authentication
-    url: https://developers.feedly.com/reference/authorization
 - aid: feedly:feedly-detection-rules-api
   name: Feedly Detection Rules API
   description: The Detection Rules API from Feedly — 1 operation(s) for detection rules.
@@ -631,6 +613,24 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/feedly-vulnerabilities-api-openapi.yml
+  - type: Documentation
+    url: https://developers.feedly.com/reference/introduction
+  - type: APIReference
+    url: https://developers.feedly.com/reference/introduction
+  - type: GettingStarted
+    url: https://developers.feedly.com/reference/building-your-first-ti-integration
+  - type: Authentication
+    url: https://developers.feedly.com/reference/authorization
+- aid: feedly:feedly-cves-api
+  name: Feedly CV Es API
+  description: The CVEs API from Feedly — 2 operation(s) for cves.
+  humanURL: https://docs.feedly.com/article/820-what-is-mcp-feedly
+  baseURL: https://mcp.feedly.com/mcp
+  tags:
+  - CVEs
+  properties:
+  - type: OpenAPI
+    url: openapi/feedly-cves-api-openapi.yml
   - type: Documentation
     url: https://developers.feedly.com/reference/introduction
   - type: APIReference
