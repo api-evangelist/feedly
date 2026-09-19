@@ -407,6 +407,8 @@ apis:
   humanURL: https://developers.feedly.com/reference/introduction
   baseURL: https://api.feedly.com/v3
   tags:
+  - Predictions
+  tags_raw:
   - Prediction
   properties:
   - type: OpenAPI
