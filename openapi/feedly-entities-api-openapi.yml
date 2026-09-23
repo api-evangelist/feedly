@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Feedly Entities API
   version: '1.0'
-  description: 'Operations tagged Entities across 2 of this provider''s published API definitions: feedly-iocs-openapi.yml, feedly-search-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Entities across 2 of this provider''s published API definitions: feedly-iocs-openapi-original.json, feedly-search-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.feedly.com/v3
   description: Feedly API
@@ -170,6 +170,57 @@ paths:
     - url: https://api.feedly.com/v3/search/
 components:
   schemas:
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+        errorMessage:
+          type: string
+          description: Human-readable error message
+    Export:
+      type: object
+      properties:
+        type:
+          type: string
+          description: Export format type
+          enum:
+          - markdown
+          - stix2.1
+          - misp
+          - csv
+        url:
+          type: string
+          format: uri
+          description: URL to download the export file
+    Statistics:
+      type: object
+      properties:
+        graph:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Daily mention counts (date as key, count as value)
+        lastMention:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) of last mention
+        numMentionsLast3Months:
+          type: integer
+          description: Total mentions in the last 3 months
+    EntityReference:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the referenced entity
+        label:
+          type: string
+          description: Human-readable label
+        type:
+          type: string
+          description: Type of referenced entity
     Relationships:
       type: object
       properties:
@@ -188,41 +239,6 @@ components:
           items:
             $ref: '#/components/schemas/RelatedEntity'
           description: Malware families associated with this entity
-    IOCDetails:
-      type: object
-      properties:
-        exports:
-          type: array
-          items:
-            $ref: '#/components/schemas/Export'
-          description: Available export formats for the IOC
-        subtype:
-          type: string
-          description: Subtype of the IOC (e.g., md5, sha256, ip, domain)
-        type:
-          type: string
-          description: Type of IOC (e.g., hash, ip, domain, url)
-    Error:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: Machine-readable error code
-        errorMessage:
-          type: string
-          description: Human-readable error message
-    EntityReference:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Unique identifier for the referenced entity
-        label:
-          type: string
-          description: Human-readable label
-        type:
-          type: string
-          description: Type of referenced entity
     RelatedEntity:
       type: object
       properties:
@@ -244,21 +260,20 @@ components:
           type: string
           format: date-time
           description: Timestamp of most recent mention
-    Export:
+    IOCDetails:
       type: object
       properties:
+        exports:
+          type: array
+          items:
+            $ref: '#/components/schemas/Export'
+          description: Available export formats for the IOC
+        subtype:
+          type: string
+          description: Subtype of the IOC (e.g., md5, sha256, ip, domain)
         type:
           type: string
-          description: Export format type
-          enum:
-          - markdown
-          - stix2.1
-          - misp
-          - csv
-        url:
-          type: string
-          format: uri
-          description: URL to download the export file
+          description: Type of IOC (e.g., hash, ip, domain, url)
     EntityDetails:
       type: object
       properties:
@@ -294,21 +309,6 @@ components:
           - threatActor
           - malwareFamily
           - vulnerability
-    Statistics:
-      type: object
-      properties:
-        graph:
-          type: object
-          additionalProperties:
-            type: integer
-          description: Daily mention counts (date as key, count as value)
-        lastMention:
-          type: integer
-          format: int64
-          description: Unix timestamp (milliseconds) of last mention
-        numMentionsLast3Months:
-          type: integer
-          description: Total mentions in the last 3 months
   securitySchemes:
     BearerAuth:
       type: http
@@ -321,8 +321,8 @@ components:
       name: Authorization
       x-bearer-format: bearer
 x-refined-from:
-- feedly-iocs-openapi.yml
-- feedly-search-openapi.yml
+- feedly-iocs-openapi-original.json
+- feedly-search-openapi-original.json
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

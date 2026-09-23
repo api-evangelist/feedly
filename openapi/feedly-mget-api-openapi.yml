@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Feedly .mget API
   version: '1.0'
-  description: 'Operations tagged .mget across 2 of this provider''s published API definitions: feedly-entities-openapi.yml, feedly-entries-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged .mget across 2 of this provider''s published API definitions: feedly-entities-openapi-original.json, feedly-entries-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.feedly.com/v3/entities
 - url: https://api.feedly.com/v3/entries/
@@ -70,8 +70,8 @@ components:
       name: Authorization
       x-bearer-format: bearer
 x-refined-from:
-- feedly-entities-openapi.yml
-- feedly-entries-openapi.yml
+- feedly-entities-openapi-original.json
+- feedly-entries-openapi-original.json
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

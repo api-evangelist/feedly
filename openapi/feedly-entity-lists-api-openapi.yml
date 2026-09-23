@@ -1,9 +1,7 @@
 openapi: 3.2.0
 info:
   title: Get Intel Profiles Entity Lists API
-  description: 'API for Feedly Enterprise features including Entity Lists — curated collections of named entities (companies, technologies, threat actors, etc.) used to scope and filter intelligence feeds across your organization.
-
-    '
+  description: API for Feedly Enterprise features including Entity Lists — curated collections of named entities (companies, technologies, threat actors, etc.) used to scope and filter intelligence feeds across your organization.
   version: '3.0'
   contact:
     name: Feedly Support
@@ -24,9 +22,7 @@ paths:
       description: 'Returns all intel profiles associated with the authenticated enterprise account. When `details=true` is passed, each list includes its full entity membership. Entity lists group named entities (companies, technologies, threat actors, custom text terms) that can be used to scope and filter intelligence feeds.
 
 
-        Entity members may be resolved Feedly entities (returned with an `id`) or unresolved custom text strings (returned with a `text` field only).
-
-        '
+        Entity members may be resolved Feedly entities (returned with an `id`) or unresolved custom text strings (returned with a `text` field only).'
       tags:
       - Entity Lists
       parameters:
@@ -143,33 +139,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    EntityMember:
-      type: object
-      description: "A member of an entity list. Members are one of two forms:\n- **Resolved entity**: has an `id` pointing to a known Feedly entity\n  (e.g., `nlp/f/entity/gz:org:microsoft`). These are matched against\n  Feedly's knowledge graph.\n\n- **Custom text term**: has only a `text` field. These are free-text strings\n  that do not resolve to a known entity but are still tracked as keywords.\n\nExactly one of `id` or `text` will be present on each member object.\n"
-      properties:
-        id:
-          type: string
-          description: 'Feedly entity identifier. Format: `nlp/f/entity/gz:{type}:{slug}`. Present when the member is a resolved entity in Feedly''s knowledge graph.
-
-            '
-          example: nlp/f/entity/gz:org:microsoft
-        text:
-          type: string
-          description: 'Raw custom text string. Present when the member is an unresolved or user-defined term that does not map to a known Feedly entity.
-
-            '
-          example: adope
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: integer
-          description: HTTP status code echoed in the response body.
-          example: 401
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Unauthorized. Please provide a valid Bearer token.
     EntityList:
       type: object
       description: 'A named collection of entities used to scope monitoring within Feedly Enterprise. Lists always have type `customTopic` and contain a mix of resolved Feedly entities (with `id`) and unresolved custom text terms (with `text` only).
@@ -245,6 +214,33 @@ components:
             '
           items:
             $ref: '#/components/schemas/EntityMember'
+    EntityMember:
+      type: object
+      description: "A member of an entity list. Members are one of two forms:\n- **Resolved entity**: has an `id` pointing to a known Feedly entity\n  (e.g., `nlp/f/entity/gz:org:microsoft`). These are matched against\n  Feedly's knowledge graph.\n\n- **Custom text term**: has only a `text` field. These are free-text strings\n  that do not resolve to a known entity but are still tracked as keywords.\n\nExactly one of `id` or `text` will be present on each member object.\n"
+      properties:
+        id:
+          type: string
+          description: 'Feedly entity identifier. Format: `nlp/f/entity/gz:{type}:{slug}`. Present when the member is a resolved entity in Feedly''s knowledge graph.
+
+            '
+          example: nlp/f/entity/gz:org:microsoft
+        text:
+          type: string
+          description: 'Raw custom text string. Present when the member is an unresolved or user-defined term that does not map to a known Feedly entity.
+
+            '
+          example: adope
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          description: HTTP status code echoed in the response body.
+          example: 401
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Unauthorized. Please provide a valid Bearer token.
   securitySchemes:
     BearerAuth:
       type: http

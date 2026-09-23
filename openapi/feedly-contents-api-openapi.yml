@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Feedly Contents API
   version: '1.0'
-  description: 'Operations tagged Contents across 3 of this provider''s published API definitions: feedly-memes-openapi.yml, feedly-search-openapi.yml, feedly-streams-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged Contents across 3 of this provider''s published API definitions: feedly-memes-openapi-original.json, feedly-search-openapi-original.json, feedly-streams-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.feedly.com/v3/memes
 - url: https://api.feedly.com/v3/search/
@@ -268,9 +268,9 @@ components:
       name: Authorization
       x-bearer-format: bearer
 x-refined-from:
-- feedly-memes-openapi.yml
-- feedly-search-openapi.yml
-- feedly-streams-openapi.yml
+- feedly-memes-openapi-original.json
+- feedly-search-openapi-original.json
+- feedly-streams-openapi-original.json
 x-readme:
   explorer-enabled: true
   proxy-enabled: true

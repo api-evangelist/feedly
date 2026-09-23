@@ -22,9 +22,7 @@ paths:
 
         **Export Options:**
 
-        - Add `?format=csv` to the URL to export the user list as a CSV file instead of JSON
-
-        '
+        - Add `?format=csv` to the URL to export the user list as a CSV file instead of JSON'
       operationId: listEnterpriseUsers
       tags:
       - Users

@@ -53,7 +53,7 @@ paths:
   /{malwareId}:
     get:
       summary: Get Malware Metadata
-      description: A GET request to the following endpoint can retrieve some of the meta-data contained in the Malware Insights Card, including the `description`,  `label`, `aliases`, `malware type`and more.
+      description: A GET request to the following endpoint can retrieve some of the meta-data contained in the Malware Insights Card, including the `description`, `label`, `aliases`, `malware type`and more.
       operationId: get-malware-metadata
       parameters:
       - name: malwareId

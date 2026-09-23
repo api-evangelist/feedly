@@ -2,7 +2,7 @@ openapi: 3.2.0
 info:
   title: Feedly CV Es API
   version: '1.0'
-  description: 'Operations tagged CVEs across 2 of this provider''s published API definitions: feedly-ti-endpoints-openapi.yml, feedly-vulnerability-agent-openapi.yml. Each path carries the servers of the definition it was published in.'
+  description: 'Operations tagged CVEs across 2 of this provider''s published API definitions: feedly-ti-endpoints-openapi-original.json, feedly-vulnerability-agent-openapi-original.json. Each path carries the servers of the definition it was published in.'
 servers:
 - url: https://api.feedly.com/v3
 tags:
@@ -64,7 +64,47 @@ paths:
   /trends/vulnerability-dashboard:
     post:
       summary: Vulnerability Agent
-      description: "Query the Vulnerability Agent.\n\n**How to get your query JSON**: Open any saved or ad-hoc Vulnerability Agent search in the Feedly UI and click the **API** button at the top of the page. Feedly generates the complete JSON payload for you — paste it directly into the request body. You do not need to construct the body manually.\n\n**Custom time windows**: Use `\"type\": \"Custom\"` with full ISO 8601 datetimes for `start` and `end` to poll on any cadence (e.g. every 4 hours) without overlapping bucket boundaries. This is useful for automated workflows (SOAR, SIEM) so each poll returns only new records with no overlap.\n\n**Request body fields**:\n- `layers` (array) — ordered filter layers; filters within a layer are\n  OR'd, layers are AND'd together\n\n- `layers[].filters[].field` — filter dimension: `period`, `trending`,\n  `created`, `exploited`, `poc`, `weaponized`, `inCisaKev`, `cvssScore`,\n  `cvssEstimate`, `cvssVector`\n\n- `layers[].filters[].value` — value depends on field:\n  period → `{\"type\": \"Last7Days\"|\"Last30Days\"|\"Last3Months\"|\"Last6Months\"|\"Custom\", \"label\": \"...\", \"start\": \"ISO datetime\", \"end\": \"ISO datetime\"}`;\n  cvssScore → `{\"gte\": 9}`;\n  cvssEstimate → `\"HIGH\"|\"MEDIUM\"|\"LOW\"`;\n  cvssVector → string component e.g. `\"AV:N\"`, `\"PR:N\"`, `\"UI:N\"`;\n  boolean fields → `true`\n\n- `count` (integer, optional) — max results per page\n- `continuation` — pagination token from the previous response\n- `sort` — `{\"field\": \"cveId\"|\"cvssScore\"|\"epssScore\"|\"publishedDate\", \"order\": \"asc\"|\"desc\"}`\n"
+      description: 'Query the Vulnerability Agent.
+
+
+        **How to get your query JSON**: Open any saved or ad-hoc Vulnerability Agent search in the Feedly UI and click the **API** button at the top of the page. Feedly generates the complete JSON payload for you — paste it directly into the request body. You do not need to construct the body manually.
+
+
+        **Custom time windows**: Use `"type": "Custom"` with full ISO 8601 datetimes for `start` and `end` to poll on any cadence (e.g. every 4 hours) without overlapping bucket boundaries. This is useful for automated workflows (SOAR, SIEM) so each poll returns only new records with no overlap.
+
+
+        **Request body fields**:
+
+        - `layers` (array) — ordered filter layers; filters within a layer are
+
+        OR''d, layers are AND''d together
+
+
+        - `layers[].filters[].field` — filter dimension: `period`, `trending`,
+
+        `created`, `exploited`, `poc`, `weaponized`, `inCisaKev`, `cvssScore`,
+
+        `cvssEstimate`, `cvssVector`
+
+
+        - `layers[].filters[].value` — value depends on field:
+
+        period → `{"type": "Last7Days"|"Last30Days"|"Last3Months"|"Last6Months"|"Custom", "label": "...", "start": "ISO datetime", "end": "ISO datetime"}`;
+
+        cvssScore → `{"gte": 9}`;
+
+        cvssEstimate → `"HIGH"|"MEDIUM"|"LOW"`;
+
+        cvssVector → string component e.g. `"AV:N"`, `"PR:N"`, `"UI:N"`;
+
+        boolean fields → `true`
+
+
+        - `count` (integer, optional) — max results per page
+
+        - `continuation` — pagination token from the previous response
+
+        - `sort` — `{"field": "cveId"|"cvssScore"|"epssScore"|"publishedDate", "order": "asc"|"desc"}`'
       operationId: getVulnerabilityAgent
       tags:
       - CVEs
@@ -171,6 +211,14 @@ paths:
     - url: https://api.feedly.com/v3
 components:
   schemas:
+    TimelineResponse:
+      type: object
+      properties:
+        events:
+          type: array
+          description: List of timeline events, ordered from most recent to oldest.
+          items:
+            $ref: '#/components/schemas/TimelineEvent'
     TimelineEvent:
       type: object
       description: A single timeline event. The fields present depend on the `type`.
@@ -248,14 +296,99 @@ components:
         summary:
           type: string
           description: AI-generated summary of the threat intelligence report. Present on `threatIntelligenceReport` events.
-    TimelineResponse:
+    ExecutiveSummary:
+      type: object
+      description: 'AI-generated executive summary for the vulnerability. Fields are written for a non-technical audience.
+
+        '
+      properties:
+        impact:
+          type: string
+          description: Plain-language description of what an attacker could do.
+          example: An attacker exploiting this vulnerability could...
+        exploitation:
+          type: string
+          description: Current exploitation status and public PoC availability.
+          example: There is no evidence that a public proof-of-concept exists...
+        description:
+          type: string
+          description: Brief summary of the vulnerability.
+        patch:
+          type: string
+          description: Patch availability and version information.
+          example: A patch is available. Firefox versions 131.0.3...
+        mitigation:
+          type: string
+          description: Recommended mitigation steps.
+          example: Update Firefox to version 131.0.3 or later.
+        processing_time_s:
+          type: number
+          description: Time taken to generate the summary, in seconds.
+          example: 8.203333
+    ScalarAggregation:
+      type: object
+      description: A single count aggregation (no breakdown by bucket).
+      properties:
+        name:
+          type: string
+          example: exploited
+        total:
+          type: integer
+          example: 34
+    VulnerabilityDashboardResponse:
       type: object
       properties:
-        events:
+        total:
+          type: integer
+          description: Total number of vulnerabilities matching the query.
+          example: 38
+        continuation:
+          description: 'Pass this value back as `continuation` in the next request to retrieve the next page of results. Absent when there are no more pages.
+
+            '
+          oneOf:
+          - type: string
+          - type: array
+            items: {}
+          example:
+          - 2026
+          - 20182
+          - vulnerability/m/entity/CVE-2026-20182
+        vulnerabilities:
           type: array
-          description: List of timeline events, ordered from most recent to oldest.
           items:
-            $ref: '#/components/schemas/TimelineEvent'
+            $ref: '#/components/schemas/Vulnerability'
+        aggregations:
+          $ref: '#/components/schemas/Aggregations'
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+        errorId:
+          type: string
+        message:
+          type: string
+    CweId:
+      type: object
+      properties:
+        cweID:
+          type: string
+          example: CWE-287
+        name:
+          type: string
+          example: Improper Authentication
+    BucketAggregation:
+      type: object
+      description: Aggregation broken down by individual entities.
+      properties:
+        name:
+          type: string
+          example: vendors
+        buckets:
+          type: array
+          items:
+            $ref: '#/components/schemas/AggregationBucket'
     PatchDetail:
       type: object
       properties:
@@ -277,102 +410,22 @@ components:
           type: string
           format: date-time
           description: When Feedly first indexed this patch.
-    ExploitDetail:
+    Aggregations:
       type: object
-      description: 'A classified exploit entry produced by Feedly''s exploit analyzer (Claude Haiku). Each URL associated with a CVE is automatically classified with a label, confidence score, and supporting evidence.
+      description: 'Facet counts for the full result set. Useful for building filter UIs or summary dashboards.
 
         '
       properties:
-        url:
-          type: string
-          format: uri
-          description: URL to the exploit or PoC resource.
-        source:
-          type: string
-          description: Source that surfaced this URL (e.g. `PoC-in-GitHub`, `nvd`).
-          example: PoC-in-GitHub
-        language:
-          type:
-          - string
-          - 'null'
-          description: Primary programming language detected in the repository.
-          example: Python
-        label:
-          type: string
-          description: 'Classification label assigned by Feedly''s exploit analyzer. `is_real_exploit` is `true` for `exploit_code` and `exploit_steps` only.
-
-            '
-          enum:
-          - exploit_code
-          - exploit_steps
-          - poc_code
-          - poc_steps
-          - detection
-          - advisory
-          - empty
-          - unknown
-          example: detection
-        is_real_exploit:
-          type: boolean
-          description: '`true` when label is `exploit_code` or `exploit_steps` — i.e. the content can compromise a real system, not just demonstrate or detect the vulnerability.
-
-            '
-        confidence:
-          type: string
-          description: 'Classifier confidence. `download_urls` and `inline_snippets` are only populated when confidence is `high` and the label is actionable (`exploit_code`, `exploit_steps`, `poc_code`, `poc_steps`, `detection`).
-
-            '
-          enum:
-          - high
-          - medium
-          - low
-          example: high
-        reason:
-          type: string
-          description: Human-readable explanation of the classification decision.
-        key_evidence:
-          type: string
-          description: Specific evidence excerpt that drove the classification.
-        download_urls:
-          type: array
-          description: 'Raw/fetchable URLs for exploit files. Only populated when `confidence` is `high` and the label is actionable.
-
-            '
-          items:
-            type: string
-            format: uri
-        inline_snippets:
-          type: array
-          description: 'Code blocks extracted from the content. Only populated when `confidence` is `high` and the label is actionable.
-
-            '
-          items:
-            type: object
-            properties:
-              language:
-                type: string
-                example: python
-              code:
-                type: string
-                example: 'import socket
-
-                  ...'
-        classification_model:
-          type: string
-          description: The model used to classify this exploit entry.
-          example: claude-haiku-4-5-20251001
-        classification_duration_ms:
-          type: integer
-          description: Time taken to classify, in milliseconds.
-          example: 1340
-        exploitAddedDate:
-          type: string
-          format: date-time
-          description: When this exploit URL was first associated with the CVE.
-        exploitUpdatedDate:
-          type: string
-          format: date-time
-          description: When the exploit classification was last updated.
+        weaponized:
+          $ref: '#/components/schemas/ScalarAggregation'
+        exploited:
+          $ref: '#/components/schemas/ScalarAggregation'
+        vendors:
+          $ref: '#/components/schemas/BucketAggregation'
+        malwareFamilies:
+          $ref: '#/components/schemas/BucketAggregation'
+        threatActors:
+          $ref: '#/components/schemas/BucketAggregation'
     Vulnerability:
       type: object
       properties:
@@ -580,81 +633,21 @@ components:
           items:
             type: object
             additionalProperties: true
-    ScalarAggregation:
+    AggregationBucket:
       type: object
-      description: A single count aggregation (no breakdown by bucket).
       properties:
-        name:
+        id:
           type: string
-          example: exploited
-        total:
-          type: integer
-          example: 34
-    VulnerabilityDashboardResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of vulnerabilities matching the query.
-          example: 38
-        continuation:
-          description: 'Pass this value back as `continuation` in the next request to retrieve the next page of results. Absent when there are no more pages.
+          description: 'Entity ID or short key. `__others__` represents all entities beyond the top N returned.
 
             '
-          oneOf:
-          - type: string
-          - type: array
-            items: {}
-          example:
-          - 2026
-          - 20182
-          - vulnerability/m/entity/CVE-2026-20182
-        vulnerabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/Vulnerability'
-        aggregations:
-          $ref: '#/components/schemas/Aggregations'
-    ExecutiveSummary:
-      type: object
-      description: 'AI-generated executive summary for the vulnerability. Fields are written for a non-technical audience.
-
-        '
-      properties:
-        impact:
+          example: nlp/f/entity/gz:mal:8071f2d8-cc44-4682-845b-6f39a9f8b587
+        label:
           type: string
-          description: Plain-language description of what an attacker could do.
-          example: An attacker exploiting this vulnerability could...
-        exploitation:
-          type: string
-          description: Current exploitation status and public PoC availability.
-          example: There is no evidence that a public proof-of-concept exists...
-        description:
-          type: string
-          description: Brief summary of the vulnerability.
-        patch:
-          type: string
-          description: Patch availability and version information.
-          example: A patch is available. Firefox versions 131.0.3...
-        mitigation:
-          type: string
-          description: Recommended mitigation steps.
-          example: Update Firefox to version 131.0.3 or later.
-        processing_time_s:
-          type: number
-          description: Time taken to generate the summary, in seconds.
-          example: 8.203333
-    BucketAggregation:
-      type: object
-      description: Aggregation broken down by individual entities.
-      properties:
-        name:
-          type: string
-          example: vendors
-        buckets:
-          type: array
-          items:
-            $ref: '#/components/schemas/AggregationBucket'
+          example: Clop
+        total:
+          type: integer
+          example: 1
     CvssV3:
       type: object
       description: CVSS v3.x base score and vector components.
@@ -722,63 +715,110 @@ components:
           - LOW
           - HIGH
           example: NONE
-    ErrorResponse:
+    ExploitDetail:
       type: object
-      properties:
-        errorCode:
-          type: integer
-        errorId:
-          type: string
-        message:
-          type: string
-    CweId:
-      type: object
-      properties:
-        cweID:
-          type: string
-          example: CWE-287
-        name:
-          type: string
-          example: Improper Authentication
-    AggregationBucket:
-      type: object
-      properties:
-        id:
-          type: string
-          description: 'Entity ID or short key. `__others__` represents all entities beyond the top N returned.
-
-            '
-          example: nlp/f/entity/gz:mal:8071f2d8-cc44-4682-845b-6f39a9f8b587
-        label:
-          type: string
-          example: Clop
-        total:
-          type: integer
-          example: 1
-    Aggregations:
-      type: object
-      description: 'Facet counts for the full result set. Useful for building filter UIs or summary dashboards.
+      description: 'A classified exploit entry produced by Feedly''s exploit analyzer (Claude Haiku). Each URL associated with a CVE is automatically classified with a label, confidence score, and supporting evidence.
 
         '
       properties:
-        weaponized:
-          $ref: '#/components/schemas/ScalarAggregation'
-        exploited:
-          $ref: '#/components/schemas/ScalarAggregation'
-        vendors:
-          $ref: '#/components/schemas/BucketAggregation'
-        malwareFamilies:
-          $ref: '#/components/schemas/BucketAggregation'
-        threatActors:
-          $ref: '#/components/schemas/BucketAggregation'
+        url:
+          type: string
+          format: uri
+          description: URL to the exploit or PoC resource.
+        source:
+          type: string
+          description: Source that surfaced this URL (e.g. `PoC-in-GitHub`, `nvd`).
+          example: PoC-in-GitHub
+        language:
+          type:
+          - string
+          - 'null'
+          description: Primary programming language detected in the repository.
+          example: Python
+        label:
+          type: string
+          description: 'Classification label assigned by Feedly''s exploit analyzer. `is_real_exploit` is `true` for `exploit_code` and `exploit_steps` only.
+
+            '
+          enum:
+          - exploit_code
+          - exploit_steps
+          - poc_code
+          - poc_steps
+          - detection
+          - advisory
+          - empty
+          - unknown
+          example: detection
+        is_real_exploit:
+          type: boolean
+          description: '`true` when label is `exploit_code` or `exploit_steps` — i.e. the content can compromise a real system, not just demonstrate or detect the vulnerability.
+
+            '
+        confidence:
+          type: string
+          description: 'Classifier confidence. `download_urls` and `inline_snippets` are only populated when confidence is `high` and the label is actionable (`exploit_code`, `exploit_steps`, `poc_code`, `poc_steps`, `detection`).
+
+            '
+          enum:
+          - high
+          - medium
+          - low
+          example: high
+        reason:
+          type: string
+          description: Human-readable explanation of the classification decision.
+        key_evidence:
+          type: string
+          description: Specific evidence excerpt that drove the classification.
+        download_urls:
+          type: array
+          description: 'Raw/fetchable URLs for exploit files. Only populated when `confidence` is `high` and the label is actionable.
+
+            '
+          items:
+            type: string
+            format: uri
+        inline_snippets:
+          type: array
+          description: 'Code blocks extracted from the content. Only populated when `confidence` is `high` and the label is actionable.
+
+            '
+          items:
+            type: object
+            properties:
+              language:
+                type: string
+                example: python
+              code:
+                type: string
+                example: 'import socket
+
+                  ...'
+        classification_model:
+          type: string
+          description: The model used to classify this exploit entry.
+          example: claude-haiku-4-5-20251001
+        classification_duration_ms:
+          type: integer
+          description: Time taken to classify, in milliseconds.
+          example: 1340
+        exploitAddedDate:
+          type: string
+          format: date-time
+          description: When this exploit URL was first associated with the CVE.
+        exploitUpdatedDate:
+          type: string
+          format: date-time
+          description: When the exploit classification was last updated.
   securitySchemes:
     bearerAuth:
       type: http
       scheme: bearer
       description: Feedly API token (format `fe_...`)
 x-refined-from:
-- feedly-ti-endpoints-openapi.yml
-- feedly-vulnerability-agent-openapi.yml
+- feedly-ti-endpoints-openapi-original.json
+- feedly-vulnerability-agent-openapi-original.json
 x-readme:
   explorer-enabled: true
   proxy-enabled: true
