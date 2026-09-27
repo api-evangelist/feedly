@@ -59,7 +59,7 @@ tags:
 - Security Automation
 - Artificial Intelligence
 - MCP
-- agent-native
+- Agent-Native
 - Webhook
 tags_raw:
 - threat-intelligence
@@ -89,7 +89,7 @@ apis:
   baseURL: https://mcp.feedly.com/mcp
   tags:
   - MCP
-  - agent-native
+  - Agent-Native
   - Threat Intelligence
   - Cybersecurity
   tags_raw:
