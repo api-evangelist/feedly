@@ -296,15 +296,73 @@ components:
           description: List of timeline events, ordered from most recent to oldest.
           items:
             $ref: '#/components/schemas/TimelineEvent'
-    ErrorResponse:
+    CvssV3:
       type: object
+      description: CVSS v3.x base score and vector components.
       properties:
-        errorCode:
-          type: integer
-        errorId:
+        version:
           type: string
-        message:
+          example: '3.1'
+        baseScore:
+          type: number
+          example: 9.3
+        vectorString:
           type: string
+          example: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:L/A:N
+        attackVector:
+          type: string
+          enum:
+          - NETWORK
+          - ADJACENT_NETWORK
+          - LOCAL
+          - PHYSICAL
+          example: NETWORK
+        attackComplexity:
+          type: string
+          enum:
+          - LOW
+          - HIGH
+          example: LOW
+        privilegesRequired:
+          type: string
+          enum:
+          - NONE
+          - LOW
+          - HIGH
+          example: NONE
+        userInteraction:
+          type: string
+          enum:
+          - NONE
+          - REQUIRED
+          example: NONE
+        scope:
+          type: string
+          enum:
+          - UNCHANGED
+          - CHANGED
+          example: CHANGED
+        confidentialityImpact:
+          type: string
+          enum:
+          - NONE
+          - LOW
+          - HIGH
+          example: HIGH
+        integrityImpact:
+          type: string
+          enum:
+          - NONE
+          - LOW
+          - HIGH
+          example: LOW
+        availabilityImpact:
+          type: string
+          enum:
+          - NONE
+          - LOW
+          - HIGH
+          example: NONE
     Vulnerability:
       type: object
       properties:
@@ -512,16 +570,6 @@ components:
           items:
             type: object
             additionalProperties: true
-    ScalarAggregation:
-      type: object
-      description: A single count aggregation (no breakdown by bucket).
-      properties:
-        name:
-          type: string
-          example: exploited
-        total:
-          type: integer
-          example: 34
     CweId:
       type: object
       properties:
@@ -531,62 +579,6 @@ components:
         name:
           type: string
           example: Improper Authentication
-    VulnerabilityDashboardResponse:
-      type: object
-      properties:
-        total:
-          type: integer
-          description: Total number of vulnerabilities matching the query.
-          example: 38
-        continuation:
-          description: 'Pass this value back as `continuation` in the next request to retrieve the next page of results. Absent when there are no more pages.
-
-            '
-          oneOf:
-          - type: string
-          - type: array
-            items: {}
-          example:
-          - 2026
-          - 20182
-          - vulnerability/m/entity/CVE-2026-20182
-        vulnerabilities:
-          type: array
-          items:
-            $ref: '#/components/schemas/Vulnerability'
-        aggregations:
-          $ref: '#/components/schemas/Aggregations'
-    Aggregations:
-      type: object
-      description: 'Facet counts for the full result set. Useful for building filter UIs or summary dashboards.
-
-        '
-      properties:
-        weaponized:
-          $ref: '#/components/schemas/ScalarAggregation'
-        exploited:
-          $ref: '#/components/schemas/ScalarAggregation'
-        vendors:
-          $ref: '#/components/schemas/BucketAggregation'
-        malwareFamilies:
-          $ref: '#/components/schemas/BucketAggregation'
-        threatActors:
-          $ref: '#/components/schemas/BucketAggregation'
-    AggregationBucket:
-      type: object
-      properties:
-        id:
-          type: string
-          description: 'Entity ID or short key. `__others__` represents all entities beyond the top N returned.
-
-            '
-          example: nlp/f/entity/gz:mal:8071f2d8-cc44-4682-845b-6f39a9f8b587
-        label:
-          type: string
-          example: Clop
-        total:
-          type: integer
-          example: 1
     ExploitDetail:
       type: object
       description: 'A classified exploit entry produced by Feedly''s exploit analyzer (Claude Haiku). Each URL associated with a CVE is automatically classified with a label, confidence score, and supporting evidence.
@@ -704,6 +696,81 @@ components:
           type: string
           format: date-time
           description: When Feedly first indexed this patch.
+    Aggregations:
+      type: object
+      description: 'Facet counts for the full result set. Useful for building filter UIs or summary dashboards.
+
+        '
+      properties:
+        weaponized:
+          $ref: '#/components/schemas/ScalarAggregation'
+        exploited:
+          $ref: '#/components/schemas/ScalarAggregation'
+        vendors:
+          $ref: '#/components/schemas/BucketAggregation'
+        malwareFamilies:
+          $ref: '#/components/schemas/BucketAggregation'
+        threatActors:
+          $ref: '#/components/schemas/BucketAggregation'
+    ScalarAggregation:
+      type: object
+      description: A single count aggregation (no breakdown by bucket).
+      properties:
+        name:
+          type: string
+          example: exploited
+        total:
+          type: integer
+          example: 34
+    VulnerabilityDashboardResponse:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total number of vulnerabilities matching the query.
+          example: 38
+        continuation:
+          description: 'Pass this value back as `continuation` in the next request to retrieve the next page of results. Absent when there are no more pages.
+
+            '
+          oneOf:
+          - type: string
+          - type: array
+            items: {}
+          example:
+          - 2026
+          - 20182
+          - vulnerability/m/entity/CVE-2026-20182
+        vulnerabilities:
+          type: array
+          items:
+            $ref: '#/components/schemas/Vulnerability'
+        aggregations:
+          $ref: '#/components/schemas/Aggregations'
+    AggregationBucket:
+      type: object
+      properties:
+        id:
+          type: string
+          description: 'Entity ID or short key. `__others__` represents all entities beyond the top N returned.
+
+            '
+          example: nlp/f/entity/gz:mal:8071f2d8-cc44-4682-845b-6f39a9f8b587
+        label:
+          type: string
+          example: Clop
+        total:
+          type: integer
+          example: 1
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+        errorId:
+          type: string
+        message:
+          type: string
     BucketAggregation:
       type: object
       description: Aggregation broken down by individual entities.
@@ -715,73 +782,6 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/AggregationBucket'
-    CvssV3:
-      type: object
-      description: CVSS v3.x base score and vector components.
-      properties:
-        version:
-          type: string
-          example: '3.1'
-        baseScore:
-          type: number
-          example: 9.3
-        vectorString:
-          type: string
-          example: CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:L/A:N
-        attackVector:
-          type: string
-          enum:
-          - NETWORK
-          - ADJACENT_NETWORK
-          - LOCAL
-          - PHYSICAL
-          example: NETWORK
-        attackComplexity:
-          type: string
-          enum:
-          - LOW
-          - HIGH
-          example: LOW
-        privilegesRequired:
-          type: string
-          enum:
-          - NONE
-          - LOW
-          - HIGH
-          example: NONE
-        userInteraction:
-          type: string
-          enum:
-          - NONE
-          - REQUIRED
-          example: NONE
-        scope:
-          type: string
-          enum:
-          - UNCHANGED
-          - CHANGED
-          example: CHANGED
-        confidentialityImpact:
-          type: string
-          enum:
-          - NONE
-          - LOW
-          - HIGH
-          example: HIGH
-        integrityImpact:
-          type: string
-          enum:
-          - NONE
-          - LOW
-          - HIGH
-          example: LOW
-        availabilityImpact:
-          type: string
-          enum:
-          - NONE
-          - LOW
-          - HIGH
-          example: NONE
     ExecutiveSummary:
       type: object
       description: 'AI-generated executive summary for the vulnerability. Fields are written for a non-technical audience.

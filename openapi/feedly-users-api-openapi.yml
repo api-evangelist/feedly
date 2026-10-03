@@ -94,15 +94,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
-      type: object
-      properties:
-        errorCode:
-          type: string
-          description: Error code identifier
-        errorMessage:
-          type: string
-          description: Human-readable error message
     User:
       type: object
       required:
@@ -236,6 +227,15 @@ components:
           format: uuid
           description: Unique identifier for the user
           example: 23242fbb-f101-4f86-972f-b17be38572f4
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Error code identifier
+        errorMessage:
+          type: string
+          description: Human-readable error message
   securitySchemes:
     BearerAuth:
       type: http

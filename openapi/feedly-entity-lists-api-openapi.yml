@@ -139,22 +139,6 @@ paths:
                 $ref: '#/components/schemas/ErrorResponse'
 components:
   schemas:
-    EntityMember:
-      type: object
-      description: "A member of an entity list. Members are one of two forms:\n- **Resolved entity**: has an `id` pointing to a known Feedly entity\n  (e.g., `nlp/f/entity/gz:org:microsoft`). These are matched against\n  Feedly's knowledge graph.\n\n- **Custom text term**: has only a `text` field. These are free-text strings\n  that do not resolve to a known entity but are still tracked as keywords.\n\nExactly one of `id` or `text` will be present on each member object.\n"
-      properties:
-        id:
-          type: string
-          description: 'Feedly entity identifier. Format: `nlp/f/entity/gz:{type}:{slug}`. Present when the member is a resolved entity in Feedly''s knowledge graph.
-
-            '
-          example: nlp/f/entity/gz:org:microsoft
-        text:
-          type: string
-          description: 'Raw custom text string. Present when the member is an unresolved or user-defined term that does not map to a known Feedly entity.
-
-            '
-          example: adope
     ErrorResponse:
       type: object
       properties:
@@ -241,6 +225,22 @@ components:
             '
           items:
             $ref: '#/components/schemas/EntityMember'
+    EntityMember:
+      type: object
+      description: "A member of an entity list. Members are one of two forms:\n- **Resolved entity**: has an `id` pointing to a known Feedly entity\n  (e.g., `nlp/f/entity/gz:org:microsoft`). These are matched against\n  Feedly's knowledge graph.\n\n- **Custom text term**: has only a `text` field. These are free-text strings\n  that do not resolve to a known entity but are still tracked as keywords.\n\nExactly one of `id` or `text` will be present on each member object.\n"
+      properties:
+        id:
+          type: string
+          description: 'Feedly entity identifier. Format: `nlp/f/entity/gz:{type}:{slug}`. Present when the member is a resolved entity in Feedly''s knowledge graph.
+
+            '
+          example: nlp/f/entity/gz:org:microsoft
+        text:
+          type: string
+          description: 'Raw custom text string. Present when the member is an unresolved or user-defined term that does not map to a known Feedly entity.
+
+            '
+          example: adope
   securitySchemes:
     BearerAuth:
       type: http

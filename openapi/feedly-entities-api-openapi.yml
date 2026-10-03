@@ -170,18 +170,62 @@ paths:
     - url: https://api.feedly.com/v3/search/
 components:
   schemas:
-    EntityReference:
+    Relationships:
       type: object
       properties:
-        id:
+        actors:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedEntity'
+          description: Threat actors associated with this entity
+        cyberAttacks:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedEntity'
+          description: Cyber attacks associated with this entity
+        malwares:
+          type: array
+          items:
+            $ref: '#/components/schemas/RelatedEntity'
+          description: Malware families associated with this entity
+    IOCDetails:
+      type: object
+      properties:
+        exports:
+          type: array
+          items:
+            $ref: '#/components/schemas/Export'
+          description: Available export formats for the IOC
+        subtype:
           type: string
-          description: Unique identifier for the referenced entity
-        label:
-          type: string
-          description: Human-readable label
+          description: Subtype of the IOC (e.g., md5, sha256, ip, domain)
         type:
           type: string
-          description: Type of referenced entity
+          description: Type of IOC (e.g., hash, ip, domain, url)
+    Error:
+      type: object
+      properties:
+        errorCode:
+          type: string
+          description: Machine-readable error code
+        errorMessage:
+          type: string
+          description: Human-readable error message
+    Statistics:
+      type: object
+      properties:
+        graph:
+          type: object
+          additionalProperties:
+            type: integer
+          description: Daily mention counts (date as key, count as value)
+        lastMention:
+          type: integer
+          format: int64
+          description: Unix timestamp (milliseconds) of last mention
+        numMentionsLast3Months:
+          type: integer
+          description: Total mentions in the last 3 months
     Export:
       type: object
       properties:
@@ -197,20 +241,6 @@ components:
           type: string
           format: uri
           description: URL to download the export file
-    IOCDetails:
-      type: object
-      properties:
-        exports:
-          type: array
-          items:
-            $ref: '#/components/schemas/Export'
-          description: Available export formats for the IOC
-        subtype:
-          type: string
-          description: Subtype of the IOC (e.g., md5, sha256, ip, domain)
-        type:
-          type: string
-          description: Type of IOC (e.g., hash, ip, domain, url)
     EntityDetails:
       type: object
       properties:
@@ -246,48 +276,18 @@ components:
           - threatActor
           - malwareFamily
           - vulnerability
-    Error:
+    EntityReference:
       type: object
       properties:
-        errorCode:
+        id:
           type: string
-          description: Machine-readable error code
-        errorMessage:
+          description: Unique identifier for the referenced entity
+        label:
           type: string
-          description: Human-readable error message
-    Relationships:
-      type: object
-      properties:
-        actors:
-          type: array
-          items:
-            $ref: '#/components/schemas/RelatedEntity'
-          description: Threat actors associated with this entity
-        cyberAttacks:
-          type: array
-          items:
-            $ref: '#/components/schemas/RelatedEntity'
-          description: Cyber attacks associated with this entity
-        malwares:
-          type: array
-          items:
-            $ref: '#/components/schemas/RelatedEntity'
-          description: Malware families associated with this entity
-    Statistics:
-      type: object
-      properties:
-        graph:
-          type: object
-          additionalProperties:
-            type: integer
-          description: Daily mention counts (date as key, count as value)
-        lastMention:
-          type: integer
-          format: int64
-          description: Unix timestamp (milliseconds) of last mention
-        numMentionsLast3Months:
-          type: integer
-          description: Total mentions in the last 3 months
+          description: Human-readable label
+        type:
+          type: string
+          description: Type of referenced entity
     RelatedEntity:
       type: object
       properties:
