@@ -1,0 +1,84 @@
+slug: feedly
+provider: Feedly
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Software & Technology
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 8
+edges:
+- tag: CVEs
+  spec_file: feedly-cves-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.85
+  evidence: GET /entities/{entityId}/timeline  Get CVE Timeline; schemas CvssV3, Vulnerability, CweId,
+    ExploitDetail, PatchDetail, VulnerabilityDashboardResponse
+  reason: Operations deliver CVE/vulnerability intelligence including exploit and patch detail, supporting
+    vulnerability management decisions.
+- tag: Ioc
+  spec_file: feedly-ioc-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.85
+  evidence: GET /ioc?/streamid=  collect-iocs  Collect IoCs with rich context
+  reason: Indicator-of-compromise collection is core threat detection intelligence consumed by SOC/SIEM.
+- tag: Detection Rules
+  spec_file: feedly-detection-rules-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: GET /detection-rules/threat/{malwareId}  Get Malware Detection Rules
+  reason: Serves malware detection rules used by SOC/threat detection tooling — threat detection and response.
+- tag: Entities API
+  spec_file: feedly-entities-api-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: get-malware-metadata  Get Malware Metadata; get-threat-actor-metadata  Get Threat Actor Metadata
+  reason: Entity lookup over threat actors, malware and CVEs is threat intelligence feeding detection
+    and response; generic 'Entities' tag but operations are plainly cyber-threat objects.
+- tag: Relationships
+  spec_file: feedly-relationships-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: get-threat-actor-relationships  Get Threat Actor Relationships; get-individual-cyber-attack-details  Get
+    Individual Cyberattack Details
+  reason: Despite the generic tag, operations expose malware/threat-actor/cyberattack relationship intelligence
+    used for threat detection and response.
+- tag: Threat Actors
+  spec_file: feedly-threat-actors-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: GET /threat-actors  trending-attackers  Trending Attackers
+  reason: Trending threat actor intelligence supports security threat monitoring and response.
+- tag: Ttp Dashboard
+  spec_file: feedly-ttp-dashboard-api-openapi.yml
+  capability_id: BC-620.30
+  capability_id_l1: BC-620
+  capability_name: Threat Detection & Response Management
+  confidence: 0.8
+  evidence: POST /ttp-dashboard  list-ttps  List TTPs from TTP Agent
+  reason: Adversary tactics, techniques and procedures intelligence used by SOC detection engineering.
+- tag: Vulnerabilities
+  spec_file: feedly-vulnerabilities-api-openapi.yml
+  capability_id: BC-620.40
+  capability_id_l1: BC-620
+  capability_name: Vulnerability Management
+  confidence: 0.8
+  evidence: GET /vulnerabilities/en?  trending-cves  Trending Vulnerabilities
+  reason: Trending CVE intelligence supports vulnerability prioritisation and remediation.
