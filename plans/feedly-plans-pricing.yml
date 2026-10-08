@@ -94,3 +94,22 @@ overage:
   note: >-
     No published overage rate or behaviour past 100,000 requests/month. Exhaustion returns 429; the
     docs do not say whether additional volume can be purchased.
+x-canonical:
+  generated: '2026-10-08'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - negotiated
+  units: []
+  plans:
+  - name: Standard
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []
+  - name: Advanced
+    access: other
+    model: unstated
+    model_how: derived
+    units: []
+    periods: []
