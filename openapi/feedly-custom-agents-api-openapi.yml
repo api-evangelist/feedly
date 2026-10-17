@@ -147,80 +147,74 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Error:
+    PirMention:
       type: object
-      description: 'Standard Feedly API error response. See [Status Codes](https://developers.feedly.com/reference/status-codes) for the full list of error scenarios.
+      description: 'An Intel Profile or entity list `@`-mentioned in a Custom Agent''s `pir`, used to scope which entities the agent tracks.
 
         '
       properties:
-        errorMessage:
-          type: string
-          description: Human-readable explanation of what went wrong.
-          example: must provide authorization token
-        errorId:
-          type: string
-          description: Opaque ID Feedly support can use to look up this specific error occurrence.
-          example: xyz.2018021111.12345
-    DashboardColumn:
-      type: object
-      description: A single column definition in a Custom Agent's table.
-      required:
-      - name
-      - type
-      properties:
         id:
-          type:
-          - string
-          - 'null'
-          description: 'Stable identifier for built-in (`predefined`) columns. `null` for user-defined (`userProvided`) columns — match those on `name` instead.
-
-            '
-          example: what-soWhat
-        name:
           type: string
-          description: 'Column header, as shown in Feedly''s UI. This is the value that shows up in `column` on each cell returned by `GET /custom-agents/{id}`.
-
-            '
-          example: What / So What
+          example: enterprise/christeam/intelProfile/tx:OrganizationIntelligenceProfileShipbuildingandmaretimeindustry-gnpzbv
         type:
           type: string
-          description: 'Whether this column ships with every Custom Agent (`predefined`) or was added by the person who built this agent (`userProvided`).
-
-            '
-          enum:
-          - predefined
-          - userProvided
-          example: predefined
-        description:
+          example: entityList
+        mention:
           type: string
-          description: Explanation of what this column captures, shown when building the agent.
-        prompt:
-          type: string
-          description: 'For `userProvided` columns, the instructions given to Feedly AI to populate this column for every row. Not present on `predefined` columns.
-
-            '
-    CustomAgentItemsResponse:
+          description: The literal `@`-mention text as typed in the PIR.
+          example: '@# Organization Intelligence Profile — Shipbuilding and maretime industry'
+    CustomAgentRow:
       type: object
-      description: A page of rows from a Custom Agent's table.
+      description: One row of a Custom Agent's table — one tracked entity and its cell data.
       required:
-      - items
-      - lastRefresh
+      - created
+      - updated
+      - id
+      - cells
       properties:
-        items:
-          type: array
-          items:
-            $ref: '#/components/schemas/CustomAgentRow'
-        lastRefresh:
+        created:
           type: integer
           format: int64
-          description: EPOCH timestamp, in milliseconds, of the last time this agent's data was refreshed.
-          example: 1783539484792
-        continuation:
-          type: string
-          description: 'Present when more rows are available beyond this page. Pass it back as the `continuation` query parameter on your next request to `GET /custom-agents/{id}` to fetch the next page. Omitted on the last page.
+          description: EPOCH timestamp, in milliseconds, of when this row was first added to the table.
+          example: 1783541284792
+        updated:
+          type: integer
+          format: int64
+          description: 'EPOCH timestamp, in milliseconds, of the last time any cell in this row was updated.
 
             '
-          example: WyIxOWY0MzU4M2ZiODoxZDM2NmU6MzBhZWZhMjAiLCJTQ01CQU5LRVIiXQ==
+          example: 1783541284792
+        id:
+          type: string
+          description: Id/name of the tracked entity this row represents (e.g. a malware family or threat actor name).
+          example: SCMBANKER
+        cells:
+          type: array
+          description: One cell per column defined in the agent's `schema.columns`.
+          items:
+            $ref: '#/components/schemas/Cell'
+        events:
+          type: array
+          description: 'Timeline events associated with this row. Not yet documented in this spec — observed as an empty array in current responses.
+
+            '
+          items:
+            type: object
+            additionalProperties: true
+    Citation:
+      type: object
+      description: A source citation backing part of a cell's `value`.
+      properties:
+        llmPredictionMatch:
+          type: string
+          description: The substring of the cell's `value` that this citation supports.
+          example: '[↗](https://thehackernews.com/2026/07/scmbanker-malware-uses-clickfix-lures.html#:~:text=A%20new%20banking,SCMBANKER%20.)'
+        citedText:
+          type: string
+          description: Excerpt of the source article text supporting the value.
+          example: A new banking fraudulent operation is targeting customers of Mexican banks, fintech, payment processors, and cryptocurrency exchanges using ClickFix lures.
+        entry:
+          $ref: '#/components/schemas/CitationEntry'
     CustomAgentDashboard:
       description: 'A Custom Agent: a user-defined table of entities tracked against a natural-language Priority Intelligence Requirement (PIR). Returned by `GET /dashboards` when `type` is `customAgent`.
 
@@ -289,23 +283,6 @@ components:
           type: string
           description: Feedly user ID of the person who created this dashboard/agent.
           example: c6d7e1e8-072b-42b8-9484-f873be3ce4dd
-    DashboardSummary:
-      description: 'A dashboard/agent item from `GET /dashboards` whose type is **not** `customAgent`. Feedly''s built-in TTP, Cyberattacks, Brand Monitoring, Vulnerability, and Credential Leaks agents are not yet fully modeled in this spec — this schema only guarantees the common fields, plus whatever else the API happens to return, via `additionalProperties`.
-
-        '
-      allOf:
-      - $ref: '#/components/schemas/DashboardCommon'
-      - type: object
-        properties:
-          type:
-            type: string
-            enum:
-            - ttp
-            - cyberAttack
-            - brandMonitoring
-            - vulnerability
-            - credentialLeaks
-        additionalProperties: true
     CitationEntry:
       type: object
       description: The source article a citation was pulled from.
@@ -319,35 +296,6 @@ components:
           format: uri
           description: URL of the source article.
           example: https://thehackernews.com/2026/07/scmbanker-malware-uses-clickfix-lures.html
-    CustomAgentSchema:
-      type: object
-      description: 'Defines the shape of the table a Custom Agent produces: the entity type it tracks, and the columns that show up as `cells` on each row returned by `GET /custom-agents/{id}`.
-
-        '
-      required:
-      - entityType
-      - columns
-      properties:
-        idFunction:
-          type: string
-          description: 'Internal prompt Feedly AI uses to decide which entities belong in this agent''s table (e.g. which APT groups or malware families are relevant). Included for reference; not needed to consume the agent''s data.
-
-            '
-        entityType:
-          type: string
-          description: The Feedly entity type this agent tracks one row per instance of.
-          example: threatActor
-        entityTypeLabel:
-          type: string
-          description: Human-readable label for `entityType`, used as a column header in Feedly's UI.
-          example: APT Group
-        columns:
-          type: array
-          description: 'The columns of this agent''s table, in display order. Each row returned by `GET /custom-agents/{id}` has one cell per column here, matched by `cell.column` equal to `column.name`.
-
-            '
-          items:
-            $ref: '#/components/schemas/DashboardColumn'
     Cell:
       type: object
       description: The value of a single column for a single row in a Custom Agent's table.
@@ -387,74 +335,126 @@ components:
 
             '
           example: false
-    PirMention:
+    DashboardColumn:
       type: object
-      description: 'An Intel Profile or entity list `@`-mentioned in a Custom Agent''s `pir`, used to scope which entities the agent tracks.
+      description: A single column definition in a Custom Agent's table.
+      required:
+      - name
+      - type
+      properties:
+        id:
+          type:
+          - string
+          - 'null'
+          description: 'Stable identifier for built-in (`predefined`) columns. `null` for user-defined (`userProvided`) columns — match those on `name` instead.
+
+            '
+          example: what-soWhat
+        name:
+          type: string
+          description: 'Column header, as shown in Feedly''s UI. This is the value that shows up in `column` on each cell returned by `GET /custom-agents/{id}`.
+
+            '
+          example: What / So What
+        type:
+          type: string
+          description: 'Whether this column ships with every Custom Agent (`predefined`) or was added by the person who built this agent (`userProvided`).
+
+            '
+          enum:
+          - predefined
+          - userProvided
+          example: predefined
+        description:
+          type: string
+          description: Explanation of what this column captures, shown when building the agent.
+        prompt:
+          type: string
+          description: 'For `userProvided` columns, the instructions given to Feedly AI to populate this column for every row. Not present on `predefined` columns.
+
+            '
+    Error:
+      type: object
+      description: 'Standard Feedly API error response. See [Status Codes](https://developers.feedly.com/reference/status-codes) for the full list of error scenarios.
 
         '
       properties:
-        id:
+        errorMessage:
           type: string
-          example: enterprise/christeam/intelProfile/tx:OrganizationIntelligenceProfileShipbuildingandmaretimeindustry-gnpzbv
-        type:
+          description: Human-readable explanation of what went wrong.
+          example: must provide authorization token
+        errorId:
           type: string
-          example: entityList
-        mention:
-          type: string
-          description: The literal `@`-mention text as typed in the PIR.
-          example: '@# Organization Intelligence Profile — Shipbuilding and maretime industry'
-    Citation:
+          description: Opaque ID Feedly support can use to look up this specific error occurrence.
+          example: xyz.2018021111.12345
+    CustomAgentSchema:
       type: object
-      description: A source citation backing part of a cell's `value`.
-      properties:
-        llmPredictionMatch:
-          type: string
-          description: The substring of the cell's `value` that this citation supports.
-          example: '[↗](https://thehackernews.com/2026/07/scmbanker-malware-uses-clickfix-lures.html#:~:text=A%20new%20banking,SCMBANKER%20.)'
-        citedText:
-          type: string
-          description: Excerpt of the source article text supporting the value.
-          example: A new banking fraudulent operation is targeting customers of Mexican banks, fintech, payment processors, and cryptocurrency exchanges using ClickFix lures.
-        entry:
-          $ref: '#/components/schemas/CitationEntry'
-    CustomAgentRow:
-      type: object
-      description: One row of a Custom Agent's table — one tracked entity and its cell data.
+      description: 'Defines the shape of the table a Custom Agent produces: the entity type it tracks, and the columns that show up as `cells` on each row returned by `GET /custom-agents/{id}`.
+
+        '
       required:
-      - created
-      - updated
-      - id
-      - cells
+      - entityType
+      - columns
       properties:
-        created:
-          type: integer
-          format: int64
-          description: EPOCH timestamp, in milliseconds, of when this row was first added to the table.
-          example: 1783541284792
-        updated:
-          type: integer
-          format: int64
-          description: 'EPOCH timestamp, in milliseconds, of the last time any cell in this row was updated.
-
-            '
-          example: 1783541284792
-        id:
+        idFunction:
           type: string
-          description: Id/name of the tracked entity this row represents (e.g. a malware family or threat actor name).
-          example: SCMBANKER
-        cells:
+          description: 'Internal prompt Feedly AI uses to decide which entities belong in this agent''s table (e.g. which APT groups or malware families are relevant). Included for reference; not needed to consume the agent''s data.
+
+            '
+        entityType:
+          type: string
+          description: The Feedly entity type this agent tracks one row per instance of.
+          example: threatActor
+        entityTypeLabel:
+          type: string
+          description: Human-readable label for `entityType`, used as a column header in Feedly's UI.
+          example: APT Group
+        columns:
           type: array
-          description: One cell per column defined in the agent's `schema.columns`.
-          items:
-            $ref: '#/components/schemas/Cell'
-        events:
-          type: array
-          description: 'Timeline events associated with this row. Not yet documented in this spec — observed as an empty array in current responses.
+          description: 'The columns of this agent''s table, in display order. Each row returned by `GET /custom-agents/{id}` has one cell per column here, matched by `cell.column` equal to `column.name`.
 
             '
           items:
-            type: object
-            additionalProperties: true
+            $ref: '#/components/schemas/DashboardColumn'
+    DashboardSummary:
+      description: 'A dashboard/agent item from `GET /dashboards` whose type is **not** `customAgent`. Feedly''s built-in TTP, Cyberattacks, Brand Monitoring, Vulnerability, and Credential Leaks agents are not yet fully modeled in this spec — this schema only guarantees the common fields, plus whatever else the API happens to return, via `additionalProperties`.
+
+        '
+      allOf:
+      - $ref: '#/components/schemas/DashboardCommon'
+      - type: object
+        properties:
+          type:
+            type: string
+            enum:
+            - ttp
+            - cyberAttack
+            - brandMonitoring
+            - vulnerability
+            - credentialLeaks
+        additionalProperties: true
+    CustomAgentItemsResponse:
+      type: object
+      description: A page of rows from a Custom Agent's table.
+      required:
+      - items
+      - lastRefresh
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/CustomAgentRow'
+        lastRefresh:
+          type: integer
+          format: int64
+          description: EPOCH timestamp, in milliseconds, of the last time this agent's data was refreshed.
+          example: 1783539484792
+        continuation:
+          type: string
+          description: 'Present when more rows are available beyond this page. Pass it back as the `continuation` query parameter on your next request to `GET /custom-agents/{id}` to fetch the next page. Omitted on the last page.
+
+            '
+          example: WyIxOWY0MzU4M2ZiODoxZDM2NmU6MzBhZWZhMjAiLCJTQ01CQU5LRVIiXQ==
   securitySchemes:
     BearerAuth:
       type: http

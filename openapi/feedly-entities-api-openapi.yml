@@ -170,15 +170,21 @@ paths:
     - url: https://api.feedly.com/v3/search/
 components:
   schemas:
-    Error:
+    Export:
       type: object
       properties:
-        errorCode:
+        type:
           type: string
-          description: Machine-readable error code
-        errorMessage:
+          description: Export format type
+          enum:
+          - markdown
+          - stix2.1
+          - misp
+          - csv
+        url:
           type: string
-          description: Human-readable error message
+          format: uri
+          description: URL to download the export file
     Statistics:
       type: object
       properties:
@@ -208,21 +214,6 @@ components:
         type:
           type: string
           description: Type of IOC (e.g., hash, ip, domain, url)
-    Export:
-      type: object
-      properties:
-        type:
-          type: string
-          description: Export format type
-          enum:
-          - markdown
-          - stix2.1
-          - misp
-          - csv
-        url:
-          type: string
-          format: uri
-          description: URL to download the export file
     EntityDetails:
       type: object
       properties:
@@ -258,27 +249,15 @@ components:
           - threatActor
           - malwareFamily
           - vulnerability
-    RelatedEntity:
+    Error:
       type: object
       properties:
-        count:
-          type: integer
-          description: Number of mentions linking this entity
-        entity:
-          $ref: '#/components/schemas/EntityReference'
-        entryIds:
-          type: array
-          items:
-            type: string
-          description: IDs of entries mentioning this relationship
-        firstMention:
+        errorCode:
           type: string
-          format: date-time
-          description: Timestamp of first mention
-        lastMention:
+          description: Machine-readable error code
+        errorMessage:
           type: string
-          format: date-time
-          description: Timestamp of most recent mention
+          description: Human-readable error message
     EntityReference:
       type: object
       properties:
@@ -309,6 +288,27 @@ components:
           items:
             $ref: '#/components/schemas/RelatedEntity'
           description: Malware families associated with this entity
+    RelatedEntity:
+      type: object
+      properties:
+        count:
+          type: integer
+          description: Number of mentions linking this entity
+        entity:
+          $ref: '#/components/schemas/EntityReference'
+        entryIds:
+          type: array
+          items:
+            type: string
+          description: IDs of entries mentioning this relationship
+        firstMention:
+          type: string
+          format: date-time
+          description: Timestamp of first mention
+        lastMention:
+          type: string
+          format: date-time
+          description: Timestamp of most recent mention
   securitySchemes:
     BearerAuth:
       type: http

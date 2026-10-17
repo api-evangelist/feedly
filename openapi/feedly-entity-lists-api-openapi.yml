@@ -214,17 +214,6 @@ components:
             '
           items:
             $ref: '#/components/schemas/EntityMember'
-    ErrorResponse:
-      type: object
-      properties:
-        errorCode:
-          type: integer
-          description: HTTP status code echoed in the response body.
-          example: 401
-        message:
-          type: string
-          description: Human-readable description of the error.
-          example: Unauthorized. Please provide a valid Bearer token.
     EntityMember:
       type: object
       description: "A member of an entity list. Members are one of two forms:\n- **Resolved entity**: has an `id` pointing to a known Feedly entity\n  (e.g., `nlp/f/entity/gz:org:microsoft`). These are matched against\n  Feedly's knowledge graph.\n\n- **Custom text term**: has only a `text` field. These are free-text strings\n  that do not resolve to a known entity but are still tracked as keywords.\n\nExactly one of `id` or `text` will be present on each member object.\n"
@@ -241,6 +230,17 @@ components:
 
             '
           example: adope
+    ErrorResponse:
+      type: object
+      properties:
+        errorCode:
+          type: integer
+          description: HTTP status code echoed in the response body.
+          example: 401
+        message:
+          type: string
+          description: Human-readable description of the error.
+          example: Unauthorized. Please provide a valid Bearer token.
   securitySchemes:
     BearerAuth:
       type: http
