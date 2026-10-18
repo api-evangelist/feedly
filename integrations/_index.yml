@@ -66,3 +66,29 @@
     builder: unknown (not in the directory record)
   status: not-a-workflow
   arazzo: null
+- slug: feedly-microsoft-teams-own
+  label: Microsoft Teams (own)
+  partner: microsoft-teams
+  partner_name: Microsoft Teams (own)
+  category: Microsoft Teams app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://appsource.microsoft.com/en-us/product/office/WA200009889
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
+- slug: feedly-slack-own
+  label: Slack (own)
+  partner: slack
+  partner_name: Slack (own)
+  category: Slack app
+  type: marketplace
+  marketplace: own
+  channel: partner-built
+  evidence: https://slack.com/marketplace/A0BTQ0LN4-feedly
+  source: edge
+  relationship: platform-app
+  status: not-a-workflow
+  arazzo: null
