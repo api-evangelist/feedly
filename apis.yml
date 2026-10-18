@@ -50,14 +50,13 @@ x-docs-platform-checked: 2026-10-03
 tags:
 - Threat Intelligence
 - Cybersecurity
-- cyber-threat-intelligence
 - Content Aggregation
 - RSS
 - News
 - Vulnerability Management
 - Indicators of Compromise
 - Malware
-- Threat Actors
+- threat-actors
 - mitre-attack
 - Security Automation
 - Artificial Intelligence
@@ -504,6 +503,8 @@ apis:
   humanURL: https://developers.feedly.com/reference/introduction
   baseURL: https://api.feedly.com/v3
   tags:
+  - threat-actors
+  tags_raw:
   - Threat Actors
   properties:
   - type: OpenAPI
